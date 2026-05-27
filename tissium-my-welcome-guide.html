@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Livret d'accueil TISSIUM pour l'immeuble MY : accès, badges, visiteurs, services, règles de vie et contacts utiles.">
-<meta name="theme-color" content="#0A1626">
+<meta name="theme-color" content="#0A2E5C">
 <title>TISSIUM — Livret d'accueil MY</title>
 <script>document.documentElement.classList.replace('no-js','js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,20 +13,25 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --ink:#0A1626;--ink-2:#1A2740;
-  --blue-deep:#0A2E5C;--blue:#1F4E8C;--blue-bright:#3A8DDE;--blue-wash:#EAF2FB;
+  /* PRIMARY · Bleu TISSIUM */
+  --ink:#0A1626;--ink-2:#15233E;
+  --blue-deep:#0A2E5C;--blue:#1F4E8C;--blue-bright:#3A8DDE;
+  --blue-wash:#E8F0FA;--blue-soft:#C9DCEF;
+  /* ACCENT · Terracotta (parcimonieux) */
   --clay:#D97757;--clay-soft:#F4D4C5;--clay-deep:#B85A3D;--clay-wash:#FBF1EC;
+  /* Neutres chauds */
   --paper:#FAF8F4;--cream:#F3EFE7;--sand:#E8E2D5;
   --line:#E5DFD4;--line-strong:#C9C3B6;
   --stone:#8B8578;--slate:#4A4F5B;--text:#15192A;
+  /* Sémantique */
   --success:#2D7D5F;--success-bg:#DCEFE5;
   --warn:#92501E;--warn-bg:#FBEED7;
   --font:'Montserrat',system-ui,-apple-system,sans-serif;
   --ease:cubic-bezier(.16,1,.3,1);--ease-soft:cubic-bezier(.4,0,.2,1);
   --shadow-xs:0 1px 2px rgba(10,22,38,.04);
   --shadow-sm:0 6px 18px rgba(10,22,38,.06);
-  --shadow-md:0 18px 44px rgba(10,22,38,.08);
-  --shadow-lg:0 32px 70px rgba(10,22,38,.14);
+  --shadow-md:0 18px 44px rgba(10,46,92,.10);
+  --shadow-lg:0 32px 70px rgba(10,46,92,.18);
 }
 
 html{scroll-behavior:smooth}
@@ -39,34 +44,32 @@ body{
 body::before{
   content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(ellipse 70% 50% at 100% 0%, rgba(217,119,87,.10), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 0% 30%, rgba(58,141,222,.08), transparent 60%),
-    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(31,78,140,.06), transparent 60%);
+    radial-gradient(ellipse 70% 50% at 100% 0%, rgba(31,78,140,.10), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 0% 30%, rgba(58,141,222,.06), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(217,119,87,.04), transparent 65%);
 }
 
 a{color:inherit;text-decoration:none;transition:color 180ms var(--ease)}
-a:hover{color:var(--clay);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:var(--clay-soft)}
-a:focus-visible,button:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:4px}
+a:hover{color:var(--blue);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:var(--blue-soft)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
 button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 sup{font-size:.6em;vertical-align:super}
 
-/* ---- Animations ---- */
+/* Animations */
 @keyframes float-a{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(24px,-32px) scale(1.06)}}
 @keyframes float-b{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-28px,20px) scale(.96)}}
 @keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(217,119,87,.5)}70%{box-shadow:0 0 0 14px rgba(217,119,87,0)}100%{box-shadow:0 0 0 0 rgba(217,119,87,0)}}
-@keyframes dash{to{stroke-dashoffset:0}}
-@keyframes blob-rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,78,140,.5)}70%{box-shadow:0 0 0 14px rgba(31,78,140,0)}100%{box-shadow:0 0 0 0 rgba(31,78,140,0)}}
 
-/* ---- Scroll progress ---- */
+/* Scroll progress */
 .progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:100;pointer-events:none}
 .progress::after{content:'';display:block;height:100%;width:var(--p,0%);
-  background:linear-gradient(90deg,var(--clay),var(--clay-deep));
-  box-shadow:0 0 20px rgba(217,119,87,.4);
+  background:linear-gradient(90deg,var(--blue),var(--blue-bright));
+  box-shadow:0 0 18px rgba(58,141,222,.5);
   transition:width 90ms linear;
 }
 
-/* ---- Skip link ---- */
+/* Skip link */
 .skip{position:fixed;left:16px;top:16px;z-index:200;transform:translateY(-150%);
   padding:10px 16px;border-radius:999px;background:var(--ink);color:#fff;
   font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
@@ -74,7 +77,7 @@ sup{font-size:.6em;vertical-align:super}
 }
 .skip:focus{transform:translateY(0);text-decoration:none;color:#fff}
 
-/* ---- Top bar ---- */
+/* Top bar */
 .topbar{
   position:fixed;top:0;left:0;right:0;z-index:50;
   display:flex;align-items:center;justify-content:space-between;
@@ -90,7 +93,7 @@ sup{font-size:.6em;vertical-align:super}
   display:inline-flex;align-items:baseline;gap:3px;
   transition:color 220ms var(--ease);
 }
-.brand:hover{color:var(--clay);text-decoration:none}
+.brand:hover{color:var(--blue-deep);text-decoration:none}
 .brand .reg{font-size:8.5px;letter-spacing:0;font-weight:400;transform:translateY(-7px)}
 
 .langs{display:inline-flex;align-items:center;gap:2px;padding:4px;
@@ -105,35 +108,35 @@ sup{font-size:.6em;vertical-align:super}
 .langs button:hover{color:var(--ink);transform:translateY(-1px)}
 .langs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 
-/* ---- Hero ---- */
+/* Hero */
 .hero{position:relative;padding:170px 40px 96px;overflow:hidden}
-.hero-blob{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:0}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(64px);pointer-events:none;z-index:0}
 .hero-blob.a{width:560px;height:560px;top:-180px;right:-100px;
-  background:radial-gradient(ellipse,rgba(217,119,87,.35),transparent 65%);
+  background:radial-gradient(ellipse,rgba(31,78,140,.28),transparent 65%);
   animation:float-a 18s ease-in-out infinite;
 }
 .hero-blob.b{width:480px;height:480px;bottom:-200px;left:-120px;
-  background:radial-gradient(ellipse,rgba(58,141,222,.22),transparent 65%);
+  background:radial-gradient(ellipse,rgba(217,119,87,.18),transparent 65%);
   animation:float-b 24s ease-in-out infinite;
 }
 .hero-inner{position:relative;z-index:1;max-width:1240px;margin:0 auto}
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:12px;
   margin-bottom:36px;
-  font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--clay);
+  font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--blue-deep);
   animation:fade-up 700ms var(--ease) both;
 }
-.pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--clay);animation:pulse 2.2s infinite}
+.pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pulse 2.2s infinite}
 
 .hero h1{
   font-weight:200;font-size:clamp(52px,9.5vw,140px);line-height:.96;
   letter-spacing:-.045em;color:var(--ink);margin-bottom:36px;
   animation:fade-up 800ms var(--ease) 80ms both;
 }
-.hero h1 strong{font-weight:600}
+.hero h1 strong{font-weight:600;color:var(--blue-deep)}
 .hero h1 .underline{position:relative;display:inline-block}
 .hero h1 .underline::after{content:'';position:absolute;left:.04em;right:.04em;bottom:.18em;height:.18em;
-  background:var(--clay-soft);border-radius:999px;z-index:-1}
+  background:var(--blue-soft);border-radius:999px;z-index:-1}
 .hero-lede{
   max-width:680px;font-size:clamp(15px,1.5vw,19px);font-weight:300;line-height:1.55;color:var(--slate);
   margin-bottom:64px;animation:fade-up 800ms var(--ease) 160ms both;
@@ -149,20 +152,20 @@ sup{font-size:.6em;vertical-align:super}
   transition:transform 320ms var(--ease),box-shadow 320ms var(--ease),border-color 320ms var(--ease);
 }
 .bento-card::before{content:'';position:absolute;inset:0;border-radius:inherit;
-  background:linear-gradient(135deg,rgba(217,119,87,.08),transparent 50%);opacity:0;transition:opacity 320ms var(--ease);pointer-events:none}
-.bento-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(217,119,87,.3)}
+  background:linear-gradient(135deg,rgba(31,78,140,.06),transparent 55%);opacity:0;transition:opacity 320ms var(--ease);pointer-events:none}
+.bento-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(31,78,140,.3)}
 .bento-card:hover::before{opacity:1}
-.bento-card .ico{width:28px;height:28px;color:var(--clay);margin-bottom:18px;display:block}
-.bento-card .label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);margin-bottom:10px}
+.bento-card .ico{width:28px;height:28px;color:var(--blue-deep);margin-bottom:18px;display:block}
+.bento-card .label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-deep);margin-bottom:10px}
 .bento-card .big{font-weight:200;font-size:44px;line-height:1;letter-spacing:-.03em;color:var(--ink);margin-bottom:8px;font-variant-numeric:tabular-nums}
-.bento-card .big small{font-size:18px;font-weight:400;color:var(--stone);letter-spacing:0;margin-left:4px}
+.bento-card .big small{font-size:18px;font-weight:400;color:var(--stone);letter-spacing:0;margin-left:6px}
 .bento-card .sub{font-size:13.5px;color:var(--slate)}
 .hero-address{grid-column:span 5}
 .hero-floor{grid-column:span 3}
 .hero-metro{grid-column:span 4}
 .hero-floor .big{font-size:60px}
 
-/* ---- Nav ---- */
+/* Nav */
 .nav-wrap{position:sticky;top:68px;z-index:30;
   background:rgba(250,248,244,.92);backdrop-filter:saturate(160%) blur(10px);
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);
@@ -173,50 +176,50 @@ sup{font-size:.6em;vertical-align:super}
   transition:color 200ms var(--ease);
 }
 .nav a:hover{color:var(--ink);text-decoration:none}
-.nav a::after{content:'';position:absolute;left:18px;right:18px;bottom:0;height:2px;background:var(--clay);
+.nav a::after{content:'';position:absolute;left:18px;right:18px;bottom:0;height:2px;background:var(--blue);
   transform:scaleX(0);transform-origin:left;transition:transform 280ms var(--ease);
 }
 .nav a:hover::after,.nav a.active::after{transform:scaleX(1)}
 .nav a.active{color:var(--ink)}
 
-/* ---- Main ---- */
+/* Main */
 main{max-width:1240px;margin:0 auto;padding:96px 40px 120px}
 .section{margin-bottom:112px;scroll-margin-top:120px}
 .section:last-child{margin-bottom:0}
 .section-head{margin-bottom:40px;max-width:760px}
 .section-eyebrow{display:inline-flex;align-items:center;gap:12px;
-  font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--clay);margin-bottom:18px;
+  font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--blue-deep);margin-bottom:18px;
 }
-.section-eyebrow::before{content:'';width:24px;height:1px;background:var(--clay)}
+.section-eyebrow::before{content:'';width:24px;height:1px;background:var(--blue-deep)}
 .section-title{
   font-weight:200;font-size:clamp(34px,5.2vw,64px);line-height:1.02;
   letter-spacing:-.038em;color:var(--ink);margin-bottom:18px;
 }
 .section-title strong{font-weight:600}
-.section-title em{font-style:italic;font-weight:300;color:var(--clay)}
+.section-title em{font-style:italic;font-weight:300;color:var(--blue)}
 .section-desc{font-size:16px;line-height:1.6;color:var(--slate);font-weight:400;max-width:620px}
 
-/* ---- Bento grid ---- */
+/* Bento grid */
 .bento-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
 .cell{
   position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px;overflow:hidden;
   transition:transform 320ms var(--ease),box-shadow 320ms var(--ease),border-color 320ms var(--ease);
 }
 .cell::before{content:'';position:absolute;inset:0;border-radius:inherit;
-  background:linear-gradient(135deg,rgba(217,119,87,.06),transparent 55%);opacity:0;transition:opacity 320ms var(--ease);pointer-events:none}
-.cell:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(217,119,87,.3)}
+  background:linear-gradient(135deg,rgba(31,78,140,.05),transparent 55%);opacity:0;transition:opacity 320ms var(--ease);pointer-events:none}
+.cell:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(31,78,140,.3)}
 .cell:hover::before{opacity:1}
-.cell.feature{background:linear-gradient(160deg,var(--ink) 0%,var(--ink-2) 100%);color:var(--paper);border-color:transparent}
+.cell.feature{background:linear-gradient(160deg,var(--blue-deep) 0%,var(--ink-2) 100%);color:var(--paper);border-color:transparent}
 .cell.feature::after{content:'';position:absolute;top:-60%;right:-30%;width:80%;height:160%;
-  background:radial-gradient(ellipse,rgba(217,119,87,.18),transparent 60%);pointer-events:none}
+  background:radial-gradient(ellipse,rgba(58,141,222,.22),transparent 60%);pointer-events:none}
 .cell.feature .cell-title{color:#fff}
-.cell.feature .cell-eyebrow{color:var(--clay-soft)}
+.cell.feature .cell-eyebrow{color:var(--blue-soft)}
 .cell.feature p{color:rgba(250,248,244,.78)}
 .cell.feature strong{color:#fff}
-.cell.feature .ico-lg{color:var(--clay-soft)}
+.cell.feature .ico-lg{color:var(--blue-soft)}
 .cell.cream{background:var(--cream);border-color:var(--sand)}
-.cell.clay{background:var(--clay-wash);border-color:rgba(217,119,87,.2)}
-.cell.clay .cell-eyebrow{color:var(--clay-deep)}
+.cell.warm{background:var(--clay-wash);border-color:rgba(217,119,87,.18)}
+.cell.warm .cell-eyebrow{color:var(--clay-deep)}
 .cell.span-12{grid-column:span 12}
 .cell.span-9{grid-column:span 9}
 .cell.span-8{grid-column:span 8}
@@ -226,7 +229,7 @@ main{max-width:1240px;margin:0 auto;padding:96px 40px 120px}
 .cell.span-4{grid-column:span 4}
 .cell.span-3{grid-column:span 3}
 .cell-eyebrow{display:inline-flex;align-items:center;gap:10px;
-  font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);margin-bottom:18px;
+  font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-deep);margin-bottom:18px;
 }
 .cell-eyebrow svg{width:14px;height:14px}
 .cell-title{font-weight:500;font-size:19px;letter-spacing:-.01em;line-height:1.25;color:var(--ink);margin-bottom:16px}
@@ -235,7 +238,7 @@ main{max-width:1240px;margin:0 auto;padding:96px 40px 120px}
 .cell p{font-size:14px;line-height:1.6;color:var(--slate);margin-bottom:10px}
 .cell p:last-child{margin-bottom:0}
 .cell p strong, .cell strong{color:var(--ink);font-weight:600}
-.cell .ico-lg{width:36px;height:36px;color:var(--clay);margin-bottom:20px;display:block}
+.cell .ico-lg{width:36px;height:36px;color:var(--blue-deep);margin-bottom:20px;display:block}
 
 .kv{display:grid;grid-template-columns:104px 1fr;gap:14px;align-items:start;padding:13px 0;border-bottom:1px solid rgba(229,223,212,.6)}
 .kv:last-child{border-bottom:0}
@@ -243,7 +246,7 @@ main{max-width:1240px;margin:0 auto;padding:96px 40px 120px}
 .kv-val{font-size:14px;color:var(--text);line-height:1.5}
 .kv-val strong{color:var(--ink);font-weight:600}
 .cell.feature .kv{border-color:rgba(255,255,255,.1)}
-.cell.feature .kv-key{color:rgba(244,212,197,.6)}
+.cell.feature .kv-key{color:rgba(201,220,239,.55)}
 .cell.feature .kv-val{color:rgba(255,255,255,.88)}
 .cell.feature .kv-val strong{color:#fff}
 
@@ -252,37 +255,38 @@ main{max-width:1240px;margin:0 auto;padding:96px 40px 120px}
 }
 .tag.ok{background:var(--success-bg);color:var(--success)}
 .tag.warn{background:var(--warn-bg);color:var(--warn)}
+.tag.blue{background:var(--blue-wash);color:var(--blue-deep)}
 .tag.clay{background:var(--clay-wash);color:var(--clay-deep)}
 .tag.ink{background:var(--ink);color:var(--paper)}
 .tag .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
 
-/* ---- Steps ---- */
+/* Steps */
 .steps{display:grid;gap:12px}
 .step{display:grid;grid-template-columns:42px 1fr;gap:18px;align-items:start;
   padding:22px;background:#fff;border:1px solid var(--line);border-radius:16px;
   transition:transform 280ms var(--ease),box-shadow 280ms var(--ease),border-color 280ms var(--ease);
 }
-.step:hover{transform:translateX(4px);border-color:rgba(217,119,87,.35);box-shadow:var(--shadow-sm)}
-.step-num{width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);
+.step:hover{transform:translateX(4px);border-color:rgba(31,78,140,.35);box-shadow:var(--shadow-sm)}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--blue-deep);color:var(--paper);
   display:flex;align-items:center;justify-content:center;font-weight:500;font-size:13.5px;
-  font-variant-numeric:tabular-nums;letter-spacing:0;
-  transition:background 280ms var(--ease),transform 280ms var(--ease);
+  font-variant-numeric:tabular-nums;
+  transition:background 280ms var(--ease),transform 360ms var(--ease);
 }
 .step:hover .step-num{background:var(--clay);transform:rotate(360deg) scale(1.08)}
 .step-body strong{display:block;font-weight:600;font-size:14.5px;color:var(--ink);margin-bottom:6px}
 .step-body span{display:block;font-size:13.5px;color:var(--slate);line-height:1.55}
 
-/* ---- Routes (hero numbers) ---- */
+/* Routes */
 .route{position:relative;padding:36px 32px}
-.route .mode{margin-bottom:14px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--clay)}
+.route .mode{margin-bottom:14px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-deep)}
 .route .time{font-weight:100;font-size:96px;line-height:.9;letter-spacing:-.05em;color:var(--ink);font-variant-numeric:tabular-nums;margin-bottom:12px}
 .route .time small{font-size:24px;font-weight:300;color:var(--stone);letter-spacing:0;margin-left:6px}
 .route .station{font-weight:600;font-size:15px;color:var(--ink);margin-bottom:6px}
 .route .desc{font-size:13px;color:var(--slate)}
-.route.alt .time{font-size:72px;font-weight:200}
+.route.alt .time{font-size:80px;font-weight:200}
 
-/* ---- Callout / alert ---- */
-.callout{padding:22px 26px;background:var(--blue-wash);border:1px solid rgba(58,141,222,.18);
+/* Callout */
+.callout{padding:22px 26px;background:var(--blue-wash);border:1px solid rgba(31,78,140,.15);
   border-left:3px solid var(--blue);border-radius:6px 16px 16px 6px;color:var(--ink-2);
 }
 .callout p{color:var(--ink-2);font-size:14px;margin:0}
@@ -291,17 +295,17 @@ main{max-width:1240px;margin:0 auto;padding:96px 40px 120px}
 .callout.warn p{color:var(--clay-deep)}
 .callout.warn strong{color:var(--clay-deep)}
 
-/* ---- Contact card ---- */
+/* Contact card */
 .contact-card{
   padding:26px;background:#fff;border:1px solid var(--line);border-radius:18px;
   transition:transform 320ms var(--ease),box-shadow 320ms var(--ease),border-color 320ms var(--ease);
   position:relative;overflow:hidden;
 }
 .contact-card::before{content:'';position:absolute;inset:0;border-radius:inherit;
-  background:linear-gradient(135deg,rgba(217,119,87,.06),transparent 55%);opacity:0;transition:opacity 320ms var(--ease);pointer-events:none}
-.contact-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(217,119,87,.3)}
+  background:linear-gradient(135deg,rgba(31,78,140,.05),transparent 55%);opacity:0;transition:opacity 320ms var(--ease);pointer-events:none}
+.contact-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(31,78,140,.3)}
 .contact-card:hover::before{opacity:1}
-.contact-org{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);margin-bottom:16px}
+.contact-org{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-deep);margin-bottom:16px}
 .contact-name{font-weight:600;font-size:18px;letter-spacing:-.01em;color:var(--ink);margin-bottom:4px}
 .contact-role{font-size:12.5px;color:var(--stone);margin-bottom:18px;line-height:1.5}
 .contact-line{display:flex;align-items:center;gap:10px;padding:11px 0;font-size:13.5px;color:var(--ink);
@@ -310,32 +314,32 @@ main{max-width:1240px;margin:0 auto;padding:96px 40px 120px}
 .contact-line:first-of-type{padding-top:14px}
 .contact-line svg{width:15px;height:15px;color:var(--stone);flex-shrink:0}
 .contact-line a{flex:1}
-.copy-btn{margin-left:auto;padding:6px 10px;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);
-  background:var(--clay-wash);border-radius:999px;opacity:0;transition:opacity 220ms var(--ease),background 220ms var(--ease),color 220ms var(--ease);
+.copy-btn{margin-left:auto;padding:6px 10px;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-deep);
+  background:var(--blue-wash);border-radius:999px;opacity:0;transition:opacity 220ms var(--ease),background 220ms var(--ease),color 220ms var(--ease);
 }
 .contact-line:hover .copy-btn{opacity:1}
 .copy-btn.copied{opacity:1;background:var(--success-bg);color:var(--success)}
 .copy-btn svg{width:11px;height:11px;margin-right:4px;vertical-align:-1px}
 
-/* ---- Rules grid ---- */
+/* Rules grid */
 .rule-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .rule{
   padding:24px;background:#fff;border:1px solid var(--line);border-radius:16px;position:relative;overflow:hidden;
   transition:transform 320ms var(--ease),box-shadow 320ms var(--ease),border-color 320ms var(--ease);
 }
-.rule::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--clay);
+.rule::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue);
   transform:scaleX(0);transform-origin:left;transition:transform 360ms var(--ease)}
-.rule:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:rgba(217,119,87,.3)}
+.rule:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:rgba(31,78,140,.3)}
 .rule:hover::before{transform:scaleX(1)}
-.rule .ico{width:22px;height:22px;color:var(--clay);margin-bottom:16px;display:block}
+.rule .ico{width:22px;height:22px;color:var(--blue-deep);margin-bottom:16px;display:block}
 .rule strong{display:block;font-weight:600;font-size:14.5px;color:var(--ink);margin-bottom:10px}
 .rule span{display:block;font-size:13px;color:var(--slate);line-height:1.55}
 
-/* ---- Lunch table ---- */
+/* Lunch */
 .lunch-wrap{padding:8px 0}
 .lunch{width:100%;border-collapse:collapse}
 .lunch th{padding:14px 18px 14px 0;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--clay);border-bottom:1px solid var(--line);text-align:left;
+  color:var(--blue-deep);border-bottom:1px solid var(--line);text-align:left;
 }
 .lunch td{padding:18px 18px 18px 0;font-size:13.5px;color:var(--text);border-bottom:1px solid rgba(229,223,212,.55);vertical-align:top}
 .lunch tr:last-child td{border-bottom:0}
@@ -344,22 +348,23 @@ main{max-width:1240px;margin:0 auto;padding:96px 40px 120px}
 .lunch tbody tr{transition:background 200ms var(--ease)}
 .lunch tbody tr:hover{background:var(--cream)}
 
-/* ---- Parking SVG ---- */
-.parking-plan{
-  width:100%;height:auto;display:block;margin:8px 0 4px;
-  background:linear-gradient(180deg, #FAF8F4, #F3EFE7);border-radius:14px;
+/* Parking plan */
+.parking-wrap{
+  margin:16px 0 8px;
+  padding:8px;
+  background:linear-gradient(180deg, #FCFAF6, #F3EFE7);
+  border:1px solid var(--line);
+  border-radius:16px;
 }
-.parking-plan .lot{fill:none;stroke:var(--line-strong);stroke-width:1.2}
-.parking-plan .spot{fill:#fff;stroke:var(--line-strong);stroke-width:.8}
-.parking-plan .tissium-spot{fill:var(--clay-soft);stroke:var(--clay);stroke-width:1.4}
-.parking-plan .circulation{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:3 3}
-.parking-plan .arrow{fill:var(--clay);stroke:none}
-.parking-plan .street{font:600 9px var(--font);fill:var(--stone);letter-spacing:.2em;text-transform:uppercase}
-.parking-plan .label{font:700 8.5px var(--font);fill:var(--clay-deep);letter-spacing:.1em;text-transform:uppercase}
-.parking-plan .num{font:500 6px var(--font);fill:var(--clay-deep);font-variant-numeric:tabular-nums}
-.parking-plan .entry-label{font:700 9px var(--font);fill:var(--ink);letter-spacing:.12em;text-transform:uppercase}
+.parking-plan{width:100%;height:auto;display:block}
+.parking-plan .ts-bg{fill:var(--clay-wash);stroke:rgba(217,119,87,.18);stroke-width:1}
+.parking-plan .ts-spot{fill:#FBE6D8;stroke:var(--clay);stroke-width:1.2;transition:fill 220ms var(--ease)}
+.parking-plan:hover .ts-spot{fill:#FAD5C0}
+.parking-plan .ts-num{font:600 11px var(--font);fill:var(--clay-deep);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.parking-plan .legend-eyebrow{font:700 10.5px var(--font);fill:var(--blue-deep);letter-spacing:.22em;text-transform:uppercase}
+.parking-plan .legend-title{font:300 22px var(--font);fill:var(--ink);letter-spacing:-.02em}
 
-/* ---- Footer ---- */
+/* Footer */
 footer{border-top:1px solid var(--line);padding:48px 40px;max-width:1240px;margin:0 auto;
   display:flex;justify-content:space-between;align-items:center;gap:20px;
   color:var(--stone);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
@@ -367,7 +372,7 @@ footer{border-top:1px solid var(--line);padding:48px 40px;max-width:1240px;margi
 footer .brand-foot{font-weight:200;letter-spacing:.34em;font-size:13px;color:var(--ink)}
 footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
 
-/* ---- Toast ---- */
+/* Toast */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
   padding:13px 22px;background:var(--ink);color:var(--paper);border-radius:999px;
   font-size:12px;font-weight:600;letter-spacing:.06em;z-index:200;
@@ -377,13 +382,13 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
   display:inline-flex;align-items:center;gap:8px;
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast svg{width:14px;height:14px;color:var(--clay-soft)}
+.toast svg{width:14px;height:14px;color:var(--blue-soft)}
 
-/* ---- Reveals ---- */
+/* Reveals */
 .js .reveal{opacity:0;transform:translateY(22px);transition:opacity 750ms var(--ease),transform 750ms var(--ease)}
 .js .reveal.in{opacity:1;transform:translateY(0)}
 
-/* ---- Responsive ---- */
+/* Responsive */
 @media (max-width:1080px){
   .hero{padding:140px 28px 70px}
   main{padding:70px 28px 100px}
@@ -469,6 +474,10 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
 <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
 <symbol id="i-door" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18H6zM10 12h.01"/></symbol>
 <symbol id="i-fork" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2v8a2 2 0 0 0 2 2v9M4 2v8M10 2v8"/></symbol>
+<symbol id="i-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="14" rx="3"/><path d="M4 12h16M7 21l2-3M17 21l-2-3"/><circle cx="8.5" cy="8" r=".7" fill="currentColor"/><circle cx="15.5" cy="8" r=".7" fill="currentColor"/></symbol>
+<symbol id="i-fridge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 11h14M9 6v3M9 14v4"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M10 11v6M14 11v6"/></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v4M3 5h4M6 17v4M4 19h4M14 4l2.5 5.5L22 12l-5.5 2.5L14 20l-2.5-5.5L6 12l5.5-2.5z"/></symbol>
 </defs></svg>
 
 <header class="topbar" id="topbar">
@@ -490,13 +499,13 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
       <span data-fr="Livret d'accueil · Usage interne" data-en="Welcome guide · Internal use">Livret d'accueil · Usage interne</span>
     </div>
     <h1 data-fr="Bienvenue<br>au <span class='underline'><strong>MY</strong></span>." data-en="Welcome<br>to <span class='underline'><strong>MY</strong></span>.">Bienvenue<br>au <span class="underline"><strong>MY</strong></span>.</h1>
-    <p class="hero-lede" data-fr="L'essentiel pour accéder aux locaux TISSIUM, travailler sur site, recevoir des visiteurs — et tout ce qui rend la vie au 7<sup>e</sup> un peu plus simple." data-en="Everything you need to access the TISSIUM offices, work on site, welcome visitors — and a few things that make life on the 7<sup>th</sup> floor a little simpler.">L'essentiel pour accéder aux locaux TISSIUM, travailler sur site, recevoir des visiteurs — et tout ce qui rend la vie au 7<sup>e</sup> un peu plus simple.</p>
+    <p class="hero-lede" data-fr="Les informations essentielles pour accéder aux locaux TISSIUM, travailler sur site et recevoir des visiteurs." data-en="Essential information to access the TISSIUM offices, work on site and welcome visitors.">Les informations essentielles pour accéder aux locaux TISSIUM, travailler sur site et recevoir des visiteurs.</p>
 
     <div class="hero-bento">
       <div class="bento-card hero-address">
         <svg class="ico"><use href="#i-pin"/></svg>
         <div class="label" data-fr="Adresse" data-en="Address">Adresse</div>
-        <div class="big">18<small data-fr="avenue Léon Gaumont" data-en="avenue Léon Gaumont">avenue Léon Gaumont</small></div>
+        <div class="big">18<small data-fr="av. Léon Gaumont" data-en="av. Léon Gaumont">av. Léon Gaumont</small></div>
         <div class="sub">75020 Paris</div>
       </div>
       <div class="bento-card hero-floor">
@@ -507,7 +516,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
       </div>
       <div class="bento-card hero-metro">
         <svg class="ico"><use href="#i-metro"/></svg>
-        <div class="label" data-fr="Accès" data-en="Access">Accès</div>
+        <div class="label" data-fr="Accès recommandé" data-en="Recommended access">Accès recommandé</div>
         <div class="big" data-count="6">0<small>min</small></div>
         <div class="sub" data-fr="Saint-Mandé · Ligne 1" data-en="Saint-Mandé · Line 1">Saint-Mandé · Ligne 1</div>
       </div>
@@ -546,31 +555,31 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
         <div>
           <div class="kv"><div class="kv-key" data-fr="Adresse" data-en="Address">Adresse</div><div class="kv-val"><strong>18 avenue Léon Gaumont, 75020 Paris</strong></div></div>
           <div class="kv"><div class="kv-key" data-fr="Étage" data-en="Floor">Étage</div><div class="kv-val" data-fr="<strong>R+7</strong> — Plateau TISSIUM" data-en="<strong>R+7</strong> — TISSIUM floor"><strong>R+7</strong> — Plateau TISSIUM</div></div>
-          <div class="kv"><div class="kv-key" data-fr="Métro" data-en="Metro">Métro</div><div class="kv-val" data-fr="<strong>Saint-Mandé</strong>, Ligne 1 — 6 min à pied" data-en="<strong>Saint-Mandé</strong>, Line 1 — 6 min on foot"><strong>Saint-Mandé</strong>, Ligne 1 — 6 min à pied</div></div>
-          <div class="kv"><div class="kv-key" data-fr="Badge" data-en="Badge">Badge</div><div class="kv-val" data-fr="Remis <strong>avant ton arrivée</strong>" data-en="Provided <strong>before you arrive</strong>">Remis <strong>avant ton arrivée</strong></div></div>
-          <div class="kv"><div class="kv-key" data-fr="Externes" data-en="Visitors">Externes</div><div class="kv-val" data-fr="Réunions au <strong>Business Center</strong>" data-en="Meetings at the <strong>Business Center</strong>">Réunions au <strong>Business Center</strong></div></div>
+          <div class="kv"><div class="kv-key" data-fr="Métro" data-en="Metro">Métro</div><div class="kv-val" data-fr="<strong>Saint-Mandé</strong>, Ligne 1 — environ 6 min à pied" data-en="<strong>Saint-Mandé</strong>, Line 1 — about 6 min on foot"><strong>Saint-Mandé</strong>, Ligne 1 — environ 6 min à pied</div></div>
+          <div class="kv"><div class="kv-key" data-fr="Badges" data-en="Badges">Badges</div><div class="kv-val" data-fr="Remis <strong>avant l'arrivée</strong>" data-en="Provided <strong>before arrival</strong>">Remis <strong>avant l'arrivée</strong></div></div>
+          <div class="kv"><div class="kv-key" data-fr="Externes" data-en="Visitors">Externes</div><div class="kv-val" data-fr="Réunions à privilégier au <strong>Business Center</strong>" data-en="External meetings preferably at the <strong>Business Center</strong>">Réunions à privilégier au <strong>Business Center</strong></div></div>
         </div>
       </article>
 
-      <article class="cell clay span-5 reveal">
-        <div class="cell-eyebrow"><svg><use href="#i-spark"/></svg><span data-fr="Premier jour" data-en="First day">Premier jour</span></div>
+      <article class="cell span-5 reveal">
+        <div class="cell-eyebrow"><svg><use href="#i-spark"/></svg><span data-fr="Premier jour · Parcours recommandé" data-en="First day · Recommended flow">Premier jour · Parcours recommandé</span></div>
         <h3 class="cell-title" data-fr="Quatre étapes, dans l'ordre." data-en="Four steps, in order.">Quatre étapes, dans l'ordre.</h3>
         <div class="steps" style="margin-top:8px">
           <div class="step"><div class="step-num">1</div><div class="step-body">
-            <strong data-fr="Vérifie ton badge" data-en="Check your badge">Vérifie ton badge</strong>
-            <span data-fr="Il doit t'être remis avant ton arrivée." data-en="It must be given to you before you arrive.">Il doit t'être remis avant ton arrivée.</span>
+            <strong data-fr="Vérifie ton badge avant de partir" data-en="Check your badge before leaving">Vérifie ton badge avant de partir</strong>
+            <span data-fr="Le badge doit t'être remis avant ton arrivée dans les locaux." data-en="Your badge should be provided before you arrive on site.">Le badge doit t'être remis avant ton arrivée dans les locaux.</span>
           </div></div>
           <div class="step"><div class="step-num">2</div><div class="step-body">
-            <strong data-fr="Entre au 18 av. Léon Gaumont" data-en="Enter at 18 av. Léon Gaumont">Entre au 18 av. Léon Gaumont</strong>
-            <span data-fr="C'est l'accès principal." data-en="It is the main entrance.">C'est l'accès principal.</span>
+            <strong data-fr="Entre par le 18 avenue Léon Gaumont" data-en="Enter through 18 avenue Léon Gaumont">Entre par le 18 avenue Léon Gaumont</strong>
+            <span data-fr="C'est l'accès principal à utiliser pour rejoindre les bureaux TISSIUM." data-en="This is the main entrance to use to reach the TISSIUM offices.">C'est l'accès principal à utiliser pour rejoindre les bureaux TISSIUM.</span>
           </div></div>
           <div class="step"><div class="step-num">3</div><div class="step-body">
-            <strong data-fr="Monte au 7" data-en="Go to the 7th">Monte au 7<sup>e</sup></strong>
-            <span data-fr="Les locaux TISSIUM sont au R+7." data-en="The TISSIUM offices are on R+7.">Les locaux TISSIUM sont au R+7.</span>
+            <strong data-fr="Monte au 7e étage" data-en="Go to the 7th floor">Monte au 7<sup>e</sup> étage</strong>
+            <span data-fr="Les locaux TISSIUM sont situés au 7e étage de l'immeuble MY." data-en="The TISSIUM offices are located on the 7th floor of the MY building.">Les locaux TISSIUM sont situés au 7<sup>e</sup> étage de l'immeuble MY.</span>
           </div></div>
           <div class="step"><div class="step-num">4</div><div class="step-body">
-            <strong data-fr="Bloqué ? Office Manager" data-en="Stuck? Office Manager">Bloqué ? Office Manager</strong>
-            <span data-fr="Kumuthiya Thiyagalingam prend le relais." data-en="Kumuthiya Thiyagalingam will help.">Kumuthiya Thiyagalingam prend le relais.</span>
+            <strong data-fr="En cas de blocage, Office Manager" data-en="If blocked, Office Manager">En cas de blocage, Office Manager</strong>
+            <span data-fr="Badge perdu, oublié ou non fonctionnel : Kumuthiya Thiyagalingam prend le relais." data-en="Lost, forgotten or non-working badge: Kumuthiya Thiyagalingam will help.">Badge perdu, oublié ou non fonctionnel : Kumuthiya Thiyagalingam prend le relais.</span>
           </div></div>
         </div>
       </article>
@@ -580,30 +589,28 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
   <!-- VENIR -->
   <section class="section reveal" id="venir">
     <div class="section-head">
-      <div class="section-eyebrow" data-fr="Venir au MY" data-en="Getting to MY">Venir au MY</div>
-      <h2 class="section-title" data-fr="<em>Saint-Mandé</em>, six minutes à pied." data-en="<em>Saint-Mandé</em>, six minutes on foot.">"Saint-Mandé", six minutes à pied.</h2>
-      <p class="section-desc" data-fr="L'accès recommandé. Si tu viens d'ailleurs, deux alternatives." data-en="The recommended route. If you're coming from elsewhere, two alternatives.">L'accès recommandé. Si tu viens d'ailleurs, deux alternatives.</p>
+      <div class="section-eyebrow" data-fr="Venir au MY · Accès collaborateurs" data-en="Getting to MY · Employee access">Venir au MY · Accès collaborateurs</div>
+      <h2 class="section-title" data-fr="<em>Saint-Mandé</em>, environ six minutes à pied." data-en="<em>Saint-Mandé</em>, about six minutes on foot."><em>Saint-Mandé</em>, environ six minutes à pied.</h2>
+      <p class="section-desc" data-fr="L'accès recommandé. Une alternative selon ton point de départ, et deux autres options pour compléter." data-en="The recommended route. One alternative depending on where you're coming from, and two more options.">L'accès recommandé. Une alternative selon ton point de départ, et deux autres options pour compléter.</p>
     </div>
 
     <div class="bento-grid">
-      <article class="cell span-6 route reveal">
-        <div class="mode" data-fr="Recommandé" data-en="Recommended">Recommandé</div>
+      <article class="cell span-7 route reveal">
+        <div class="mode" data-fr="Accès recommandé" data-en="Recommended">Accès recommandé</div>
         <div class="time" data-count="6">0<small>min</small></div>
         <div class="station" data-fr="Saint-Mandé · Ligne 1" data-en="Saint-Mandé · Line 1">Saint-Mandé · Ligne 1</div>
-        <div class="desc" data-fr="Trajet piéton le plus simple vers le 18 av. Léon Gaumont." data-en="The easiest walk to 18 av. Léon Gaumont.">Trajet piéton le plus simple vers le 18 av. Léon Gaumont.</div>
+        <div class="desc" data-fr="Trajet piéton le plus simple vers le 18 avenue Léon Gaumont." data-en="The easiest walking route to 18 avenue Léon Gaumont.">Trajet piéton le plus simple vers le 18 avenue Léon Gaumont.</div>
       </article>
-      <article class="cell span-3 route alt reveal">
+      <article class="cell span-5 route alt reveal">
         <div class="mode" data-fr="Alternative" data-en="Alternative">Alternative</div>
         <div class="time" data-count="12">0<small>min</small></div>
         <div class="station" data-fr="Porte de Montreuil · Ligne 9" data-en="Porte de Montreuil · Line 9">Porte de Montreuil · Ligne 9</div>
+        <div class="desc" data-fr="Option utile selon ton point de départ." data-en="A useful option depending on where you are coming from.">Option utile selon ton point de départ.</div>
       </article>
-      <article class="cell span-3 route alt reveal">
-        <div class="mode" data-fr="Alternative" data-en="Alternative">Alternative</div>
-        <div class="time" data-count="12">0<small>min</small></div>
-        <div class="station" data-fr="Robespierre · Ligne 9" data-en="Robespierre · Line 9">Robespierre · Ligne 9</div>
-      </article>
+
       <article class="cell cream span-12 reveal">
-        <p data-fr="<strong>RER A :</strong> Vincennes ou Nation, environ 18 min à pied selon ta direction." data-en="<strong>RER A:</strong> Vincennes or Nation, about 18 min on foot depending on your direction."><strong>RER A :</strong> Vincennes ou Nation, environ 18 min à pied selon ta direction.</p>
+        <div class="cell-eyebrow"><svg><use href="#i-train"/></svg><span data-fr="Autres options" data-en="Other options">Autres options</span></div>
+        <p data-fr="<strong>Robespierre · Ligne 9</strong> — environ 12 min. <strong>RER A</strong> via Vincennes ou Nation — environ 18 min." data-en="<strong>Robespierre · Line 9</strong> — about 12 min. <strong>RER A</strong> via Vincennes or Nation — about 18 min."><strong>Robespierre · Ligne 9</strong> — environ 12 min. <strong>RER A</strong> via Vincennes ou Nation — environ 18 min.</p>
       </article>
     </div>
   </section>
@@ -618,86 +625,67 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
     <div class="bento-grid">
       <article class="cell span-5 reveal">
         <svg class="ico-lg"><use href="#i-bike"/></svg>
-        <div class="cell-eyebrow" data-fr="Vélo" data-en="Bike">Vélo</div>
+        <div class="cell-eyebrow" data-fr="Vélo · Parking intérieur" data-en="Bike · Indoor parking">Vélo · Parking intérieur</div>
         <h3 class="cell-title" data-fr="Parking vélo intérieur" data-en="Indoor bike parking">Parking vélo intérieur</h3>
-        <p data-fr="Accessible au <strong>08 avenue Léon Gaumont</strong>." data-en="Accessible at <strong>08 avenue Léon Gaumont</strong>.">Accessible au <strong>08 avenue Léon Gaumont</strong>.</p>
-        <p data-fr="Accès par badge. Le lecteur est <strong>discret, noir</strong>, à l'entrée dédiée." data-en="Badge access. The reader is <strong>discreet, black</strong>, at the dedicated entrance.">Accès par badge. Le lecteur est <strong>discret, noir</strong>, à l'entrée dédiée.</p>
+        <p data-fr="Un parking vélo intérieur est accessible au <strong>08 avenue Léon Gaumont</strong>." data-en="Indoor bike parking is accessible at <strong>08 avenue Léon Gaumont</strong>.">Un parking vélo intérieur est accessible au <strong>08 avenue Léon Gaumont</strong>.</p>
+        <p data-fr="L'accès se fait par <strong>badge</strong>. Le point de badgeage est <strong>discret, de couleur noire</strong>, à l'entrée dédiée." data-en="Access is by <strong>badge</strong>. The reader is <strong>discreet, black</strong>, at the dedicated entrance.">L'accès se fait par <strong>badge</strong>. Le point de badgeage est <strong>discret, de couleur noire</strong>, à l'entrée dédiée.</p>
       </article>
 
       <article class="cell span-7 reveal">
         <svg class="ico-lg"><use href="#i-parking"/></svg>
-        <div class="cell-eyebrow" data-fr="Voiture · 2e sous-sol" data-en="Car · Basement -2">Voiture · 2e sous-sol</div>
+        <div class="cell-eyebrow" data-fr="Voiture · 2e sous-sol" data-en="Car · Basement -2">Voiture · 2<sup>e</sup> sous-sol</div>
         <h3 class="cell-title" data-fr="10 emplacements TISSIUM" data-en="10 TISSIUM spots">10 emplacements TISSIUM</h3>
-        <p data-fr="Accès au <strong>68 rue Claude Érignac, 94160 Montreuil</strong>. Au <strong>2e sous-sol</strong>, places <strong>2052 → 2057</strong> et <strong>2067 → 2070</strong>." data-en="Access at <strong>68 rue Claude Érignac, 94160 Montreuil</strong>. On <strong>basement -2</strong>, spots <strong>2052 → 2057</strong> and <strong>2067 → 2070</strong>.">Accès au <strong>68 rue Claude Érignac, 94160 Montreuil</strong>. Au <strong>2e sous-sol</strong>, places <strong>2052 → 2057</strong> et <strong>2067 → 2070</strong>.</p>
+        <p data-fr="L'accès parking se fait au <strong>68 rue Claude Érignac, 94160 Montreuil</strong>. Le parking TISSIUM se situe au <strong>2<sup>e</sup> sous-sol</strong>, emplacements <strong>2052 → 2057</strong> et <strong>2067 → 2070</strong>." data-en="Parking access is at <strong>68 rue Claude Érignac, 94160 Montreuil</strong>. The TISSIUM parking is on <strong>basement -2</strong>, spots <strong>2052 → 2057</strong> and <strong>2067 → 2070</strong>.">L'accès parking se fait au <strong>68 rue Claude Érignac, 94160 Montreuil</strong>. Le parking TISSIUM se situe au <strong>2<sup>e</sup> sous-sol</strong>, emplacements <strong>2052 → 2057</strong> et <strong>2067 → 2070</strong>.</p>
 
-        <!-- Simplified parking plan -->
-        <svg class="parking-plan" viewBox="0 0 600 280" role="img" aria-label="Plan simplifié du 2e sous-sol indiquant les 10 emplacements TISSIUM">
-          <!-- Lot outline (approx triangular) -->
-          <path class="lot" d="M40 40 L560 50 L540 230 L80 240 Z"/>
+        <div class="parking-wrap">
+          <svg class="parking-plan" viewBox="0 0 580 290" role="img" aria-label="Les 10 emplacements TISSIUM au 2e sous-sol">
+            <!-- Header -->
+            <text class="legend-eyebrow" x="32" y="36" data-fr="Niveau -2 · Sous-sol parking" data-en="Level -2 · Underground parking">Niveau -2 · Sous-sol parking</text>
+            <text class="legend-title" x="32" y="60" data-fr="Nos emplacements" data-en="Our parking spots">Nos emplacements</text>
 
-          <!-- Background rows of generic spots -->
-          <g class="spot">
-            <!-- top row -->
-            <g><rect x="80" y="58" width="22" height="14" rx="1.5"/><rect x="104" y="58" width="22" height="14" rx="1.5"/><rect x="128" y="58" width="22" height="14" rx="1.5"/><rect x="152" y="58" width="22" height="14" rx="1.5"/><rect x="176" y="58" width="22" height="14" rx="1.5"/><rect x="200" y="58" width="22" height="14" rx="1.5"/><rect x="224" y="58" width="22" height="14" rx="1.5"/><rect x="248" y="58" width="22" height="14" rx="1.5"/></g>
-            <!-- middle row -->
-            <g><rect x="80" y="120" width="22" height="14" rx="1.5"/><rect x="104" y="120" width="22" height="14" rx="1.5"/><rect x="128" y="120" width="22" height="14" rx="1.5"/><rect x="152" y="120" width="22" height="14" rx="1.5"/><rect x="176" y="120" width="22" height="14" rx="1.5"/><rect x="200" y="120" width="22" height="14" rx="1.5"/></g>
-            <!-- right cluster -->
-            <g><rect x="430" y="78" width="22" height="14" rx="1.5"/><rect x="454" y="78" width="22" height="14" rx="1.5"/><rect x="478" y="78" width="22" height="14" rx="1.5"/><rect x="430" y="98" width="22" height="14" rx="1.5"/><rect x="454" y="98" width="22" height="14" rx="1.5"/><rect x="478" y="98" width="22" height="14" rx="1.5"/><rect x="430" y="118" width="22" height="14" rx="1.5"/><rect x="454" y="118" width="22" height="14" rx="1.5"/><rect x="478" y="118" width="22" height="14" rx="1.5"/></g>
-            <!-- bottom row -->
-            <g><rect x="100" y="200" width="22" height="14" rx="1.5"/><rect x="124" y="200" width="22" height="14" rx="1.5"/><rect x="148" y="200" width="22" height="14" rx="1.5"/><rect x="172" y="200" width="22" height="14" rx="1.5"/><rect x="196" y="200" width="22" height="14" rx="1.5"/><rect x="220" y="200" width="22" height="14" rx="1.5"/><rect x="244" y="200" width="22" height="14" rx="1.5"/><rect x="268" y="200" width="22" height="14" rx="1.5"/><rect x="292" y="200" width="22" height="14" rx="1.5"/><rect x="316" y="200" width="22" height="14" rx="1.5"/><rect x="340" y="200" width="22" height="14" rx="1.5"/><rect x="364" y="200" width="22" height="14" rx="1.5"/><rect x="388" y="200" width="22" height="14" rx="1.5"/><rect x="412" y="200" width="22" height="14" rx="1.5"/></g>
-          </g>
+            <!-- Big count -->
+            <text x="548" y="58" text-anchor="end" font-family="Montserrat" font-size="56" font-weight="100" fill="#15192A" letter-spacing="-0.04em">10</text>
+            <text x="548" y="76" text-anchor="end" font-family="Montserrat" font-size="9.5" font-weight="700" fill="#8B8578" letter-spacing="0.22em" data-fr="PLACES" data-en="SPOTS">PLACES</text>
 
-          <!-- Circulation dashed lines -->
-          <path class="circulation" d="M70 90 L500 90"/>
-          <path class="circulation" d="M70 155 L520 155"/>
-          <path class="circulation" d="M70 185 L520 185"/>
+            <!-- Cluster background highlight -->
+            <rect class="ts-bg" x="148" y="100" width="296" height="172" rx="14"/>
 
-          <!-- TISSIUM cluster: 2067-2070 (4 spots) -->
-          <g class="tissium-spot">
-            <rect x="324" y="100" width="22" height="14" rx="2"/>
-            <rect x="324" y="120" width="22" height="14" rx="2"/>
-            <rect x="324" y="140" width="22" height="14" rx="2"/>
-            <rect x="324" y="160" width="22" height="14" rx="2"/>
-          </g>
-          <text class="num" x="328" y="110">2067</text>
-          <text class="num" x="328" y="130">2068</text>
-          <text class="num" x="328" y="150">2069</text>
-          <text class="num" x="328" y="170">2070</text>
+            <!-- 3 columns of spots -->
+            <g transform="translate(164 116)">
+              <!-- Col 1: 2067 → 2070 (4 spots) -->
+              <g>
+                <rect class="ts-spot" x="0" y="0" width="78" height="32" rx="6"/>
+                <text class="ts-num" x="39" y="20" text-anchor="middle">2067</text>
+                <rect class="ts-spot" x="0" y="38" width="78" height="32" rx="6"/>
+                <text class="ts-num" x="39" y="58" text-anchor="middle">2068</text>
+                <rect class="ts-spot" x="0" y="76" width="78" height="32" rx="6"/>
+                <text class="ts-num" x="39" y="96" text-anchor="middle">2069</text>
+                <rect class="ts-spot" x="0" y="114" width="78" height="32" rx="6"/>
+                <text class="ts-num" x="39" y="134" text-anchor="middle">2070</text>
+              </g>
+              <!-- Col 2: 2052 → 2054 (3 spots, centered vertically vs col 1) -->
+              <g transform="translate(90 19)">
+                <rect class="ts-spot" x="0" y="0" width="78" height="32" rx="6"/>
+                <text class="ts-num" x="39" y="20" text-anchor="middle">2052</text>
+                <rect class="ts-spot" x="0" y="38" width="78" height="32" rx="6"/>
+                <text class="ts-num" x="39" y="58" text-anchor="middle">2053</text>
+                <rect class="ts-spot" x="0" y="76" width="78" height="32" rx="6"/>
+                <text class="ts-num" x="39" y="96" text-anchor="middle">2054</text>
+              </g>
+              <!-- Col 3: 2055 → 2057 (3 spots) -->
+              <g transform="translate(180 19)">
+                <rect class="ts-spot" x="0" y="0" width="78" height="32" rx="6"/>
+                <text class="ts-num" x="39" y="20" text-anchor="middle">2055</text>
+                <rect class="ts-spot" x="0" y="38" width="78" height="32" rx="6"/>
+                <text class="ts-num" x="39" y="58" text-anchor="middle">2056</text>
+                <rect class="ts-spot" x="0" y="76" width="78" height="32" rx="6"/>
+                <text class="ts-num" x="39" y="96" text-anchor="middle">2057</text>
+              </g>
+            </g>
+          </svg>
+        </div>
 
-          <!-- TISSIUM cluster: 2052-2057 (6 spots in 2 rows) -->
-          <g class="tissium-spot">
-            <rect x="370" y="100" width="22" height="14" rx="2"/>
-            <rect x="370" y="120" width="22" height="14" rx="2"/>
-            <rect x="370" y="140" width="22" height="14" rx="2"/>
-            <rect x="394" y="100" width="22" height="14" rx="2"/>
-            <rect x="394" y="120" width="22" height="14" rx="2"/>
-            <rect x="394" y="140" width="22" height="14" rx="2"/>
-          </g>
-          <text class="num" x="374" y="110">2052</text>
-          <text class="num" x="374" y="130">2053</text>
-          <text class="num" x="374" y="150">2054</text>
-          <text class="num" x="398" y="110">2055</text>
-          <text class="num" x="398" y="130">2056</text>
-          <text class="num" x="398" y="150">2057</text>
-
-          <!-- Label arrow -->
-          <path d="M 320 60 L 360 90" stroke="var(--clay)" stroke-width="1.2" fill="none" stroke-dasharray="2 2"/>
-          <circle cx="360" cy="90" r="3" fill="var(--clay)"/>
-          <text class="label" x="200" y="50">TISSIUM · 10 places</text>
-
-          <!-- Streets -->
-          <text class="street" x="200" y="32" text-anchor="middle">RUE CLAUDE ÉRIGNAC</text>
-          <text class="street" x="300" y="262" text-anchor="middle">AVENUE LÉON GAUMONT</text>
-
-          <!-- Entry marker -->
-          <g transform="translate(530 165)">
-            <circle r="14" fill="var(--ink)"/>
-            <text fill="#fff" font-family="var(--font)" font-weight="700" font-size="10" text-anchor="middle" y="3.5">P</text>
-          </g>
-          <text class="entry-label" x="528" y="195" text-anchor="middle" data-fr="Entrée" data-en="Entry">Entrée</text>
-        </svg>
-
-        <p style="margin-top:14px" data-fr="Sur demande auprès de l'<strong>Office Manager</strong>, selon disponibilité. <strong>Badge parking spécifique</strong> requis." data-en="On request through the <strong>Office Manager</strong>, subject to availability. Requires a <strong>dedicated parking badge</strong>.">Sur demande auprès de l'<strong>Office Manager</strong>, selon disponibilité. <strong>Badge parking spécifique</strong> requis.</p>
+        <p style="margin-top:14px" data-fr="L'utilisation du parking se fait <strong>selon les disponibilités, sur demande auprès de l'Office Manager</strong>. Accès réservé aux personnes disposant d'un <strong>badge parking spécifique</strong>. En cas de difficulté, contacter le <strong>PC Sécurité</strong>." data-en="Parking use is <strong>subject to availability and on request through the Office Manager</strong>. Access is restricted to people with a <strong>dedicated parking badge</strong>. In case of difficulty, contact the <strong>Security desk</strong>.">L'utilisation du parking se fait <strong>selon les disponibilités, sur demande auprès de l'Office Manager</strong>. Accès réservé aux personnes disposant d'un <strong>badge parking spécifique</strong>. En cas de difficulté, contacter le <strong>PC Sécurité</strong>.</p>
       </article>
     </div>
   </section>
@@ -712,20 +700,20 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
     <div class="bento-grid">
       <article class="cell span-6 reveal">
         <svg class="ico-lg"><use href="#i-key"/></svg>
-        <div class="cell-eyebrow" data-fr="Collaborateurs · Confirmé" data-en="Employees · Confirmed">Collaborateurs · Confirmé</div>
+        <div class="cell-eyebrow"><span data-fr="Collaborateurs TISSIUM" data-en="TISSIUM employees">Collaborateurs TISSIUM</span> <span class="tag ok" style="margin-left:auto"><span class="dot"></span><span data-fr="Confirmé" data-en="Confirmed">Confirmé</span></span></div>
         <h3 class="cell-title" data-fr="Ton badge t'attend." data-en="Your badge is ready.">Ton badge t'attend.</h3>
-        <p data-fr="Les badges d'accès sont remis aux collaborateurs <strong>avant leur arrivée</strong> dans les locaux." data-en="Access badges are given to employees <strong>before they arrive</strong> on site.">Les badges d'accès sont remis aux collaborateurs <strong>avant leur arrivée</strong> dans les locaux.</p>
-        <p data-fr="Badge <strong>perdu, oublié ou non fonctionnel ?</strong> Contacte l'Office Manager :" data-en="Badge <strong>lost, forgotten or not working?</strong> Contact the Office Manager:">Badge <strong>perdu, oublié ou non fonctionnel ?</strong> Contacte l'Office Manager :</p>
+        <p data-fr="Les badges d'accès seront remis aux collaborateurs <strong>avant leur arrivée</strong> dans les locaux." data-en="Access badges will be provided to employees <strong>before they arrive</strong> on site.">Les badges d'accès seront remis aux collaborateurs <strong>avant leur arrivée</strong> dans les locaux.</p>
+        <p data-fr="En cas de badge <strong>perdu, oublié ou non fonctionnel</strong>, contacter l'Office Manager :" data-en="For a <strong>lost, forgotten or non-working</strong> badge, contact the Office Manager:">En cas de badge <strong>perdu, oublié ou non fonctionnel</strong>, contacter l'Office Manager :</p>
         <p style="margin-top:14px"><strong>Kumuthiya Thiyagalingam</strong> · <a href="tel:+33761615867">+33 7 61 61 58 67</a> · <a href="mailto:kthiyagalingam@tissium.com">kthiyagalingam@tissium.com</a></p>
       </article>
 
       <article class="cell span-6 reveal" id="visiteurs">
         <svg class="ico-lg"><use href="#i-users"/></svg>
-        <div class="cell-eyebrow" data-fr="Visiteurs" data-en="Visitors">Visiteurs</div>
+        <div class="cell-eyebrow" data-fr="Visiteurs · Accueil & accompagnement" data-en="Visitors · Reception & escorting">Visiteurs · Accueil & accompagnement</div>
         <h3 class="cell-title" data-fr="Toujours accompagnés." data-en="Always escorted.">Toujours accompagnés.</h3>
         <p data-fr="Les visiteurs entrent <strong>accompagnés par leur contact TISSIUM</strong>." data-en="Visitors enter <strong>with their TISSIUM host</strong>.">Les visiteurs entrent <strong>accompagnés par leur contact TISSIUM</strong>.</p>
-        <p data-fr="Un <strong>badge visiteur</strong> peut être demandé pour les allers-retours sur la journée ou une période donnée." data-en="A <strong>visitor badge</strong> can be requested for back-and-forth access during the day or over a specific period.">Un <strong>badge visiteur</strong> peut être demandé pour les allers-retours sur la journée ou une période donnée.</p>
-        <div class="callout" style="margin-top:18px"><p data-fr="<strong>Réunions avec externes :</strong> privilégier le <strong>Business Center</strong>, plus adapté pour recevoir." data-en="<strong>External meetings:</strong> use the <strong>Business Center</strong> whenever possible — better suited for welcoming guests."><strong>Réunions avec externes :</strong> privilégier le <strong>Business Center</strong>, plus adapté pour recevoir.</p></div>
+        <p data-fr="Un <strong>badge visiteur</strong> peut être demandé pour les visiteurs ayant besoin d'effectuer plusieurs allers-retours dans la journée ou pendant une période donnée." data-en="A <strong>visitor badge</strong> may be requested for visitors who need to go in and out several times during the day or over a specific period.">Un <strong>badge visiteur</strong> peut être demandé pour les visiteurs ayant besoin d'effectuer plusieurs allers-retours dans la journée ou pendant une période donnée.</p>
+        <div class="callout" style="margin-top:18px"><p data-fr="<strong>Réunions avec externes :</strong> privilégier le <strong>Business Center</strong>, plus adapté pour recevoir des personnes extérieures." data-en="<strong>External meetings:</strong> use the <strong>Business Center</strong> whenever possible — better suited for welcoming external guests."><strong>Réunions avec externes :</strong> privilégier le <strong>Business Center</strong>, plus adapté pour recevoir des personnes extérieures.</p></div>
       </article>
     </div>
   </section>
@@ -742,17 +730,20 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
         <svg class="ico-lg"><use href="#i-coffee"/></svg>
         <div class="cell-eyebrow" data-fr="Business Center · 8h–20h" data-en="Business Center · 8AM–8PM">Business Center · 8h–20h</div>
         <h3 class="cell-title lg" data-fr="<strong>Great Work</strong> by Praemia REIM" data-en="<strong>Great Work</strong> by Praemia REIM"><strong>Great Work</strong> by Praemia REIM</h3>
-        <p data-fr="Les réservations se font individuellement via l'application ou via l'accueil de l'immeuble. Capacités des salles sur le site web ; reste des infos pratiques dans l'app." data-en="Bookings are made individually via the app or through the building reception. Room capacities are on the website; other practical info is in the app.">Les réservations se font individuellement via l'application ou via l'accueil de l'immeuble. Capacités des salles sur le site web ; reste des infos pratiques dans l'app.</p>
-        <p data-fr="L'app permet aussi de réserver les créneaux de <strong>yoga</strong>. Des <strong>vestiaires et douches</strong> sont disponibles à l'entrée de l'espace vestiaires." data-en="The app also lets you book <strong>yoga</strong> slots. <strong>Changing rooms and showers</strong> are available at the entrance to the changing area.">L'app permet aussi de réserver les créneaux de <strong>yoga</strong>. Des <strong>vestiaires et douches</strong> sont disponibles à l'entrée de l'espace vestiaires.</p>
-        <p style="margin-top:16px"><a href="https://apps.apple.com/fr/app/great-work-by-praemia-reim/id1670201153?l=en-GB" style="color:var(--clay-soft);text-decoration:underline;text-underline-offset:4px"><span data-fr="Télécharger l'app · iOS" data-en="Download the app · iOS">Télécharger l'app · iOS</span> →</a></p>
+        <p data-fr="Le Business Center de l'immeuble MY est accessible de <strong>8h à 20h</strong>." data-en="The MY Business Center is open from <strong>8:00 AM to 8:00 PM</strong>.">Le Business Center de l'immeuble MY est accessible de <strong>8h à 20h</strong>.</p>
+        <p data-fr="Les réservations peuvent être effectuées <strong>individuellement via l'application</strong> ou via l'<strong>accueil de l'immeuble</strong>. Capacités des salles sur le site web ; autres infos pratiques dans l'application." data-en="Bookings can be made <strong>individually via the app</strong> or through the <strong>building reception</strong>. Room capacities are on the website; other practical info is in the app.">Les réservations peuvent être effectuées <strong>individuellement via l'application</strong> ou via l'<strong>accueil de l'immeuble</strong>. Capacités des salles sur le site web ; autres infos pratiques dans l'application.</p>
+        <p data-fr="L'application permet également de réserver des créneaux pour les séances de <strong>yoga</strong>. Des <strong>vestiaires et douches</strong> sont disponibles à l'entrée de l'espace vestiaires du Business Center." data-en="The app also lets you book <strong>yoga</strong> sessions. <strong>Changing rooms and showers</strong> are available at the entrance to the Business Center changing area.">L'application permet également de réserver des créneaux pour les séances de <strong>yoga</strong>. Des <strong>vestiaires et douches</strong> sont disponibles à l'entrée de l'espace vestiaires du Business Center.</p>
+        <p style="margin-top:16px"><a href="https://apps.apple.com/fr/app/great-work-by-praemia-reim/id1670201153?l=en-GB" style="color:var(--blue-soft);text-decoration:underline;text-underline-offset:4px"><span data-fr="Télécharger l'application · iOS" data-en="Download the app · iOS">Télécharger l'application · iOS</span> →</a></p>
+        <p data-fr="Pour les réunions avec des personnes externes, privilégier ces espaces plutôt que le plateau TISSIUM." data-en="For meetings with external guests, use these spaces rather than the TISSIUM floor whenever possible.">Pour les réunions avec des personnes externes, privilégier ces espaces plutôt que le plateau TISSIUM.</p>
       </article>
 
-      <article class="cell clay span-5 reveal">
-        <svg class="ico-lg"><use href="#i-utensils"/></svg>
-        <div class="cell-eyebrow"><span data-fr="Restauration" data-en="Catering">Restauration</span> <span class="tag clay" style="margin-left:auto"><span class="dot"></span><span data-fr="Pris en charge" data-en="Covered">Pris en charge</span></span></div>
+      <article class="cell warm span-5 reveal">
+        <svg class="ico-lg" style="color:var(--clay-deep)"><use href="#i-utensils"/></svg>
+        <div class="cell-eyebrow"><span data-fr="Restauration" data-en="Catering">Restauration</span> <span class="tag clay" style="margin-left:auto"><span class="dot"></span><span data-fr="Admission prise en charge" data-en="Admission covered">Admission prise en charge</span></span></div>
         <h3 class="cell-title" data-fr="Un RIE dans l'immeuble" data-en="A company restaurant in the building">Un RIE dans l'immeuble</h3>
-        <p data-fr="L'<strong>admission au RIE</strong> est prise en charge pour les collaborateurs TISSIUM." data-en="<strong>Admission to the company restaurant</strong> is covered for TISSIUM employees.">L'<strong>admission au RIE</strong> est prise en charge pour les collaborateurs TISSIUM.</p>
-        <p data-fr="Les modalités pratiques — inscription, badge, horaires, paiement, visiteurs — sont communiquées avant ton arrivée." data-en="Practical details — registration, badge, hours, payment, visitors — are shared before your arrival.">Les modalités pratiques — inscription, badge, horaires, paiement, visiteurs — sont communiquées avant ton arrivée.</p>
+        <p data-fr="Un RIE est présent dans l'immeuble MY." data-en="A company restaurant is available in the MY building.">Un RIE est présent dans l'immeuble MY.</p>
+        <p data-fr="L'admission au RIE sera <strong>prise en charge pour les collaborateurs TISSIUM</strong>." data-en="Admission to the company restaurant will be <strong>covered for TISSIUM employees</strong>.">L'admission au RIE sera <strong>prise en charge pour les collaborateurs TISSIUM</strong>.</p>
+        <p data-fr="Les modalités pratiques seront communiquées avant l'arrivée : inscription, badge éventuel, horaires, paiement et accès visiteurs." data-en="Practical details will be shared before arrival: registration, potential badge, hours, payment and visitor access.">Les modalités pratiques seront communiquées avant l'arrivée : inscription, badge éventuel, horaires, paiement et accès visiteurs.</p>
       </article>
     </div>
   </section>
@@ -770,14 +761,14 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
         <div class="cell-eyebrow" data-fr="Courrier · Accueil immeuble" data-en="Mail · Building reception">Courrier · Accueil immeuble</div>
         <h3 class="cell-title" data-fr="Courrier simple à l'accueil" data-en="Standard mail at reception">Courrier simple à l'accueil</h3>
         <p data-fr="Le courrier simple est à récupérer à l'<strong>accueil de l'immeuble</strong>." data-en="Standard mail can be collected at the <strong>building reception</strong>.">Le courrier simple est à récupérer à l'<strong>accueil de l'immeuble</strong>.</p>
-        <div class="callout warn" style="margin-top:18px"><p data-fr="<strong>LRAR :</strong> les recommandés doivent être réceptionnés <strong>directement par le destinataire</strong>. L'accueil ne prend en charge que le courrier simple. En cas d'absence, l'Office Manager prend le relais." data-en="<strong>Registered mail:</strong> registered letters must be collected <strong>by the recipient in person</strong>. Reception only handles standard mail. If the recipient is absent, the Office Manager takes over."><strong>LRAR :</strong> les recommandés doivent être réceptionnés <strong>directement par le destinataire</strong>. L'accueil ne prend en charge que le courrier simple. En cas d'absence, l'Office Manager prend le relais.</p></div>
+        <div class="callout warn" style="margin-top:18px"><p data-fr="<strong>LRAR :</strong> les recommandés doivent être réceptionnés <strong>directement par leur destinataire</strong>. L'accueil ne prend en charge que le courrier simple. En cas d'absence du destinataire, l'<strong>Office Manager</strong> prendra le relais." data-en="<strong>Registered mail:</strong> registered letters must be collected <strong>by the recipient in person</strong>. Reception only handles standard mail. If the recipient is absent, the <strong>Office Manager</strong> will take over."><strong>LRAR :</strong> les recommandés doivent être réceptionnés <strong>directement par leur destinataire</strong>. L'accueil ne prend en charge que le courrier simple. En cas d'absence du destinataire, l'<strong>Office Manager</strong> prendra le relais.</p></div>
       </article>
 
       <article class="cell span-6 reveal">
         <svg class="ico-lg"><use href="#i-laptop"/></svg>
-        <div class="cell-eyebrow" data-fr="IT & équipement" data-en="IT & equipment">IT & équipement</div>
-        <h3 class="cell-title" data-fr="Tu viens avec ton matériel habituel" data-en="You bring your usual equipment">Tu viens avec ton matériel habituel</h3>
-        <p data-fr="Pas de changement spécifique lié au déménagement : les collaborateurs viennent avec leur <strong>équipement TISSIUM habituel</strong>." data-en="No specific change tied to the move: employees use their <strong>usual TISSIUM equipment</strong>.">Pas de changement spécifique lié au déménagement : les collaborateurs viennent avec leur <strong>équipement TISSIUM habituel</strong>.</p>
+        <div class="cell-eyebrow"><span data-fr="IT & équipement" data-en="IT & equipment">IT & équipement</span> <span class="tag blue" style="margin-left:auto"><span class="dot"></span><span data-fr="Pas de changement" data-en="No change">Pas de changement</span></span></div>
+        <h3 class="cell-title" data-fr="Tu viens avec ton matériel habituel" data-en="You come with your usual equipment">Tu viens avec ton matériel habituel</h3>
+        <p data-fr="Pas de changement spécifique lié au déménagement : les collaborateurs viennent avec leur <strong>équipement TISSIUM habituel</strong>." data-en="No specific change linked to the move: employees use their <strong>usual TISSIUM equipment</strong>.">Pas de changement spécifique lié au déménagement : les collaborateurs viennent avec leur <strong>équipement TISSIUM habituel</strong>.</p>
         <p data-fr="Les <strong>règles IT et cybersécurité</strong> TISSIUM continuent de s'appliquer." data-en="TISSIUM <strong>IT and cybersecurity rules</strong> continue to apply.">Les <strong>règles IT et cybersécurité</strong> TISSIUM continuent de s'appliquer.</p>
       </article>
     </div>
@@ -788,29 +779,29 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
     <div class="section-head">
       <div class="section-eyebrow" data-fr="Bien vivre ensemble · Flex office" data-en="Living together · Flex office">Bien vivre ensemble · Flex office</div>
       <h2 class="section-title" data-fr="Un plateau partagé, <em>une attention partagée</em>." data-en="A shared floor, <em>a shared attention</em>.">Un plateau partagé, <em>une attention partagée</em>.</h2>
-      <p class="section-desc" data-fr="Les espaces TISSIUM au MY fonctionnent en flex office. En fin de journée, le poste reste propre, disponible et prêt pour le lendemain." data-en="TISSIUM spaces at MY work as flex office. At the end of the day, the desk stays clean, available and ready for the next day.">Les espaces TISSIUM au MY fonctionnent en flex office. En fin de journée, le poste reste propre, disponible et prêt pour le lendemain.</p>
+      <p class="section-desc" data-fr="Les espaces TISSIUM au MY fonctionnent en flex office. La règle : laisser son poste, sa cuisine et ses surfaces communes propres, disponibles et prêts pour le suivant." data-en="TISSIUM spaces at MY work as flex office. The rule: leave your desk, kitchen and shared surfaces clean, available and ready for the next person.">Les espaces TISSIUM au MY fonctionnent en flex office. La règle : laisser son poste, sa cuisine et ses surfaces communes propres, disponibles et prêts pour le suivant.</p>
     </div>
 
     <div class="rule-grid">
       <article class="rule reveal">
         <svg class="ico"><use href="#i-broom"/></svg>
         <strong data-fr="Clean desk" data-en="Clean desk">Clean desk</strong>
-        <span data-fr="Range tes affaires, récupère tes effets personnels, ne laisse pas de documents confidentiels visibles." data-en="Clear your desk, take your belongings, leave no confidential documents visible.">Range tes affaires, récupère tes effets personnels, ne laisse pas de documents confidentiels visibles.</span>
+        <span data-fr="En fin de journée, range ton poste, récupère tes effets personnels et ne laisse pas de documents confidentiels visibles." data-en="At the end of the day, clear your desk, take your belongings and leave no confidential documents visible.">En fin de journée, range ton poste, récupère tes effets personnels et ne laisse pas de documents confidentiels visibles.</span>
       </article>
       <article class="rule reveal">
         <svg class="ico"><use href="#i-locker"/></svg>
         <strong data-fr="Casiers" data-en="Lockers">Casiers</strong>
-        <span data-fr="À l'entrée du R+7. Mêmes règles qu'avant : effets personnels stockés, postes dégagés." data-en="At the R+7 entrance. Same rules as before: personal items stored, workstations clear.">À l'entrée du R+7. Mêmes règles qu'avant : effets personnels stockés, postes dégagés.</span>
+        <span data-fr="Les casiers sont situés à l'entrée du R+7. Mêmes règles qu'avant : effets personnels stockés, postes dégagés." data-en="Lockers are located at the R+7 entrance. Same rules as before: personal items stored, workstations clear.">Les casiers sont situés à l'entrée du R+7. Mêmes règles qu'avant : effets personnels stockés, postes dégagés.</span>
       </article>
       <article class="rule reveal">
         <svg class="ico"><use href="#i-coffee"/></svg>
         <strong>Agora</strong>
-        <span data-fr="À l'entrée principale du R+7. Pour les cafés, points informels et mini-réunions. Repas possibles ponctuellement." data-en="At the main R+7 entrance. For coffees, informal catch-ups, short meetings. Occasional meals OK.">À l'entrée principale du R+7. Pour les cafés, points informels et mini-réunions. Repas possibles ponctuellement.</span>
+        <span data-fr="À l'entrée principale du R+7. Espace café convivial pour cafés, points informels et mini-réunions. Repas possibles ponctuellement, mais le RIE reste le lieu principal." data-en="At the main R+7 entrance. A friendly coffee area for coffees, informal catch-ups, short meetings. Occasional meals OK; the company restaurant remains the main lunch area.">À l'entrée principale du R+7. Espace café convivial pour cafés, points informels et mini-réunions. Repas possibles ponctuellement, mais le RIE reste le lieu principal.</span>
       </article>
       <article class="rule reveal">
         <svg class="ico"><use href="#i-chat"/></svg>
         <strong data-fr="Échanges spontanés" data-en="Spontaneous chats">Échanges spontanés</strong>
-        <span data-fr="Discussions qui durent ou mobilisent plusieurs personnes : direction l'Agora plutôt que l'open space." data-en="Discussions that last or involve several people: head to the Agora rather than the open space.">Discussions qui durent ou mobilisent plusieurs personnes : direction l'Agora plutôt que l'open space.</span>
+        <span data-fr="Pour les discussions qui durent ou mobilisent plusieurs personnes, direction l'Agora plutôt que l'open space." data-en="For discussions that last or involve several people, head to the Agora rather than the open space.">Pour les discussions qui durent ou mobilisent plusieurs personnes, direction l'Agora plutôt que l'open space.</span>
       </article>
       <article class="rule reveal">
         <svg class="ico"><use href="#i-volume"/></svg>
@@ -820,22 +811,42 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
       <article class="rule reveal">
         <svg class="ico"><use href="#i-lock"/></svg>
         <strong data-fr="Confidentialité" data-en="Confidentiality">Confidentialité</strong>
-        <span data-fr="Pas de sujets sensibles à voix haute en open space. Verrouille l'écran quand tu quittes ton poste." data-en="No sensitive topics out loud in the open space. Lock your screen when you leave your desk.">Pas de sujets sensibles à voix haute en open space. Verrouille l'écran quand tu quittes ton poste.</span>
+        <span data-fr="Pas de sujets sensibles à voix haute en open space. Verrouille ton écran quand tu quittes ton poste." data-en="No sensitive topics out loud in the open space. Lock your screen when you leave your desk.">Pas de sujets sensibles à voix haute en open space. Verrouille ton écran quand tu quittes ton poste.</span>
       </article>
       <article class="rule reveal">
         <svg class="ico"><use href="#i-door"/></svg>
         <strong data-fr="Salles & espaces" data-en="Rooms & spaces">Salles & espaces</strong>
-        <span data-fr="Libère les salles à l'heure, annule si tu n'en as plus besoin, laisse les espaces propres après usage." data-en="Leave rooms on time, cancel if you no longer need them, leave shared spaces clean after use.">Libère les salles à l'heure, annule si tu n'en as plus besoin, laisse les espaces propres après usage.</span>
+        <span data-fr="Libère les salles à l'heure, annule ta réservation si elle n'est plus utile, laisse les espaces propres après usage." data-en="Leave rooms on time, cancel your booking if you no longer need it, leave shared spaces clean after use.">Libère les salles à l'heure, annule ta réservation si elle n'est plus utile, laisse les espaces propres après usage.</span>
       </article>
       <article class="rule reveal">
         <svg class="ico"><use href="#i-fork"/></svg>
         <strong data-fr="Repas" data-en="Meals">Repas</strong>
-        <span data-fr="Le RIE reste le lieu principal pour déjeuner. L'Agora ponctuellement, à condition de la laisser propre et disponible." data-en="The company restaurant is the main lunch area. The Agora occasionally, provided it stays clean and available.">Le RIE reste le lieu principal pour déjeuner. L'Agora ponctuellement, à condition de la laisser propre et disponible.</span>
+        <span data-fr="Le RIE reste le lieu principal pour déjeuner. L'Agora ponctuellement, à condition de la laisser propre et disponible. Manger au poste reste exceptionnel." data-en="The company restaurant is the main lunch area. The Agora occasionally, provided it stays clean and available. Eating at your desk remains exceptional.">Le RIE reste le lieu principal pour déjeuner. L'Agora ponctuellement, à condition de la laisser propre et disponible. Manger au poste reste exceptionnel.</span>
+      </article>
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-fridge"/></svg>
+        <strong data-fr="Frigo · Vidé chaque vendredi" data-en="Fridge · Cleared every Friday">Frigo · Vidé chaque vendredi</strong>
+        <span data-fr="Étiquette tes denrées (nom + date). Tout ce qui reste dans le frigo est jeté chaque vendredi pour repartir propre." data-en="Label your food (name + date). Anything left in the fridge is thrown out every Friday so we start fresh.">Étiquette tes denrées (nom + date). Tout ce qui reste dans le frigo est jeté chaque vendredi pour repartir propre.</span>
+      </article>
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-utensils"/></svg>
+        <strong data-fr="Vaisselle" data-en="Dishes">Vaisselle</strong>
+        <span data-fr="Lave et range ta vaisselle immédiatement après usage. Pas de vaisselle qui traîne dans l'évier." data-en="Wash and put away your dishes immediately after use. No dishes left in the sink.">Lave et range ta vaisselle immédiatement après usage. Pas de vaisselle qui traîne dans l'évier.</span>
+      </article>
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-sparkles"/></svg>
+        <strong data-fr="Plan de travail & équipements" data-en="Counter & equipment">Plan de travail & équipements</strong>
+        <span data-fr="Essuie le plan de travail, le micro-ondes et la machine à café après chaque utilisation. On ne laisse rien à faire au suivant." data-en="Wipe the counter, microwave and coffee machine after each use. Leave nothing for the next person.">Essuie le plan de travail, le micro-ondes et la machine à café après chaque utilisation. On ne laisse rien à faire au suivant.</span>
+      </article>
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-trash"/></svg>
+        <strong data-fr="Déchets & odeurs" data-en="Waste & smells">Déchets & odeurs</strong>
+        <span data-fr="Sors les sacs poubelle pleins. Évite les plats à fortes odeurs si tu manges au poste — pense à tes voisins." data-en="Take out full bin bags. Avoid strong-smelling dishes if you eat at your desk — think of your neighbours.">Sors les sacs poubelle pleins. Évite les plats à fortes odeurs si tu manges au poste — pense à tes voisins.</span>
       </article>
     </div>
   </section>
 
-  <!-- SECURITE & ACCUEIL & CONTACTS -->
+  <!-- SECURITE & ACCUEIL -->
   <section class="section reveal" id="securite">
     <div class="section-head">
       <div class="section-eyebrow" data-fr="Sécurité & accueil" data-en="Security & reception">Sécurité & accueil</div>
@@ -845,7 +856,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
     <div class="bento-grid">
       <article class="cell span-6 reveal">
         <svg class="ico-lg"><use href="#i-shield"/></svg>
-        <div class="cell-eyebrow"><span data-fr="PC Sécurité · H24" data-en="Security desk · 24/7">PC Sécurité · H24</span> <span class="tag ok" style="margin-left:auto"><span class="dot"></span>ARTUS</span></div>
+        <div class="cell-eyebrow"><span data-fr="PC Sécurité · H24" data-en="Security desk · 24/7">PC Sécurité · H24</span> <span class="tag ink" style="margin-left:auto">ARTUS</span></div>
         <h3 class="cell-title" data-fr="Urgence bâtiment, accès hors horaires" data-en="Building emergency, out-of-hours access">Urgence bâtiment, accès hors horaires</h3>
         <div class="contact-line"><svg><use href="#i-phone"/></svg><a href="tel:0789682800">07 89 68 28 00</a></div>
         <div class="contact-line"><svg><use href="#i-at"/></svg><a href="mailto:pcsecuritemy@gmail.com">pcsecuritemy@gmail.com</a></div>
@@ -853,7 +864,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
 
       <article class="cell span-6 reveal">
         <svg class="ico-lg"><use href="#i-bell"/></svg>
-        <div class="cell-eyebrow"><span data-fr="Accueil immeuble · 8h–20h" data-en="Building reception · 8AM–8PM">Accueil immeuble · 8h–20h</span> <span class="tag ok" style="margin-left:auto"><span class="dot"></span>DEMETER</span></div>
+        <div class="cell-eyebrow"><span data-fr="Accueil immeuble · 8h–20h" data-en="Building reception · 8AM–8PM">Accueil immeuble · 8h–20h</span> <span class="tag ink" style="margin-left:auto">DEMETER</span></div>
         <h3 class="cell-title" data-fr="Courrier, visiteurs, orientation" data-en="Mail, visitors, orientation">Courrier, visiteurs, orientation</h3>
         <div class="contact-line"><svg><use href="#i-phone"/></svg><a href="tel:0185783938">01 85 78 39 38</a></div>
         <div class="contact-line"><svg><use href="#i-phone"/></svg><a href="tel:0764006513">07 64 00 65 13</a></div>
@@ -865,7 +876,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
   <!-- CONTACTS -->
   <section class="section reveal" id="contacts">
     <div class="section-head">
-      <div class="section-eyebrow" data-fr="Contacts utiles" data-en="Useful contacts">Contacts utiles</div>
+      <div class="section-eyebrow" data-fr="Contacts utiles · Version collaborateurs" data-en="Useful contacts · Employee version">Contacts utiles · Version collaborateurs</div>
       <h2 class="section-title" data-fr="Une question ? <em>Une personne</em>." data-en="Got a question? <em>One person</em>.">Une question ? <em>Une personne</em>.</h2>
       <p class="section-desc" data-fr="Survole un contact pour copier son numéro ou son email d'un clic." data-en="Hover a contact to copy a number or email with one click.">Survole un contact pour copier son numéro ou son email d'un clic.</p>
     </div>
@@ -901,7 +912,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
   <!-- AUTOUR -->
   <section class="section reveal" id="autour">
     <div class="section-head">
-      <div class="section-eyebrow" data-fr="Autour du MY" data-en="Around MY">Autour du MY</div>
+      <div class="section-eyebrow" data-fr="Autour du MY · Dans le bâtiment & à proximité" data-en="Around MY · In the building & nearby">Autour du MY · Dans le bâtiment & à proximité</div>
       <h2 class="section-title" data-fr="À deux pas, <em>quelques bonnes adresses</em>." data-en="A few steps away, <em>some good spots</em>.">À deux pas, <em>quelques bonnes adresses</em>.</h2>
     </div>
 
@@ -920,12 +931,12 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
             <tr><td><strong>La MiN</strong><span class="addr">116 rue de Lagny, Montreuil</span></td><td data-fr="Israélienne / méditerranéenne" data-en="Israeli / Mediterranean">Israélienne / méditerranéenne</td><td>€€</td><td>350 m · 5 min</td></tr>
             <tr><td><strong>Lolo Cuisine Mésopotamienne</strong><span class="addr">45 rue Armand Carrel, Montreuil</span></td><td data-fr="Kurde / orientale" data-en="Kurdish / Middle Eastern">Kurde / orientale</td><td>€</td><td>350 m · 5 min</td></tr>
             <tr><td><strong>Jour Montreuil</strong><span class="addr">38 rue Cuvier, Montreuil</span></td><td data-fr="Salades / healthy" data-en="Salads / healthy">Salades / healthy</td><td>€€</td><td>600 m · 8 min</td></tr>
-            <tr><td><strong>Bistrot ben et kei</strong><span class="addr">19 av. Georges Clemenceau, Vincennes</span></td><td data-fr="Franco-japonais" data-en="French-Japanese">Franco-japonais</td><td>€€–€€€</td><td>650 m · 9 min</td></tr>
+            <tr><td><strong>Bistrot ben et kei</strong><span class="addr">19 av. Georges Clemenceau, Vincennes</span></td><td data-fr="Bistrot franco-japonais" data-en="French-Japanese bistro">Bistrot franco-japonais</td><td>€€–€€€</td><td>650 m · 9 min</td></tr>
             <tr><td><strong>Shishido Ramen</strong><span class="addr">21 av. Georges Clemenceau, Vincennes</span></td><td data-fr="Ramen / japonais" data-en="Ramen / Japanese">Ramen / japonais</td><td>€€</td><td>650 m · 9 min</td></tr>
-            <tr><td><strong>Khao Thaï</strong><span class="addr">18 av. Georges Clemenceau, Vincennes</span></td><td data-fr="Thaïlandais" data-en="Thai">Thaïlandais</td><td>€€</td><td>600 m · 9 min</td></tr>
-            <tr><td><strong>Bill's Burger</strong><span class="addr">21 rue de Lagny, Vincennes</span></td><td data-fr="Burgers" data-en="Burgers">Burgers</td><td>€</td><td>700 m · 9 min</td></tr>
-            <tr><td><strong>L'assiette voyageuse</strong><span class="addr">50 rue de Lagny, Montreuil</span></td><td data-fr="Cuisine du monde" data-en="World food">Cuisine du monde</td><td>€</td><td>750 m · 10 min</td></tr>
-            <tr><td><strong>Koko 72</strong><span class="addr">72 rue Robespierre, Montreuil</span></td><td data-fr="Cantine asiatique" data-en="Asian canteen">Cantine asiatique</td><td>€</td><td>800 m · 11 min</td></tr>
+            <tr><td><strong>Khao Thaï</strong><span class="addr">18 av. Georges Clemenceau, Vincennes</span></td><td data-fr="Thaïlandais : pad thaï, currys, bobun" data-en="Thai: pad thai, curries, bobun">Thaïlandais : pad thaï, currys, bobun</td><td>€€</td><td>600 m · 9 min</td></tr>
+            <tr><td><strong>Bill's Burger</strong><span class="addr">21 rue de Lagny, Vincennes</span></td><td data-fr="Burgers gourmets" data-en="Gourmet burgers">Burgers gourmets</td><td>€</td><td>700 m · 9 min</td></tr>
+            <tr><td><strong>L'assiette voyageuse</strong><span class="addr">50 rue de Lagny, Montreuil</span></td><td data-fr="Cuisine du monde / familial" data-en="World food / casual">Cuisine du monde / familial</td><td>€</td><td>750 m · 10 min</td></tr>
+            <tr><td><strong>Koko 72</strong><span class="addr">72 rue Robespierre, Montreuil</span></td><td data-fr="Cantine asiatique / plats du jour" data-en="Asian canteen / daily dishes">Cantine asiatique / plats du jour</td><td>€</td><td>800 m · 11 min</td></tr>
           </tbody>
         </table>
       </article>
@@ -934,19 +945,19 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
         <div class="cell-eyebrow" data-fr="Dans l'immeuble · -2" data-en="In the building · -2">Dans l'immeuble · -2</div>
         <h3 class="cell-title" data-fr="Provélite Académie" data-en="Provélite Academy">Provélite Académie</h3>
         <p data-fr="Salon d'application au <strong>-2</strong> de l'immeuble : coupes et prestations coiffure <strong>à prix réduits</strong>, sur rendez-vous selon les créneaux pédagogiques." data-en="Training salon on <strong>basement -2</strong>: discounted haircuts and hair services, by appointment depending on training slots.">Salon d'application au <strong>-2</strong> de l'immeuble : coupes et prestations coiffure <strong>à prix réduits</strong>, sur rendez-vous selon les créneaux pédagogiques.</p>
-        <p style="margin-top:14px"><a href="tel:0148587735">01 48 58 77 35</a> · <a href="https://www.canva.com/design/DAF64C3KhHE/KO4Wo5Q6Wc1zRMW_UtQ0Kw/view?utm_content=DAF64C3KhHE&utm_campaign=designshare&utm_medium=link&utm_source=editor" data-fr="Voir les informations" data-en="View information">Voir les informations</a> →</p>
+        <p style="margin-top:14px"><a href="tel:0148587735">01 48 58 77 35</a> · <a href="https://www.canva.com/design/DAF64C3KhHE/KO4Wo5Q6Wc1zRMW_UtQ0Kw/view?utm_content=DAF64C3KhHE&utm_campaign=designshare&utm_medium=link&utm_source=editor" data-fr="Voir les informations Provélite" data-en="View Provélite information">Voir les informations Provélite</a> →</p>
       </article>
 
       <article class="cell span-3 reveal">
         <div class="cell-eyebrow" data-fr="Afterwork" data-en="Afterwork">Afterwork</div>
         <h3 class="cell-title">Patio</h3>
-        <p data-fr="Bar / afterwork à proximité." data-en="Nearby bar / afterwork.">Bar / afterwork à proximité.</p>
+        <p data-fr="Option bar / afterwork à proximité." data-en="Nearby bar / afterwork option.">Option bar / afterwork à proximité.</p>
       </article>
 
       <article class="cell span-3 reveal">
         <div class="cell-eyebrow" data-fr="Café informel" data-en="Casual coffee">Café informel</div>
         <h3 class="cell-title">Birdie's Cafe</h3>
-        <p data-fr="Café ou verre informel." data-en="Coffee or informal drink.">Café ou verre informel.</p>
+        <p data-fr="Option café ou verre informel." data-en="Coffee or informal drink option.">Option café ou verre informel.</p>
       </article>
 
       <article class="cell span-4 reveal">
@@ -965,13 +976,13 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
       <article class="cell span-4 reveal">
         <div class="cell-eyebrow" data-fr="Bouger · Foot" data-en="Move · Football">Bouger · Foot</div>
         <h3 class="cell-title">Centre Sportif Maryse Hilsz</h3>
-        <p data-fr="34 rue Maryse Hilsz, Paris 20<sup>e</sup>. ~650 m / 9 min. Créneaux à confirmer." data-en="34 rue Maryse Hilsz, Paris 20<sup>th</sup>. ~650 m / 9 min. Slots to confirm.">34 rue Maryse Hilsz, Paris 20<sup>e</sup>. ~650 m / 9 min. Créneaux à confirmer.</p>
+        <p data-fr="Option foot la plus proche : 34 rue Maryse Hilsz, Paris 20<sup>e</sup>. Environ 650 m / 9 min à pied. Accès aux créneaux à confirmer." data-en="Closest football option: 34 rue Maryse Hilsz, Paris 20<sup>th</sup>. About 650 m / 9 min on foot. Slot access to be confirmed.">Option foot la plus proche : 34 rue Maryse Hilsz, Paris 20<sup>e</sup>. Environ 650 m / 9 min à pied. Accès aux créneaux à confirmer.</p>
       </article>
 
-      <article class="cell clay span-12 reveal">
+      <article class="cell span-12 reveal">
         <div class="cell-eyebrow" data-fr="Vraie pause verte" data-en="Real green break">Vraie pause verte</div>
         <h3 class="cell-title lg" data-fr="Bois de Vincennes" data-en="Bois de Vincennes">Bois de Vincennes</h3>
-        <p data-fr="Marche, footing ou simple respiration côté Saint-Mandé / Vincennes. À deux pas du MY." data-en="Walk, jog or simply breathe near Saint-Mandé / Vincennes. A few steps from MY.">Marche, footing ou simple respiration côté Saint-Mandé / Vincennes. À deux pas du MY.</p>
+        <p data-fr="Option marche, footing ou vraie pause verte côté Saint-Mandé / Vincennes. À deux pas du MY." data-en="Walking, running or a proper green break near Saint-Mandé / Vincennes. A few steps from MY.">Option marche, footing ou vraie pause verte côté Saint-Mandé / Vincennes. À deux pas du MY.</p>
       </article>
     </div>
   </section>
@@ -980,8 +991,8 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
 
 <footer>
   <span class="brand-foot">TISSIUM<span class="reg">®</span></span>
-  <span data-fr="Livret d'accueil MY · Usage interne" data-en="MY Welcome Guide · Internal use">Livret d'accueil MY · Usage interne</span>
-  <span data-fr="Version candidate · à valider" data-en="Candidate version · pending validation">Version candidate · à valider</span>
+  <span data-fr="Livret d'accueil Immeuble MY · Usage interne" data-en="MY Building Welcome Guide · Internal use">Livret d'accueil Immeuble MY · Usage interne</span>
+  <span data-fr="Version finale candidate · à valider" data-en="Final candidate version · pending validation">Version finale candidate · à valider</span>
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite">
@@ -994,10 +1005,9 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
   const $$ = (s, c = document) => c.querySelectorAll(s);
   const $ = (s, c = document) => c.querySelector(s);
 
-  // ---- Language ----
   const I18N = {
-    fr: { toastCopy: 'Copié dans le presse-papiers', toastShare: 'Lien copié' },
-    en: { toastCopy: 'Copied to clipboard', toastShare: 'Link copied' }
+    fr: { toastCopy: 'Copié dans le presse-papiers', btnCopy: 'Copier', btnCopied: 'Copié' },
+    en: { toastCopy: 'Copied to clipboard', btnCopy: 'Copy', btnCopied: 'Copied' }
   };
   let currentLang = 'fr';
   try { currentLang = localStorage.getItem('tissium-my-lang') || 'fr'; } catch {}
@@ -1006,18 +1016,22 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
     currentLang = lang === 'en' ? 'en' : 'fr';
     document.documentElement.lang = currentLang;
     $$('[data-fr][data-en]').forEach(el => {
-      el.innerHTML = el.dataset[currentLang];
+      if (!el.closest('.copy-btn')) el.innerHTML = el.dataset[currentLang];
+    });
+    $$('.copy-btn').forEach(b => {
+      if (!b.classList.contains('copied')) {
+        b.innerHTML = '<svg><use href="#i-copy"/></svg>' + I18N[currentLang].btnCopy;
+      }
     });
     $$('.langs button').forEach(b => {
-      const on = b.dataset.lang === currentLang;
-      b.setAttribute('aria-pressed', String(on));
+      b.setAttribute('aria-pressed', String(b.dataset.lang === currentLang));
     });
     try { localStorage.setItem('tissium-my-lang', currentLang); } catch {}
   }
   $$('.langs button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
   setLang(currentLang);
 
-  // ---- Scroll progress ----
+  // Scroll progress + topbar shrink
   const progress = $('#progress');
   const topbar = $('#topbar');
   let ticking = false;
@@ -1035,7 +1049,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // ---- Active nav ----
+  // Active nav
   const sections = $$('main .section[id]');
   const navLinks = $$('.nav a');
   const navMap = new Map();
@@ -1053,7 +1067,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
     sections.forEach(s => navObs.observe(s));
   }
 
-  // ---- Reveal on scroll ----
+  // Reveal on scroll
   if ('IntersectionObserver' in window) {
     const revObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -1071,7 +1085,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
     $$('.reveal').forEach(el => el.classList.add('in'));
   }
 
-  // ---- Animated number counters ----
+  // Animated counters
   function animateCount(el) {
     const target = parseFloat(el.dataset.count);
     if (!target) return;
@@ -1104,7 +1118,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
     $$('[data-count]').forEach(el => animateCount(el));
   }
 
-  // ---- Copy-to-clipboard on contact lines ----
+  // Copy to clipboard
   const toast = $('#toast');
   const toastMsg = $('#toast-msg');
   let toastTimer = 0;
@@ -1124,12 +1138,11 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
       try {
         await navigator.clipboard.writeText(value);
         btn.classList.add('copied');
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<svg><use href="#i-check"/></svg>' + (currentLang === 'fr' ? 'Copié' : 'Copied');
+        btn.innerHTML = '<svg><use href="#i-check"/></svg>' + I18N[currentLang].btnCopied;
         showToast(I18N[currentLang].toastCopy);
         setTimeout(() => {
           btn.classList.remove('copied');
-          btn.innerHTML = orig;
+          btn.innerHTML = '<svg><use href="#i-copy"/></svg>' + I18N[currentLang].btnCopy;
         }, 1800);
       } catch {
         showToast(value);
@@ -1138,7 +1151,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
     btn.addEventListener('click', copy);
   });
 
-  // ---- Smooth-scroll offset for anchor links ----
+  // Smooth-scroll offset
   $$('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
       const id = a.getAttribute('href').slice(1);
