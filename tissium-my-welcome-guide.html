@@ -1,0 +1,1158 @@
+<!doctype html>
+<html lang="fr" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Livret d'accueil TISSIUM pour l'immeuble MY : accès, badges, visiteurs, services, règles de vie et contacts utiles.">
+<meta name="theme-color" content="#0A1626">
+<title>TISSIUM — Livret d'accueil MY</title>
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0A1626;--ink-2:#1A2740;
+  --blue-deep:#0A2E5C;--blue:#1F4E8C;--blue-bright:#3A8DDE;--blue-wash:#EAF2FB;
+  --clay:#D97757;--clay-soft:#F4D4C5;--clay-deep:#B85A3D;--clay-wash:#FBF1EC;
+  --paper:#FAF8F4;--cream:#F3EFE7;--sand:#E8E2D5;
+  --line:#E5DFD4;--line-strong:#C9C3B6;
+  --stone:#8B8578;--slate:#4A4F5B;--text:#15192A;
+  --success:#2D7D5F;--success-bg:#DCEFE5;
+  --warn:#92501E;--warn-bg:#FBEED7;
+  --font:'Montserrat',system-ui,-apple-system,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);--ease-soft:cubic-bezier(.4,0,.2,1);
+  --shadow-xs:0 1px 2px rgba(10,22,38,.04);
+  --shadow-sm:0 6px 18px rgba(10,22,38,.06);
+  --shadow-md:0 18px 44px rgba(10,22,38,.08);
+  --shadow-lg:0 32px 70px rgba(10,22,38,.14);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);font-weight:400;font-size:15px;line-height:1.55;
+  color:var(--text);background:var(--paper);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 50% at 100% 0%, rgba(217,119,87,.10), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 0% 30%, rgba(58,141,222,.08), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(31,78,140,.06), transparent 60%);
+}
+
+a{color:inherit;text-decoration:none;transition:color 180ms var(--ease)}
+a:hover{color:var(--clay);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:var(--clay-soft)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:4px}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+sup{font-size:.6em;vertical-align:super}
+
+/* ---- Animations ---- */
+@keyframes float-a{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(24px,-32px) scale(1.06)}}
+@keyframes float-b{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-28px,20px) scale(.96)}}
+@keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(217,119,87,.5)}70%{box-shadow:0 0 0 14px rgba(217,119,87,0)}100%{box-shadow:0 0 0 0 rgba(217,119,87,0)}}
+@keyframes dash{to{stroke-dashoffset:0}}
+@keyframes blob-rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* ---- Scroll progress ---- */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:100;pointer-events:none}
+.progress::after{content:'';display:block;height:100%;width:var(--p,0%);
+  background:linear-gradient(90deg,var(--clay),var(--clay-deep));
+  box-shadow:0 0 20px rgba(217,119,87,.4);
+  transition:width 90ms linear;
+}
+
+/* ---- Skip link ---- */
+.skip{position:fixed;left:16px;top:16px;z-index:200;transform:translateY(-150%);
+  padding:10px 16px;border-radius:999px;background:var(--ink);color:#fff;
+  font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  transition:transform 200ms var(--ease);
+}
+.skip:focus{transform:translateY(0);text-decoration:none;color:#fff}
+
+/* ---- Top bar ---- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 40px;pointer-events:none;
+  transition:padding 280ms var(--ease),background 280ms var(--ease),backdrop-filter 280ms var(--ease),box-shadow 280ms var(--ease);
+}
+.topbar.shrunk{padding:12px 40px;background:rgba(250,248,244,.84);backdrop-filter:saturate(160%) blur(16px);box-shadow:0 1px 0 var(--line)}
+.topbar > *{pointer-events:auto}
+
+.brand{
+  font-family:var(--font);font-weight:200;font-size:20px;
+  letter-spacing:.36em;color:var(--ink);
+  display:inline-flex;align-items:baseline;gap:3px;
+  transition:color 220ms var(--ease);
+}
+.brand:hover{color:var(--clay);text-decoration:none}
+.brand .reg{font-size:8.5px;letter-spacing:0;font-weight:400;transform:translateY(-7px)}
+
+.langs{display:inline-flex;align-items:center;gap:2px;padding:4px;
+  border-radius:999px;background:rgba(10,22,38,.06);
+  backdrop-filter:saturate(160%) blur(12px);
+}
+.topbar.shrunk .langs{background:rgba(10,22,38,.08)}
+.langs button{padding:7px 13px;border-radius:999px;
+  font-size:10px;font-weight:700;letter-spacing:.18em;color:var(--slate);
+  transition:background 200ms var(--ease),color 200ms var(--ease),transform 200ms var(--ease);
+}
+.langs button:hover{color:var(--ink);transform:translateY(-1px)}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+/* ---- Hero ---- */
+.hero{position:relative;padding:170px 40px 96px;overflow:hidden}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:0}
+.hero-blob.a{width:560px;height:560px;top:-180px;right:-100px;
+  background:radial-gradient(ellipse,rgba(217,119,87,.35),transparent 65%);
+  animation:float-a 18s ease-in-out infinite;
+}
+.hero-blob.b{width:480px;height:480px;bottom:-200px;left:-120px;
+  background:radial-gradient(ellipse,rgba(58,141,222,.22),transparent 65%);
+  animation:float-b 24s ease-in-out infinite;
+}
+.hero-inner{position:relative;z-index:1;max-width:1240px;margin:0 auto}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  margin-bottom:36px;
+  font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--clay);
+  animation:fade-up 700ms var(--ease) both;
+}
+.pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--clay);animation:pulse 2.2s infinite}
+
+.hero h1{
+  font-weight:200;font-size:clamp(52px,9.5vw,140px);line-height:.96;
+  letter-spacing:-.045em;color:var(--ink);margin-bottom:36px;
+  animation:fade-up 800ms var(--ease) 80ms both;
+}
+.hero h1 strong{font-weight:600}
+.hero h1 .underline{position:relative;display:inline-block}
+.hero h1 .underline::after{content:'';position:absolute;left:.04em;right:.04em;bottom:.18em;height:.18em;
+  background:var(--clay-soft);border-radius:999px;z-index:-1}
+.hero-lede{
+  max-width:680px;font-size:clamp(15px,1.5vw,19px);font-weight:300;line-height:1.55;color:var(--slate);
+  margin-bottom:64px;animation:fade-up 800ms var(--ease) 160ms both;
+}
+.hero-lede strong{font-weight:500;color:var(--ink)}
+
+.hero-bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;
+  animation:fade-up 800ms var(--ease) 240ms both;
+}
+.bento-card{
+  position:relative;background:#fff;border:1px solid var(--line);
+  border-radius:20px;padding:28px;overflow:hidden;
+  transition:transform 320ms var(--ease),box-shadow 320ms var(--ease),border-color 320ms var(--ease);
+}
+.bento-card::before{content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(135deg,rgba(217,119,87,.08),transparent 50%);opacity:0;transition:opacity 320ms var(--ease);pointer-events:none}
+.bento-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(217,119,87,.3)}
+.bento-card:hover::before{opacity:1}
+.bento-card .ico{width:28px;height:28px;color:var(--clay);margin-bottom:18px;display:block}
+.bento-card .label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);margin-bottom:10px}
+.bento-card .big{font-weight:200;font-size:44px;line-height:1;letter-spacing:-.03em;color:var(--ink);margin-bottom:8px;font-variant-numeric:tabular-nums}
+.bento-card .big small{font-size:18px;font-weight:400;color:var(--stone);letter-spacing:0;margin-left:4px}
+.bento-card .sub{font-size:13.5px;color:var(--slate)}
+.hero-address{grid-column:span 5}
+.hero-floor{grid-column:span 3}
+.hero-metro{grid-column:span 4}
+.hero-floor .big{font-size:60px}
+
+/* ---- Nav ---- */
+.nav-wrap{position:sticky;top:68px;z-index:30;
+  background:rgba(250,248,244,.92);backdrop-filter:saturate(160%) blur(10px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.nav{max-width:1240px;margin:0 auto;padding:0 40px;display:flex;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{position:relative;padding:18px 18px;font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--slate);white-space:nowrap;
+  transition:color 200ms var(--ease);
+}
+.nav a:hover{color:var(--ink);text-decoration:none}
+.nav a::after{content:'';position:absolute;left:18px;right:18px;bottom:0;height:2px;background:var(--clay);
+  transform:scaleX(0);transform-origin:left;transition:transform 280ms var(--ease);
+}
+.nav a:hover::after,.nav a.active::after{transform:scaleX(1)}
+.nav a.active{color:var(--ink)}
+
+/* ---- Main ---- */
+main{max-width:1240px;margin:0 auto;padding:96px 40px 120px}
+.section{margin-bottom:112px;scroll-margin-top:120px}
+.section:last-child{margin-bottom:0}
+.section-head{margin-bottom:40px;max-width:760px}
+.section-eyebrow{display:inline-flex;align-items:center;gap:12px;
+  font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--clay);margin-bottom:18px;
+}
+.section-eyebrow::before{content:'';width:24px;height:1px;background:var(--clay)}
+.section-title{
+  font-weight:200;font-size:clamp(34px,5.2vw,64px);line-height:1.02;
+  letter-spacing:-.038em;color:var(--ink);margin-bottom:18px;
+}
+.section-title strong{font-weight:600}
+.section-title em{font-style:italic;font-weight:300;color:var(--clay)}
+.section-desc{font-size:16px;line-height:1.6;color:var(--slate);font-weight:400;max-width:620px}
+
+/* ---- Bento grid ---- */
+.bento-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.cell{
+  position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px;overflow:hidden;
+  transition:transform 320ms var(--ease),box-shadow 320ms var(--ease),border-color 320ms var(--ease);
+}
+.cell::before{content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(135deg,rgba(217,119,87,.06),transparent 55%);opacity:0;transition:opacity 320ms var(--ease);pointer-events:none}
+.cell:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(217,119,87,.3)}
+.cell:hover::before{opacity:1}
+.cell.feature{background:linear-gradient(160deg,var(--ink) 0%,var(--ink-2) 100%);color:var(--paper);border-color:transparent}
+.cell.feature::after{content:'';position:absolute;top:-60%;right:-30%;width:80%;height:160%;
+  background:radial-gradient(ellipse,rgba(217,119,87,.18),transparent 60%);pointer-events:none}
+.cell.feature .cell-title{color:#fff}
+.cell.feature .cell-eyebrow{color:var(--clay-soft)}
+.cell.feature p{color:rgba(250,248,244,.78)}
+.cell.feature strong{color:#fff}
+.cell.feature .ico-lg{color:var(--clay-soft)}
+.cell.cream{background:var(--cream);border-color:var(--sand)}
+.cell.clay{background:var(--clay-wash);border-color:rgba(217,119,87,.2)}
+.cell.clay .cell-eyebrow{color:var(--clay-deep)}
+.cell.span-12{grid-column:span 12}
+.cell.span-9{grid-column:span 9}
+.cell.span-8{grid-column:span 8}
+.cell.span-7{grid-column:span 7}
+.cell.span-6{grid-column:span 6}
+.cell.span-5{grid-column:span 5}
+.cell.span-4{grid-column:span 4}
+.cell.span-3{grid-column:span 3}
+.cell-eyebrow{display:inline-flex;align-items:center;gap:10px;
+  font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);margin-bottom:18px;
+}
+.cell-eyebrow svg{width:14px;height:14px}
+.cell-title{font-weight:500;font-size:19px;letter-spacing:-.01em;line-height:1.25;color:var(--ink);margin-bottom:16px}
+.cell-title.lg{font-weight:300;font-size:32px;letter-spacing:-.025em;line-height:1.1;margin-bottom:20px}
+.cell-title.lg strong{font-weight:600}
+.cell p{font-size:14px;line-height:1.6;color:var(--slate);margin-bottom:10px}
+.cell p:last-child{margin-bottom:0}
+.cell p strong, .cell strong{color:var(--ink);font-weight:600}
+.cell .ico-lg{width:36px;height:36px;color:var(--clay);margin-bottom:20px;display:block}
+
+.kv{display:grid;grid-template-columns:104px 1fr;gap:14px;align-items:start;padding:13px 0;border-bottom:1px solid rgba(229,223,212,.6)}
+.kv:last-child{border-bottom:0}
+.kv-key{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);padding-top:2px}
+.kv-val{font-size:14px;color:var(--text);line-height:1.5}
+.kv-val strong{color:var(--ink);font-weight:600}
+.cell.feature .kv{border-color:rgba(255,255,255,.1)}
+.cell.feature .kv-key{color:rgba(244,212,197,.6)}
+.cell.feature .kv-val{color:rgba(255,255,255,.88)}
+.cell.feature .kv-val strong{color:#fff}
+
+.tag{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;
+  font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase
+}
+.tag.ok{background:var(--success-bg);color:var(--success)}
+.tag.warn{background:var(--warn-bg);color:var(--warn)}
+.tag.clay{background:var(--clay-wash);color:var(--clay-deep)}
+.tag.ink{background:var(--ink);color:var(--paper)}
+.tag .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* ---- Steps ---- */
+.steps{display:grid;gap:12px}
+.step{display:grid;grid-template-columns:42px 1fr;gap:18px;align-items:start;
+  padding:22px;background:#fff;border:1px solid var(--line);border-radius:16px;
+  transition:transform 280ms var(--ease),box-shadow 280ms var(--ease),border-color 280ms var(--ease);
+}
+.step:hover{transform:translateX(4px);border-color:rgba(217,119,87,.35);box-shadow:var(--shadow-sm)}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;font-weight:500;font-size:13.5px;
+  font-variant-numeric:tabular-nums;letter-spacing:0;
+  transition:background 280ms var(--ease),transform 280ms var(--ease);
+}
+.step:hover .step-num{background:var(--clay);transform:rotate(360deg) scale(1.08)}
+.step-body strong{display:block;font-weight:600;font-size:14.5px;color:var(--ink);margin-bottom:6px}
+.step-body span{display:block;font-size:13.5px;color:var(--slate);line-height:1.55}
+
+/* ---- Routes (hero numbers) ---- */
+.route{position:relative;padding:36px 32px}
+.route .mode{margin-bottom:14px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--clay)}
+.route .time{font-weight:100;font-size:96px;line-height:.9;letter-spacing:-.05em;color:var(--ink);font-variant-numeric:tabular-nums;margin-bottom:12px}
+.route .time small{font-size:24px;font-weight:300;color:var(--stone);letter-spacing:0;margin-left:6px}
+.route .station{font-weight:600;font-size:15px;color:var(--ink);margin-bottom:6px}
+.route .desc{font-size:13px;color:var(--slate)}
+.route.alt .time{font-size:72px;font-weight:200}
+
+/* ---- Callout / alert ---- */
+.callout{padding:22px 26px;background:var(--blue-wash);border:1px solid rgba(58,141,222,.18);
+  border-left:3px solid var(--blue);border-radius:6px 16px 16px 6px;color:var(--ink-2);
+}
+.callout p{color:var(--ink-2);font-size:14px;margin:0}
+.callout strong{color:var(--ink);font-weight:600}
+.callout.warn{background:var(--clay-wash);border-color:rgba(217,119,87,.2);border-left-color:var(--clay)}
+.callout.warn p{color:var(--clay-deep)}
+.callout.warn strong{color:var(--clay-deep)}
+
+/* ---- Contact card ---- */
+.contact-card{
+  padding:26px;background:#fff;border:1px solid var(--line);border-radius:18px;
+  transition:transform 320ms var(--ease),box-shadow 320ms var(--ease),border-color 320ms var(--ease);
+  position:relative;overflow:hidden;
+}
+.contact-card::before{content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(135deg,rgba(217,119,87,.06),transparent 55%);opacity:0;transition:opacity 320ms var(--ease);pointer-events:none}
+.contact-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(217,119,87,.3)}
+.contact-card:hover::before{opacity:1}
+.contact-org{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);margin-bottom:16px}
+.contact-name{font-weight:600;font-size:18px;letter-spacing:-.01em;color:var(--ink);margin-bottom:4px}
+.contact-role{font-size:12.5px;color:var(--stone);margin-bottom:18px;line-height:1.5}
+.contact-line{display:flex;align-items:center;gap:10px;padding:11px 0;font-size:13.5px;color:var(--ink);
+  border-top:1px solid rgba(229,223,212,.7);position:relative;
+}
+.contact-line:first-of-type{padding-top:14px}
+.contact-line svg{width:15px;height:15px;color:var(--stone);flex-shrink:0}
+.contact-line a{flex:1}
+.copy-btn{margin-left:auto;padding:6px 10px;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);
+  background:var(--clay-wash);border-radius:999px;opacity:0;transition:opacity 220ms var(--ease),background 220ms var(--ease),color 220ms var(--ease);
+}
+.contact-line:hover .copy-btn{opacity:1}
+.copy-btn.copied{opacity:1;background:var(--success-bg);color:var(--success)}
+.copy-btn svg{width:11px;height:11px;margin-right:4px;vertical-align:-1px}
+
+/* ---- Rules grid ---- */
+.rule-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.rule{
+  padding:24px;background:#fff;border:1px solid var(--line);border-radius:16px;position:relative;overflow:hidden;
+  transition:transform 320ms var(--ease),box-shadow 320ms var(--ease),border-color 320ms var(--ease);
+}
+.rule::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--clay);
+  transform:scaleX(0);transform-origin:left;transition:transform 360ms var(--ease)}
+.rule:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:rgba(217,119,87,.3)}
+.rule:hover::before{transform:scaleX(1)}
+.rule .ico{width:22px;height:22px;color:var(--clay);margin-bottom:16px;display:block}
+.rule strong{display:block;font-weight:600;font-size:14.5px;color:var(--ink);margin-bottom:10px}
+.rule span{display:block;font-size:13px;color:var(--slate);line-height:1.55}
+
+/* ---- Lunch table ---- */
+.lunch-wrap{padding:8px 0}
+.lunch{width:100%;border-collapse:collapse}
+.lunch th{padding:14px 18px 14px 0;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--clay);border-bottom:1px solid var(--line);text-align:left;
+}
+.lunch td{padding:18px 18px 18px 0;font-size:13.5px;color:var(--text);border-bottom:1px solid rgba(229,223,212,.55);vertical-align:top}
+.lunch tr:last-child td{border-bottom:0}
+.lunch td strong{color:var(--ink);font-weight:600;font-size:14.5px}
+.lunch .addr{display:block;font-size:11.5px;color:var(--stone);margin-top:3px}
+.lunch tbody tr{transition:background 200ms var(--ease)}
+.lunch tbody tr:hover{background:var(--cream)}
+
+/* ---- Parking SVG ---- */
+.parking-plan{
+  width:100%;height:auto;display:block;margin:8px 0 4px;
+  background:linear-gradient(180deg, #FAF8F4, #F3EFE7);border-radius:14px;
+}
+.parking-plan .lot{fill:none;stroke:var(--line-strong);stroke-width:1.2}
+.parking-plan .spot{fill:#fff;stroke:var(--line-strong);stroke-width:.8}
+.parking-plan .tissium-spot{fill:var(--clay-soft);stroke:var(--clay);stroke-width:1.4}
+.parking-plan .circulation{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:3 3}
+.parking-plan .arrow{fill:var(--clay);stroke:none}
+.parking-plan .street{font:600 9px var(--font);fill:var(--stone);letter-spacing:.2em;text-transform:uppercase}
+.parking-plan .label{font:700 8.5px var(--font);fill:var(--clay-deep);letter-spacing:.1em;text-transform:uppercase}
+.parking-plan .num{font:500 6px var(--font);fill:var(--clay-deep);font-variant-numeric:tabular-nums}
+.parking-plan .entry-label{font:700 9px var(--font);fill:var(--ink);letter-spacing:.12em;text-transform:uppercase}
+
+/* ---- Footer ---- */
+footer{border-top:1px solid var(--line);padding:48px 40px;max-width:1240px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  color:var(--stone);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+}
+footer .brand-foot{font-weight:200;letter-spacing:.34em;font-size:13px;color:var(--ink)}
+footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
+
+/* ---- Toast ---- */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+  padding:13px 22px;background:var(--ink);color:var(--paper);border-radius:999px;
+  font-size:12px;font-weight:600;letter-spacing:.06em;z-index:200;
+  opacity:0;pointer-events:none;
+  transition:opacity 240ms var(--ease),transform 280ms var(--ease);
+  box-shadow:var(--shadow-lg);
+  display:inline-flex;align-items:center;gap:8px;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast svg{width:14px;height:14px;color:var(--clay-soft)}
+
+/* ---- Reveals ---- */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity 750ms var(--ease),transform 750ms var(--ease)}
+.js .reveal.in{opacity:1;transform:translateY(0)}
+
+/* ---- Responsive ---- */
+@media (max-width:1080px){
+  .hero{padding:140px 28px 70px}
+  main{padding:70px 28px 100px}
+  .hero-address,.hero-floor,.hero-metro{grid-column:span 12}
+  .hero-floor .big{font-size:48px}
+  .rule-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:800px){
+  .topbar{padding:16px 20px}
+  .topbar.shrunk{padding:10px 20px}
+  .hero{padding:120px 20px 56px}
+  .nav-wrap{top:56px}
+  .nav{padding:0 20px}
+  .nav a{padding:14px 14px;font-size:9.5px}
+  main{padding:54px 20px 80px}
+  .section{margin-bottom:80px}
+  .cell{padding:24px}
+  .cell.span-3,.cell.span-4,.cell.span-5,.cell.span-6,.cell.span-7,.cell.span-8,.cell.span-9{grid-column:span 12}
+  .route .time{font-size:72px}
+  .route.alt .time{font-size:56px}
+  .lunch th,.lunch td{padding:12px 12px 12px 0;font-size:12.5px}
+  .lunch th{font-size:9.5px}
+  footer{flex-direction:column;align-items:flex-start;padding:32px 20px;gap:14px}
+}
+@media (max-width:560px){
+  .rule-grid{grid-template-columns:1fr}
+  .kv{grid-template-columns:90px 1fr;gap:10px}
+  .hero h1{font-size:48px}
+  .section-title{font-size:32px}
+  .cell-title.lg{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .js .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+  .hero-blob{display:none}
+}
+@media print{
+  .topbar,.nav-wrap,.progress,.skip,.toast{display:none}
+  body{background:#fff}
+  body::before{display:none}
+  .hero{padding:40px 30px}
+  .hero-blob{display:none}
+  main{padding:20px 30px 40px;max-width:none}
+  .cell,.step,.contact-card,.rule{box-shadow:none !important;break-inside:avoid;border:1px solid #ddd}
+  .section{margin-bottom:36px}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<a class="skip" href="#main" data-fr="Aller au contenu" data-en="Skip to content">Aller au contenu</a>
+
+<!-- Icon sprite -->
+<svg style="position:absolute;width:0;height:0" aria-hidden="true"><defs>
+<symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-7-7.5-7-13a7 7 0 1 1 14 0c0 5.5-7 13-7 13z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+<symbol id="i-floor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13M4 21h16M9 21v-5h6v5"/></symbol>
+<symbol id="i-metro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="15" rx="3"/><path d="M5 12h14M9 21l1.5-3M15 21l-1.5-3"/><circle cx="9" cy="8" r=".6" fill="currentColor"/><circle cx="15" cy="8" r=".6" fill="currentColor"/></symbol>
+<symbol id="i-bike" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6h3l-5 11-4-7H6m9-4l3 11"/></symbol>
+<symbol id="i-parking" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 17V7h3.5a2.5 2.5 0 0 1 0 5H10"/></symbol>
+<symbol id="i-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="12" r="2.5"/><path d="M15 10h4M15 14h4M6 17c.5-1.5 1.6-2.5 3-2.5s2.5 1 3 2.5"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3m-4 4l3 3m-5-1l3 3"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+<symbol id="i-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h15a3 3 0 0 1 0 6h-1M3 9v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V9zM7 2v3M11 2v3M15 2v3"/></symbol>
+<symbol id="i-utensils" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v6a3 3 0 0 0 3 3v9M7 3v6M16 14V3c-2 0-4 2-4 5s2 5 4 5zm0 0v8"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3 8-10V5l-8-3-8 3v7c0 7 8 10 8 10z"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M14 21a2 2 0 0 1-4 0"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></symbol>
+<symbol id="i-at" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="11" rx="2"/><path d="M2 20h20"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 7L20 10.5l-6.4 1.5L12 19l-1.6-7L4 10.5l6.4-1.5L12 2z"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></symbol>
+<symbol id="i-volume" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5zM15 9a3 3 0 0 1 0 6M18.5 6.5a7 7 0 0 1 0 11"/></symbol>
+<symbol id="i-broom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6M9 9l5-5 5 5-5 5M5 21l4-4M5 21c-1.5 0-2-1.5-1-3l5-5 4 4-5 5c-1.5 1-3 .5-3-1z"/></symbol>
+<symbol id="i-locker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 12h14M9 7v1M9 16v1M15 7v1M15 16v1"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-door" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18H6zM10 12h.01"/></symbol>
+<symbol id="i-fork" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2v8a2 2 0 0 0 2 2v9M4 2v8M10 2v8"/></symbol>
+</defs></svg>
+
+<header class="topbar" id="topbar">
+  <a class="brand" href="#top" aria-label="TISSIUM">TISSIUM<span class="reg">®</span></a>
+  <div class="langs" role="group" aria-label="Language">
+    <button data-lang="fr" aria-pressed="true">FR</button>
+    <button data-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<a id="top" tabindex="-1"></a>
+
+<section class="hero">
+  <div class="hero-blob a" aria-hidden="true"></div>
+  <div class="hero-blob b" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="pulse" aria-hidden="true"></span>
+      <span data-fr="Livret d'accueil · Usage interne" data-en="Welcome guide · Internal use">Livret d'accueil · Usage interne</span>
+    </div>
+    <h1 data-fr="Bienvenue<br>au <span class='underline'><strong>MY</strong></span>." data-en="Welcome<br>to <span class='underline'><strong>MY</strong></span>.">Bienvenue<br>au <span class="underline"><strong>MY</strong></span>.</h1>
+    <p class="hero-lede" data-fr="L'essentiel pour accéder aux locaux TISSIUM, travailler sur site, recevoir des visiteurs — et tout ce qui rend la vie au 7<sup>e</sup> un peu plus simple." data-en="Everything you need to access the TISSIUM offices, work on site, welcome visitors — and a few things that make life on the 7<sup>th</sup> floor a little simpler.">L'essentiel pour accéder aux locaux TISSIUM, travailler sur site, recevoir des visiteurs — et tout ce qui rend la vie au 7<sup>e</sup> un peu plus simple.</p>
+
+    <div class="hero-bento">
+      <div class="bento-card hero-address">
+        <svg class="ico"><use href="#i-pin"/></svg>
+        <div class="label" data-fr="Adresse" data-en="Address">Adresse</div>
+        <div class="big">18<small data-fr="avenue Léon Gaumont" data-en="avenue Léon Gaumont">avenue Léon Gaumont</small></div>
+        <div class="sub">75020 Paris</div>
+      </div>
+      <div class="bento-card hero-floor">
+        <svg class="ico"><use href="#i-floor"/></svg>
+        <div class="label" data-fr="Étage" data-en="Floor">Étage</div>
+        <div class="big">R+7</div>
+        <div class="sub" data-fr="Plateau TISSIUM" data-en="TISSIUM floor">Plateau TISSIUM</div>
+      </div>
+      <div class="bento-card hero-metro">
+        <svg class="ico"><use href="#i-metro"/></svg>
+        <div class="label" data-fr="Accès" data-en="Access">Accès</div>
+        <div class="big" data-count="6">0<small>min</small></div>
+        <div class="sub" data-fr="Saint-Mandé · Ligne 1" data-en="Saint-Mandé · Line 1">Saint-Mandé · Ligne 1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="nav-wrap">
+  <nav class="nav" aria-label="Sections">
+    <a href="#essentiel" data-fr="Essentiel" data-en="Essentials">Essentiel</a>
+    <a href="#venir" data-fr="Accès" data-en="Access">Accès</a>
+    <a href="#badges" data-fr="Badges" data-en="Badges">Badges</a>
+    <a href="#visiteurs" data-fr="Visiteurs" data-en="Visitors">Visiteurs</a>
+    <a href="#services" data-fr="Services" data-en="Services">Services</a>
+    <a href="#courrier" data-fr="Courrier" data-en="Mail">Courrier</a>
+    <a href="#vivre" data-fr="Bien vivre" data-en="Living together">Bien vivre</a>
+    <a href="#securite" data-fr="Sécurité" data-en="Security">Sécurité</a>
+    <a href="#contacts" data-fr="Contacts" data-en="Contacts">Contacts</a>
+    <a href="#autour" data-fr="Autour" data-en="Nearby">Autour</a>
+  </nav>
+</div>
+
+<main id="main">
+
+  <!-- ESSENTIEL -->
+  <section class="section reveal" id="essentiel">
+    <div class="section-head">
+      <div class="section-eyebrow" data-fr="L'essentiel · 30 secondes" data-en="The essentials · 30 seconds">L'essentiel · 30 secondes</div>
+      <h2 class="section-title" data-fr="Tout ce qu'il faut savoir <em>avant</em> ta première journée." data-en="Everything to know <em>before</em> your first day.">Tout ce qu'il faut savoir <em>avant</em> ta première journée.</h2>
+    </div>
+
+    <div class="bento-grid">
+      <article class="cell feature span-7 reveal">
+        <div class="cell-eyebrow"><svg><use href="#i-spark"/></svg><span data-fr="En 30 secondes" data-en="In 30 seconds">En 30 secondes</span></div>
+        <h3 class="cell-title lg" data-fr="Une adresse, un étage, <strong>un badge</strong>." data-en="One address, one floor, <strong>one badge</strong>.">Une adresse, un étage, <strong>un badge</strong>.</h3>
+        <div>
+          <div class="kv"><div class="kv-key" data-fr="Adresse" data-en="Address">Adresse</div><div class="kv-val"><strong>18 avenue Léon Gaumont, 75020 Paris</strong></div></div>
+          <div class="kv"><div class="kv-key" data-fr="Étage" data-en="Floor">Étage</div><div class="kv-val" data-fr="<strong>R+7</strong> — Plateau TISSIUM" data-en="<strong>R+7</strong> — TISSIUM floor"><strong>R+7</strong> — Plateau TISSIUM</div></div>
+          <div class="kv"><div class="kv-key" data-fr="Métro" data-en="Metro">Métro</div><div class="kv-val" data-fr="<strong>Saint-Mandé</strong>, Ligne 1 — 6 min à pied" data-en="<strong>Saint-Mandé</strong>, Line 1 — 6 min on foot"><strong>Saint-Mandé</strong>, Ligne 1 — 6 min à pied</div></div>
+          <div class="kv"><div class="kv-key" data-fr="Badge" data-en="Badge">Badge</div><div class="kv-val" data-fr="Remis <strong>avant ton arrivée</strong>" data-en="Provided <strong>before you arrive</strong>">Remis <strong>avant ton arrivée</strong></div></div>
+          <div class="kv"><div class="kv-key" data-fr="Externes" data-en="Visitors">Externes</div><div class="kv-val" data-fr="Réunions au <strong>Business Center</strong>" data-en="Meetings at the <strong>Business Center</strong>">Réunions au <strong>Business Center</strong></div></div>
+        </div>
+      </article>
+
+      <article class="cell clay span-5 reveal">
+        <div class="cell-eyebrow"><svg><use href="#i-spark"/></svg><span data-fr="Premier jour" data-en="First day">Premier jour</span></div>
+        <h3 class="cell-title" data-fr="Quatre étapes, dans l'ordre." data-en="Four steps, in order.">Quatre étapes, dans l'ordre.</h3>
+        <div class="steps" style="margin-top:8px">
+          <div class="step"><div class="step-num">1</div><div class="step-body">
+            <strong data-fr="Vérifie ton badge" data-en="Check your badge">Vérifie ton badge</strong>
+            <span data-fr="Il doit t'être remis avant ton arrivée." data-en="It must be given to you before you arrive.">Il doit t'être remis avant ton arrivée.</span>
+          </div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">
+            <strong data-fr="Entre au 18 av. Léon Gaumont" data-en="Enter at 18 av. Léon Gaumont">Entre au 18 av. Léon Gaumont</strong>
+            <span data-fr="C'est l'accès principal." data-en="It is the main entrance.">C'est l'accès principal.</span>
+          </div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">
+            <strong data-fr="Monte au 7" data-en="Go to the 7th">Monte au 7<sup>e</sup></strong>
+            <span data-fr="Les locaux TISSIUM sont au R+7." data-en="The TISSIUM offices are on R+7.">Les locaux TISSIUM sont au R+7.</span>
+          </div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">
+            <strong data-fr="Bloqué ? Office Manager" data-en="Stuck? Office Manager">Bloqué ? Office Manager</strong>
+            <span data-fr="Kumuthiya Thiyagalingam prend le relais." data-en="Kumuthiya Thiyagalingam will help.">Kumuthiya Thiyagalingam prend le relais.</span>
+          </div></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- VENIR -->
+  <section class="section reveal" id="venir">
+    <div class="section-head">
+      <div class="section-eyebrow" data-fr="Venir au MY" data-en="Getting to MY">Venir au MY</div>
+      <h2 class="section-title" data-fr="<em>Saint-Mandé</em>, six minutes à pied." data-en="<em>Saint-Mandé</em>, six minutes on foot.">"Saint-Mandé", six minutes à pied.</h2>
+      <p class="section-desc" data-fr="L'accès recommandé. Si tu viens d'ailleurs, deux alternatives." data-en="The recommended route. If you're coming from elsewhere, two alternatives.">L'accès recommandé. Si tu viens d'ailleurs, deux alternatives.</p>
+    </div>
+
+    <div class="bento-grid">
+      <article class="cell span-6 route reveal">
+        <div class="mode" data-fr="Recommandé" data-en="Recommended">Recommandé</div>
+        <div class="time" data-count="6">0<small>min</small></div>
+        <div class="station" data-fr="Saint-Mandé · Ligne 1" data-en="Saint-Mandé · Line 1">Saint-Mandé · Ligne 1</div>
+        <div class="desc" data-fr="Trajet piéton le plus simple vers le 18 av. Léon Gaumont." data-en="The easiest walk to 18 av. Léon Gaumont.">Trajet piéton le plus simple vers le 18 av. Léon Gaumont.</div>
+      </article>
+      <article class="cell span-3 route alt reveal">
+        <div class="mode" data-fr="Alternative" data-en="Alternative">Alternative</div>
+        <div class="time" data-count="12">0<small>min</small></div>
+        <div class="station" data-fr="Porte de Montreuil · Ligne 9" data-en="Porte de Montreuil · Line 9">Porte de Montreuil · Ligne 9</div>
+      </article>
+      <article class="cell span-3 route alt reveal">
+        <div class="mode" data-fr="Alternative" data-en="Alternative">Alternative</div>
+        <div class="time" data-count="12">0<small>min</small></div>
+        <div class="station" data-fr="Robespierre · Ligne 9" data-en="Robespierre · Line 9">Robespierre · Ligne 9</div>
+      </article>
+      <article class="cell cream span-12 reveal">
+        <p data-fr="<strong>RER A :</strong> Vincennes ou Nation, environ 18 min à pied selon ta direction." data-en="<strong>RER A:</strong> Vincennes or Nation, about 18 min on foot depending on your direction."><strong>RER A :</strong> Vincennes ou Nation, environ 18 min à pied selon ta direction.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- BIKE & PARKING -->
+  <section class="section reveal">
+    <div class="section-head">
+      <div class="section-eyebrow" data-fr="Vélo & parking" data-en="Bike & parking">Vélo & parking</div>
+      <h2 class="section-title" data-fr="Et si tu viens <em>autrement</em>." data-en="And if you come <em>another way</em>.">Et si tu viens <em>autrement</em>.</h2>
+    </div>
+
+    <div class="bento-grid">
+      <article class="cell span-5 reveal">
+        <svg class="ico-lg"><use href="#i-bike"/></svg>
+        <div class="cell-eyebrow" data-fr="Vélo" data-en="Bike">Vélo</div>
+        <h3 class="cell-title" data-fr="Parking vélo intérieur" data-en="Indoor bike parking">Parking vélo intérieur</h3>
+        <p data-fr="Accessible au <strong>08 avenue Léon Gaumont</strong>." data-en="Accessible at <strong>08 avenue Léon Gaumont</strong>.">Accessible au <strong>08 avenue Léon Gaumont</strong>.</p>
+        <p data-fr="Accès par badge. Le lecteur est <strong>discret, noir</strong>, à l'entrée dédiée." data-en="Badge access. The reader is <strong>discreet, black</strong>, at the dedicated entrance.">Accès par badge. Le lecteur est <strong>discret, noir</strong>, à l'entrée dédiée.</p>
+      </article>
+
+      <article class="cell span-7 reveal">
+        <svg class="ico-lg"><use href="#i-parking"/></svg>
+        <div class="cell-eyebrow" data-fr="Voiture · 2e sous-sol" data-en="Car · Basement -2">Voiture · 2e sous-sol</div>
+        <h3 class="cell-title" data-fr="10 emplacements TISSIUM" data-en="10 TISSIUM spots">10 emplacements TISSIUM</h3>
+        <p data-fr="Accès au <strong>68 rue Claude Érignac, 94160 Montreuil</strong>. Au <strong>2e sous-sol</strong>, places <strong>2052 → 2057</strong> et <strong>2067 → 2070</strong>." data-en="Access at <strong>68 rue Claude Érignac, 94160 Montreuil</strong>. On <strong>basement -2</strong>, spots <strong>2052 → 2057</strong> and <strong>2067 → 2070</strong>.">Accès au <strong>68 rue Claude Érignac, 94160 Montreuil</strong>. Au <strong>2e sous-sol</strong>, places <strong>2052 → 2057</strong> et <strong>2067 → 2070</strong>.</p>
+
+        <!-- Simplified parking plan -->
+        <svg class="parking-plan" viewBox="0 0 600 280" role="img" aria-label="Plan simplifié du 2e sous-sol indiquant les 10 emplacements TISSIUM">
+          <!-- Lot outline (approx triangular) -->
+          <path class="lot" d="M40 40 L560 50 L540 230 L80 240 Z"/>
+
+          <!-- Background rows of generic spots -->
+          <g class="spot">
+            <!-- top row -->
+            <g><rect x="80" y="58" width="22" height="14" rx="1.5"/><rect x="104" y="58" width="22" height="14" rx="1.5"/><rect x="128" y="58" width="22" height="14" rx="1.5"/><rect x="152" y="58" width="22" height="14" rx="1.5"/><rect x="176" y="58" width="22" height="14" rx="1.5"/><rect x="200" y="58" width="22" height="14" rx="1.5"/><rect x="224" y="58" width="22" height="14" rx="1.5"/><rect x="248" y="58" width="22" height="14" rx="1.5"/></g>
+            <!-- middle row -->
+            <g><rect x="80" y="120" width="22" height="14" rx="1.5"/><rect x="104" y="120" width="22" height="14" rx="1.5"/><rect x="128" y="120" width="22" height="14" rx="1.5"/><rect x="152" y="120" width="22" height="14" rx="1.5"/><rect x="176" y="120" width="22" height="14" rx="1.5"/><rect x="200" y="120" width="22" height="14" rx="1.5"/></g>
+            <!-- right cluster -->
+            <g><rect x="430" y="78" width="22" height="14" rx="1.5"/><rect x="454" y="78" width="22" height="14" rx="1.5"/><rect x="478" y="78" width="22" height="14" rx="1.5"/><rect x="430" y="98" width="22" height="14" rx="1.5"/><rect x="454" y="98" width="22" height="14" rx="1.5"/><rect x="478" y="98" width="22" height="14" rx="1.5"/><rect x="430" y="118" width="22" height="14" rx="1.5"/><rect x="454" y="118" width="22" height="14" rx="1.5"/><rect x="478" y="118" width="22" height="14" rx="1.5"/></g>
+            <!-- bottom row -->
+            <g><rect x="100" y="200" width="22" height="14" rx="1.5"/><rect x="124" y="200" width="22" height="14" rx="1.5"/><rect x="148" y="200" width="22" height="14" rx="1.5"/><rect x="172" y="200" width="22" height="14" rx="1.5"/><rect x="196" y="200" width="22" height="14" rx="1.5"/><rect x="220" y="200" width="22" height="14" rx="1.5"/><rect x="244" y="200" width="22" height="14" rx="1.5"/><rect x="268" y="200" width="22" height="14" rx="1.5"/><rect x="292" y="200" width="22" height="14" rx="1.5"/><rect x="316" y="200" width="22" height="14" rx="1.5"/><rect x="340" y="200" width="22" height="14" rx="1.5"/><rect x="364" y="200" width="22" height="14" rx="1.5"/><rect x="388" y="200" width="22" height="14" rx="1.5"/><rect x="412" y="200" width="22" height="14" rx="1.5"/></g>
+          </g>
+
+          <!-- Circulation dashed lines -->
+          <path class="circulation" d="M70 90 L500 90"/>
+          <path class="circulation" d="M70 155 L520 155"/>
+          <path class="circulation" d="M70 185 L520 185"/>
+
+          <!-- TISSIUM cluster: 2067-2070 (4 spots) -->
+          <g class="tissium-spot">
+            <rect x="324" y="100" width="22" height="14" rx="2"/>
+            <rect x="324" y="120" width="22" height="14" rx="2"/>
+            <rect x="324" y="140" width="22" height="14" rx="2"/>
+            <rect x="324" y="160" width="22" height="14" rx="2"/>
+          </g>
+          <text class="num" x="328" y="110">2067</text>
+          <text class="num" x="328" y="130">2068</text>
+          <text class="num" x="328" y="150">2069</text>
+          <text class="num" x="328" y="170">2070</text>
+
+          <!-- TISSIUM cluster: 2052-2057 (6 spots in 2 rows) -->
+          <g class="tissium-spot">
+            <rect x="370" y="100" width="22" height="14" rx="2"/>
+            <rect x="370" y="120" width="22" height="14" rx="2"/>
+            <rect x="370" y="140" width="22" height="14" rx="2"/>
+            <rect x="394" y="100" width="22" height="14" rx="2"/>
+            <rect x="394" y="120" width="22" height="14" rx="2"/>
+            <rect x="394" y="140" width="22" height="14" rx="2"/>
+          </g>
+          <text class="num" x="374" y="110">2052</text>
+          <text class="num" x="374" y="130">2053</text>
+          <text class="num" x="374" y="150">2054</text>
+          <text class="num" x="398" y="110">2055</text>
+          <text class="num" x="398" y="130">2056</text>
+          <text class="num" x="398" y="150">2057</text>
+
+          <!-- Label arrow -->
+          <path d="M 320 60 L 360 90" stroke="var(--clay)" stroke-width="1.2" fill="none" stroke-dasharray="2 2"/>
+          <circle cx="360" cy="90" r="3" fill="var(--clay)"/>
+          <text class="label" x="200" y="50">TISSIUM · 10 places</text>
+
+          <!-- Streets -->
+          <text class="street" x="200" y="32" text-anchor="middle">RUE CLAUDE ÉRIGNAC</text>
+          <text class="street" x="300" y="262" text-anchor="middle">AVENUE LÉON GAUMONT</text>
+
+          <!-- Entry marker -->
+          <g transform="translate(530 165)">
+            <circle r="14" fill="var(--ink)"/>
+            <text fill="#fff" font-family="var(--font)" font-weight="700" font-size="10" text-anchor="middle" y="3.5">P</text>
+          </g>
+          <text class="entry-label" x="528" y="195" text-anchor="middle" data-fr="Entrée" data-en="Entry">Entrée</text>
+        </svg>
+
+        <p style="margin-top:14px" data-fr="Sur demande auprès de l'<strong>Office Manager</strong>, selon disponibilité. <strong>Badge parking spécifique</strong> requis." data-en="On request through the <strong>Office Manager</strong>, subject to availability. Requires a <strong>dedicated parking badge</strong>.">Sur demande auprès de l'<strong>Office Manager</strong>, selon disponibilité. <strong>Badge parking spécifique</strong> requis.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- BADGES + VISITEURS -->
+  <section class="section reveal" id="badges">
+    <div class="section-head">
+      <div class="section-eyebrow" data-fr="Badges & visiteurs" data-en="Badges & visitors">Badges & visiteurs</div>
+      <h2 class="section-title" data-fr="Une clé physique, <em>une règle simple</em>." data-en="A physical key, <em>one simple rule</em>.">Une clé physique, <em>une règle simple</em>.</h2>
+    </div>
+
+    <div class="bento-grid">
+      <article class="cell span-6 reveal">
+        <svg class="ico-lg"><use href="#i-key"/></svg>
+        <div class="cell-eyebrow" data-fr="Collaborateurs · Confirmé" data-en="Employees · Confirmed">Collaborateurs · Confirmé</div>
+        <h3 class="cell-title" data-fr="Ton badge t'attend." data-en="Your badge is ready.">Ton badge t'attend.</h3>
+        <p data-fr="Les badges d'accès sont remis aux collaborateurs <strong>avant leur arrivée</strong> dans les locaux." data-en="Access badges are given to employees <strong>before they arrive</strong> on site.">Les badges d'accès sont remis aux collaborateurs <strong>avant leur arrivée</strong> dans les locaux.</p>
+        <p data-fr="Badge <strong>perdu, oublié ou non fonctionnel ?</strong> Contacte l'Office Manager :" data-en="Badge <strong>lost, forgotten or not working?</strong> Contact the Office Manager:">Badge <strong>perdu, oublié ou non fonctionnel ?</strong> Contacte l'Office Manager :</p>
+        <p style="margin-top:14px"><strong>Kumuthiya Thiyagalingam</strong> · <a href="tel:+33761615867">+33 7 61 61 58 67</a> · <a href="mailto:kthiyagalingam@tissium.com">kthiyagalingam@tissium.com</a></p>
+      </article>
+
+      <article class="cell span-6 reveal" id="visiteurs">
+        <svg class="ico-lg"><use href="#i-users"/></svg>
+        <div class="cell-eyebrow" data-fr="Visiteurs" data-en="Visitors">Visiteurs</div>
+        <h3 class="cell-title" data-fr="Toujours accompagnés." data-en="Always escorted.">Toujours accompagnés.</h3>
+        <p data-fr="Les visiteurs entrent <strong>accompagnés par leur contact TISSIUM</strong>." data-en="Visitors enter <strong>with their TISSIUM host</strong>.">Les visiteurs entrent <strong>accompagnés par leur contact TISSIUM</strong>.</p>
+        <p data-fr="Un <strong>badge visiteur</strong> peut être demandé pour les allers-retours sur la journée ou une période donnée." data-en="A <strong>visitor badge</strong> can be requested for back-and-forth access during the day or over a specific period.">Un <strong>badge visiteur</strong> peut être demandé pour les allers-retours sur la journée ou une période donnée.</p>
+        <div class="callout" style="margin-top:18px"><p data-fr="<strong>Réunions avec externes :</strong> privilégier le <strong>Business Center</strong>, plus adapté pour recevoir." data-en="<strong>External meetings:</strong> use the <strong>Business Center</strong> whenever possible — better suited for welcoming guests."><strong>Réunions avec externes :</strong> privilégier le <strong>Business Center</strong>, plus adapté pour recevoir.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section reveal" id="services">
+    <div class="section-head">
+      <div class="section-eyebrow" data-fr="Services de l'immeuble" data-en="Building services">Services de l'immeuble</div>
+      <h2 class="section-title" data-fr="<em>Travailler</em>, recevoir, <em>déjeuner</em>." data-en="<em>Work</em>, host, <em>have lunch</em>."><em>Travailler</em>, recevoir, <em>déjeuner</em>.</h2>
+    </div>
+
+    <div class="bento-grid">
+      <article class="cell feature span-7 reveal">
+        <svg class="ico-lg"><use href="#i-coffee"/></svg>
+        <div class="cell-eyebrow" data-fr="Business Center · 8h–20h" data-en="Business Center · 8AM–8PM">Business Center · 8h–20h</div>
+        <h3 class="cell-title lg" data-fr="<strong>Great Work</strong> by Praemia REIM" data-en="<strong>Great Work</strong> by Praemia REIM"><strong>Great Work</strong> by Praemia REIM</h3>
+        <p data-fr="Les réservations se font individuellement via l'application ou via l'accueil de l'immeuble. Capacités des salles sur le site web ; reste des infos pratiques dans l'app." data-en="Bookings are made individually via the app or through the building reception. Room capacities are on the website; other practical info is in the app.">Les réservations se font individuellement via l'application ou via l'accueil de l'immeuble. Capacités des salles sur le site web ; reste des infos pratiques dans l'app.</p>
+        <p data-fr="L'app permet aussi de réserver les créneaux de <strong>yoga</strong>. Des <strong>vestiaires et douches</strong> sont disponibles à l'entrée de l'espace vestiaires." data-en="The app also lets you book <strong>yoga</strong> slots. <strong>Changing rooms and showers</strong> are available at the entrance to the changing area.">L'app permet aussi de réserver les créneaux de <strong>yoga</strong>. Des <strong>vestiaires et douches</strong> sont disponibles à l'entrée de l'espace vestiaires.</p>
+        <p style="margin-top:16px"><a href="https://apps.apple.com/fr/app/great-work-by-praemia-reim/id1670201153?l=en-GB" style="color:var(--clay-soft);text-decoration:underline;text-underline-offset:4px"><span data-fr="Télécharger l'app · iOS" data-en="Download the app · iOS">Télécharger l'app · iOS</span> →</a></p>
+      </article>
+
+      <article class="cell clay span-5 reveal">
+        <svg class="ico-lg"><use href="#i-utensils"/></svg>
+        <div class="cell-eyebrow"><span data-fr="Restauration" data-en="Catering">Restauration</span> <span class="tag clay" style="margin-left:auto"><span class="dot"></span><span data-fr="Pris en charge" data-en="Covered">Pris en charge</span></span></div>
+        <h3 class="cell-title" data-fr="Un RIE dans l'immeuble" data-en="A company restaurant in the building">Un RIE dans l'immeuble</h3>
+        <p data-fr="L'<strong>admission au RIE</strong> est prise en charge pour les collaborateurs TISSIUM." data-en="<strong>Admission to the company restaurant</strong> is covered for TISSIUM employees.">L'<strong>admission au RIE</strong> est prise en charge pour les collaborateurs TISSIUM.</p>
+        <p data-fr="Les modalités pratiques — inscription, badge, horaires, paiement, visiteurs — sont communiquées avant ton arrivée." data-en="Practical details — registration, badge, hours, payment, visitors — are shared before your arrival.">Les modalités pratiques — inscription, badge, horaires, paiement, visiteurs — sont communiquées avant ton arrivée.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- COURRIER + IT -->
+  <section class="section reveal" id="courrier">
+    <div class="section-head">
+      <div class="section-eyebrow" data-fr="Courrier & équipement" data-en="Mail & equipment">Courrier & équipement</div>
+      <h2 class="section-title" data-fr="Rien de nouveau, <em>juste plus simple</em>." data-en="Nothing new, <em>just simpler</em>.">Rien de nouveau, <em>juste plus simple</em>.</h2>
+    </div>
+
+    <div class="bento-grid">
+      <article class="cell span-6 reveal">
+        <svg class="ico-lg"><use href="#i-mail"/></svg>
+        <div class="cell-eyebrow" data-fr="Courrier · Accueil immeuble" data-en="Mail · Building reception">Courrier · Accueil immeuble</div>
+        <h3 class="cell-title" data-fr="Courrier simple à l'accueil" data-en="Standard mail at reception">Courrier simple à l'accueil</h3>
+        <p data-fr="Le courrier simple est à récupérer à l'<strong>accueil de l'immeuble</strong>." data-en="Standard mail can be collected at the <strong>building reception</strong>.">Le courrier simple est à récupérer à l'<strong>accueil de l'immeuble</strong>.</p>
+        <div class="callout warn" style="margin-top:18px"><p data-fr="<strong>LRAR :</strong> les recommandés doivent être réceptionnés <strong>directement par le destinataire</strong>. L'accueil ne prend en charge que le courrier simple. En cas d'absence, l'Office Manager prend le relais." data-en="<strong>Registered mail:</strong> registered letters must be collected <strong>by the recipient in person</strong>. Reception only handles standard mail. If the recipient is absent, the Office Manager takes over."><strong>LRAR :</strong> les recommandés doivent être réceptionnés <strong>directement par le destinataire</strong>. L'accueil ne prend en charge que le courrier simple. En cas d'absence, l'Office Manager prend le relais.</p></div>
+      </article>
+
+      <article class="cell span-6 reveal">
+        <svg class="ico-lg"><use href="#i-laptop"/></svg>
+        <div class="cell-eyebrow" data-fr="IT & équipement" data-en="IT & equipment">IT & équipement</div>
+        <h3 class="cell-title" data-fr="Tu viens avec ton matériel habituel" data-en="You bring your usual equipment">Tu viens avec ton matériel habituel</h3>
+        <p data-fr="Pas de changement spécifique lié au déménagement : les collaborateurs viennent avec leur <strong>équipement TISSIUM habituel</strong>." data-en="No specific change tied to the move: employees use their <strong>usual TISSIUM equipment</strong>.">Pas de changement spécifique lié au déménagement : les collaborateurs viennent avec leur <strong>équipement TISSIUM habituel</strong>.</p>
+        <p data-fr="Les <strong>règles IT et cybersécurité</strong> TISSIUM continuent de s'appliquer." data-en="TISSIUM <strong>IT and cybersecurity rules</strong> continue to apply.">Les <strong>règles IT et cybersécurité</strong> TISSIUM continuent de s'appliquer.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- BIEN VIVRE -->
+  <section class="section reveal" id="vivre">
+    <div class="section-head">
+      <div class="section-eyebrow" data-fr="Bien vivre ensemble · Flex office" data-en="Living together · Flex office">Bien vivre ensemble · Flex office</div>
+      <h2 class="section-title" data-fr="Un plateau partagé, <em>une attention partagée</em>." data-en="A shared floor, <em>a shared attention</em>.">Un plateau partagé, <em>une attention partagée</em>.</h2>
+      <p class="section-desc" data-fr="Les espaces TISSIUM au MY fonctionnent en flex office. En fin de journée, le poste reste propre, disponible et prêt pour le lendemain." data-en="TISSIUM spaces at MY work as flex office. At the end of the day, the desk stays clean, available and ready for the next day.">Les espaces TISSIUM au MY fonctionnent en flex office. En fin de journée, le poste reste propre, disponible et prêt pour le lendemain.</p>
+    </div>
+
+    <div class="rule-grid">
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-broom"/></svg>
+        <strong data-fr="Clean desk" data-en="Clean desk">Clean desk</strong>
+        <span data-fr="Range tes affaires, récupère tes effets personnels, ne laisse pas de documents confidentiels visibles." data-en="Clear your desk, take your belongings, leave no confidential documents visible.">Range tes affaires, récupère tes effets personnels, ne laisse pas de documents confidentiels visibles.</span>
+      </article>
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-locker"/></svg>
+        <strong data-fr="Casiers" data-en="Lockers">Casiers</strong>
+        <span data-fr="À l'entrée du R+7. Mêmes règles qu'avant : effets personnels stockés, postes dégagés." data-en="At the R+7 entrance. Same rules as before: personal items stored, workstations clear.">À l'entrée du R+7. Mêmes règles qu'avant : effets personnels stockés, postes dégagés.</span>
+      </article>
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-coffee"/></svg>
+        <strong>Agora</strong>
+        <span data-fr="À l'entrée principale du R+7. Pour les cafés, points informels et mini-réunions. Repas possibles ponctuellement." data-en="At the main R+7 entrance. For coffees, informal catch-ups, short meetings. Occasional meals OK.">À l'entrée principale du R+7. Pour les cafés, points informels et mini-réunions. Repas possibles ponctuellement.</span>
+      </article>
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-chat"/></svg>
+        <strong data-fr="Échanges spontanés" data-en="Spontaneous chats">Échanges spontanés</strong>
+        <span data-fr="Discussions qui durent ou mobilisent plusieurs personnes : direction l'Agora plutôt que l'open space." data-en="Discussions that last or involve several people: head to the Agora rather than the open space.">Discussions qui durent ou mobilisent plusieurs personnes : direction l'Agora plutôt que l'open space.</span>
+      </article>
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-volume"/></svg>
+        <strong data-fr="Appels & visios" data-en="Calls & video">Appels & visios</strong>
+        <span data-fr="Longs appels, visios, discussions sensibles : en salle ou espace adapté. Au poste, casque et volume raisonnable." data-en="Long calls, video meetings, sensitive discussions: in a room or suitable space. At your desk, use a headset, reasonable volume.">Longs appels, visios, discussions sensibles : en salle ou espace adapté. Au poste, casque et volume raisonnable.</span>
+      </article>
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-lock"/></svg>
+        <strong data-fr="Confidentialité" data-en="Confidentiality">Confidentialité</strong>
+        <span data-fr="Pas de sujets sensibles à voix haute en open space. Verrouille l'écran quand tu quittes ton poste." data-en="No sensitive topics out loud in the open space. Lock your screen when you leave your desk.">Pas de sujets sensibles à voix haute en open space. Verrouille l'écran quand tu quittes ton poste.</span>
+      </article>
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-door"/></svg>
+        <strong data-fr="Salles & espaces" data-en="Rooms & spaces">Salles & espaces</strong>
+        <span data-fr="Libère les salles à l'heure, annule si tu n'en as plus besoin, laisse les espaces propres après usage." data-en="Leave rooms on time, cancel if you no longer need them, leave shared spaces clean after use.">Libère les salles à l'heure, annule si tu n'en as plus besoin, laisse les espaces propres après usage.</span>
+      </article>
+      <article class="rule reveal">
+        <svg class="ico"><use href="#i-fork"/></svg>
+        <strong data-fr="Repas" data-en="Meals">Repas</strong>
+        <span data-fr="Le RIE reste le lieu principal pour déjeuner. L'Agora ponctuellement, à condition de la laisser propre et disponible." data-en="The company restaurant is the main lunch area. The Agora occasionally, provided it stays clean and available.">Le RIE reste le lieu principal pour déjeuner. L'Agora ponctuellement, à condition de la laisser propre et disponible.</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- SECURITE & ACCUEIL & CONTACTS -->
+  <section class="section reveal" id="securite">
+    <div class="section-head">
+      <div class="section-eyebrow" data-fr="Sécurité & accueil" data-en="Security & reception">Sécurité & accueil</div>
+      <h2 class="section-title" data-fr="<em>H24</em> pour la sécu, <em>8h–20h</em> pour l'accueil." data-en="<em>24/7</em> for security, <em>8AM–8PM</em> for reception."><em>H24</em> pour la sécu, <em>8h–20h</em> pour l'accueil.</h2>
+    </div>
+
+    <div class="bento-grid">
+      <article class="cell span-6 reveal">
+        <svg class="ico-lg"><use href="#i-shield"/></svg>
+        <div class="cell-eyebrow"><span data-fr="PC Sécurité · H24" data-en="Security desk · 24/7">PC Sécurité · H24</span> <span class="tag ok" style="margin-left:auto"><span class="dot"></span>ARTUS</span></div>
+        <h3 class="cell-title" data-fr="Urgence bâtiment, accès hors horaires" data-en="Building emergency, out-of-hours access">Urgence bâtiment, accès hors horaires</h3>
+        <div class="contact-line"><svg><use href="#i-phone"/></svg><a href="tel:0789682800">07 89 68 28 00</a></div>
+        <div class="contact-line"><svg><use href="#i-at"/></svg><a href="mailto:pcsecuritemy@gmail.com">pcsecuritemy@gmail.com</a></div>
+      </article>
+
+      <article class="cell span-6 reveal">
+        <svg class="ico-lg"><use href="#i-bell"/></svg>
+        <div class="cell-eyebrow"><span data-fr="Accueil immeuble · 8h–20h" data-en="Building reception · 8AM–8PM">Accueil immeuble · 8h–20h</span> <span class="tag ok" style="margin-left:auto"><span class="dot"></span>DEMETER</span></div>
+        <h3 class="cell-title" data-fr="Courrier, visiteurs, orientation" data-en="Mail, visitors, orientation">Courrier, visiteurs, orientation</h3>
+        <div class="contact-line"><svg><use href="#i-phone"/></svg><a href="tel:0185783938">01 85 78 39 38</a></div>
+        <div class="contact-line"><svg><use href="#i-phone"/></svg><a href="tel:0764006513">07 64 00 65 13</a></div>
+        <div class="contact-line"><svg><use href="#i-at"/></svg><a href="mailto:my.hotessesaccueil@gmail.com">my.hotessesaccueil@gmail.com</a></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section class="section reveal" id="contacts">
+    <div class="section-head">
+      <div class="section-eyebrow" data-fr="Contacts utiles" data-en="Useful contacts">Contacts utiles</div>
+      <h2 class="section-title" data-fr="Une question ? <em>Une personne</em>." data-en="Got a question? <em>One person</em>.">Une question ? <em>Une personne</em>.</h2>
+      <p class="section-desc" data-fr="Survole un contact pour copier son numéro ou son email d'un clic." data-en="Hover a contact to copy a number or email with one click.">Survole un contact pour copier son numéro ou son email d'un clic.</p>
+    </div>
+
+    <div class="bento-grid">
+      <article class="contact-card cell span-4 reveal">
+        <div class="contact-org">TISSIUM</div>
+        <div class="contact-name">Kumuthiya Thiyagalingam</div>
+        <div class="contact-role" data-fr="HR Administrative & Office Manager · badges, accès, visiteurs" data-en="HR Administrative & Office Manager · badges, access, visitors">HR Administrative & Office Manager · badges, accès, visiteurs</div>
+        <div class="contact-line" data-copy="+33761615867"><svg><use href="#i-phone"/></svg><a href="tel:+33761615867">+33 7 61 61 58 67</a><button class="copy-btn" type="button"><svg><use href="#i-copy"/></svg>Copier</button></div>
+        <div class="contact-line" data-copy="kthiyagalingam@tissium.com"><svg><use href="#i-at"/></svg><a href="mailto:kthiyagalingam@tissium.com">kthiyagalingam@tissium.com</a><button class="copy-btn" type="button"><svg><use href="#i-copy"/></svg>Copier</button></div>
+      </article>
+
+      <article class="contact-card cell span-4 reveal">
+        <div class="contact-org" data-fr="Accueil MY" data-en="MY reception">Accueil MY</div>
+        <div class="contact-name" data-fr="Accueil immeuble" data-en="Building reception">Accueil immeuble</div>
+        <div class="contact-role" data-fr="Courrier, visiteurs, orientation · 8h–20h" data-en="Mail, visitors, orientation · 8AM–8PM">Courrier, visiteurs, orientation · 8h–20h</div>
+        <div class="contact-line" data-copy="0185783938"><svg><use href="#i-phone"/></svg><a href="tel:0185783938">01 85 78 39 38</a><button class="copy-btn" type="button"><svg><use href="#i-copy"/></svg>Copier</button></div>
+        <div class="contact-line" data-copy="0764006513"><svg><use href="#i-phone"/></svg><a href="tel:0764006513">07 64 00 65 13</a><button class="copy-btn" type="button"><svg><use href="#i-copy"/></svg>Copier</button></div>
+        <div class="contact-line" data-copy="my.hotessesaccueil@gmail.com"><svg><use href="#i-at"/></svg><a href="mailto:my.hotessesaccueil@gmail.com">my.hotessesaccueil@gmail.com</a><button class="copy-btn" type="button"><svg><use href="#i-copy"/></svg>Copier</button></div>
+      </article>
+
+      <article class="contact-card cell span-4 reveal">
+        <div class="contact-org" data-fr="Sécurité MY" data-en="MY security">Sécurité MY</div>
+        <div class="contact-name" data-fr="PC Sécurité" data-en="Security desk">PC Sécurité</div>
+        <div class="contact-role" data-fr="Urgence bâtiment, accès hors horaires · H24" data-en="Building emergency, out-of-hours access · 24/7">Urgence bâtiment, accès hors horaires · H24</div>
+        <div class="contact-line" data-copy="0789682800"><svg><use href="#i-phone"/></svg><a href="tel:0789682800">07 89 68 28 00</a><button class="copy-btn" type="button"><svg><use href="#i-copy"/></svg>Copier</button></div>
+        <div class="contact-line" data-copy="pcsecuritemy@gmail.com"><svg><use href="#i-at"/></svg><a href="mailto:pcsecuritemy@gmail.com">pcsecuritemy@gmail.com</a><button class="copy-btn" type="button"><svg><use href="#i-copy"/></svg>Copier</button></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- AUTOUR -->
+  <section class="section reveal" id="autour">
+    <div class="section-head">
+      <div class="section-eyebrow" data-fr="Autour du MY" data-en="Around MY">Autour du MY</div>
+      <h2 class="section-title" data-fr="À deux pas, <em>quelques bonnes adresses</em>." data-en="A few steps away, <em>some good spots</em>.">À deux pas, <em>quelques bonnes adresses</em>.</h2>
+    </div>
+
+    <div class="bento-grid">
+      <article class="cell span-12 reveal lunch-wrap">
+        <div class="cell-eyebrow" data-fr="Déjeuner à proximité" data-en="Lunch nearby">Déjeuner à proximité</div>
+        <h3 class="cell-title lg" style="margin-bottom:24px" data-fr="Si tu sors du RIE." data-en="If you skip the company restaurant.">Si tu sors du RIE.</h3>
+        <table class="lunch">
+          <thead><tr>
+            <th data-fr="Adresse" data-en="Address">Adresse</th>
+            <th data-fr="Style" data-en="Style">Style</th>
+            <th data-fr="Budget" data-en="Budget">Budget</th>
+            <th data-fr="Distance" data-en="Distance">Distance</th>
+          </tr></thead>
+          <tbody>
+            <tr><td><strong>La MiN</strong><span class="addr">116 rue de Lagny, Montreuil</span></td><td data-fr="Israélienne / méditerranéenne" data-en="Israeli / Mediterranean">Israélienne / méditerranéenne</td><td>€€</td><td>350 m · 5 min</td></tr>
+            <tr><td><strong>Lolo Cuisine Mésopotamienne</strong><span class="addr">45 rue Armand Carrel, Montreuil</span></td><td data-fr="Kurde / orientale" data-en="Kurdish / Middle Eastern">Kurde / orientale</td><td>€</td><td>350 m · 5 min</td></tr>
+            <tr><td><strong>Jour Montreuil</strong><span class="addr">38 rue Cuvier, Montreuil</span></td><td data-fr="Salades / healthy" data-en="Salads / healthy">Salades / healthy</td><td>€€</td><td>600 m · 8 min</td></tr>
+            <tr><td><strong>Bistrot ben et kei</strong><span class="addr">19 av. Georges Clemenceau, Vincennes</span></td><td data-fr="Franco-japonais" data-en="French-Japanese">Franco-japonais</td><td>€€–€€€</td><td>650 m · 9 min</td></tr>
+            <tr><td><strong>Shishido Ramen</strong><span class="addr">21 av. Georges Clemenceau, Vincennes</span></td><td data-fr="Ramen / japonais" data-en="Ramen / Japanese">Ramen / japonais</td><td>€€</td><td>650 m · 9 min</td></tr>
+            <tr><td><strong>Khao Thaï</strong><span class="addr">18 av. Georges Clemenceau, Vincennes</span></td><td data-fr="Thaïlandais" data-en="Thai">Thaïlandais</td><td>€€</td><td>600 m · 9 min</td></tr>
+            <tr><td><strong>Bill's Burger</strong><span class="addr">21 rue de Lagny, Vincennes</span></td><td data-fr="Burgers" data-en="Burgers">Burgers</td><td>€</td><td>700 m · 9 min</td></tr>
+            <tr><td><strong>L'assiette voyageuse</strong><span class="addr">50 rue de Lagny, Montreuil</span></td><td data-fr="Cuisine du monde" data-en="World food">Cuisine du monde</td><td>€</td><td>750 m · 10 min</td></tr>
+            <tr><td><strong>Koko 72</strong><span class="addr">72 rue Robespierre, Montreuil</span></td><td data-fr="Cantine asiatique" data-en="Asian canteen">Cantine asiatique</td><td>€</td><td>800 m · 11 min</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="cell cream span-6 reveal">
+        <div class="cell-eyebrow" data-fr="Dans l'immeuble · -2" data-en="In the building · -2">Dans l'immeuble · -2</div>
+        <h3 class="cell-title" data-fr="Provélite Académie" data-en="Provélite Academy">Provélite Académie</h3>
+        <p data-fr="Salon d'application au <strong>-2</strong> de l'immeuble : coupes et prestations coiffure <strong>à prix réduits</strong>, sur rendez-vous selon les créneaux pédagogiques." data-en="Training salon on <strong>basement -2</strong>: discounted haircuts and hair services, by appointment depending on training slots.">Salon d'application au <strong>-2</strong> de l'immeuble : coupes et prestations coiffure <strong>à prix réduits</strong>, sur rendez-vous selon les créneaux pédagogiques.</p>
+        <p style="margin-top:14px"><a href="tel:0148587735">01 48 58 77 35</a> · <a href="https://www.canva.com/design/DAF64C3KhHE/KO4Wo5Q6Wc1zRMW_UtQ0Kw/view?utm_content=DAF64C3KhHE&utm_campaign=designshare&utm_medium=link&utm_source=editor" data-fr="Voir les informations" data-en="View information">Voir les informations</a> →</p>
+      </article>
+
+      <article class="cell span-3 reveal">
+        <div class="cell-eyebrow" data-fr="Afterwork" data-en="Afterwork">Afterwork</div>
+        <h3 class="cell-title">Patio</h3>
+        <p data-fr="Bar / afterwork à proximité." data-en="Nearby bar / afterwork.">Bar / afterwork à proximité.</p>
+      </article>
+
+      <article class="cell span-3 reveal">
+        <div class="cell-eyebrow" data-fr="Café informel" data-en="Casual coffee">Café informel</div>
+        <h3 class="cell-title">Birdie's Cafe</h3>
+        <p data-fr="Café ou verre informel." data-en="Coffee or informal drink.">Café ou verre informel.</p>
+      </article>
+
+      <article class="cell span-4 reveal">
+        <div class="cell-eyebrow" data-fr="Bouger" data-en="Move">Bouger</div>
+        <h3 class="cell-title">Arkose</h3>
+        <p data-fr="Escalade indoor pour une pause sportive après le bureau." data-en="Indoor climbing for a sporty afterwork break.">Escalade indoor pour une pause sportive après le bureau.</p>
+      </article>
+
+      <article class="cell span-4 reveal">
+        <div class="cell-eyebrow" data-fr="Bouger · Padel" data-en="Move · Padel">Bouger · Padel</div>
+        <h3 class="cell-title">4PADEL Paris 20</h3>
+        <p data-fr="Padel à proximité." data-en="Nearby padel.">Padel à proximité.</p>
+        <p><a href="https://www.4padel.fr/nos-centres/79/paris_20">4padel.fr</a> →</p>
+      </article>
+
+      <article class="cell span-4 reveal">
+        <div class="cell-eyebrow" data-fr="Bouger · Foot" data-en="Move · Football">Bouger · Foot</div>
+        <h3 class="cell-title">Centre Sportif Maryse Hilsz</h3>
+        <p data-fr="34 rue Maryse Hilsz, Paris 20<sup>e</sup>. ~650 m / 9 min. Créneaux à confirmer." data-en="34 rue Maryse Hilsz, Paris 20<sup>th</sup>. ~650 m / 9 min. Slots to confirm.">34 rue Maryse Hilsz, Paris 20<sup>e</sup>. ~650 m / 9 min. Créneaux à confirmer.</p>
+      </article>
+
+      <article class="cell clay span-12 reveal">
+        <div class="cell-eyebrow" data-fr="Vraie pause verte" data-en="Real green break">Vraie pause verte</div>
+        <h3 class="cell-title lg" data-fr="Bois de Vincennes" data-en="Bois de Vincennes">Bois de Vincennes</h3>
+        <p data-fr="Marche, footing ou simple respiration côté Saint-Mandé / Vincennes. À deux pas du MY." data-en="Walk, jog or simply breathe near Saint-Mandé / Vincennes. A few steps from MY.">Marche, footing ou simple respiration côté Saint-Mandé / Vincennes. À deux pas du MY.</p>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="brand-foot">TISSIUM<span class="reg">®</span></span>
+  <span data-fr="Livret d'accueil MY · Usage interne" data-en="MY Welcome Guide · Internal use">Livret d'accueil MY · Usage interne</span>
+  <span data-fr="Version candidate · à valider" data-en="Candidate version · pending validation">Version candidate · à valider</span>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg><use href="#i-check"/></svg>
+  <span id="toast-msg">Copié</span>
+</div>
+
+<script>
+(() => {
+  const $$ = (s, c = document) => c.querySelectorAll(s);
+  const $ = (s, c = document) => c.querySelector(s);
+
+  // ---- Language ----
+  const I18N = {
+    fr: { toastCopy: 'Copié dans le presse-papiers', toastShare: 'Lien copié' },
+    en: { toastCopy: 'Copied to clipboard', toastShare: 'Link copied' }
+  };
+  let currentLang = 'fr';
+  try { currentLang = localStorage.getItem('tissium-my-lang') || 'fr'; } catch {}
+
+  function setLang(lang) {
+    currentLang = lang === 'en' ? 'en' : 'fr';
+    document.documentElement.lang = currentLang;
+    $$('[data-fr][data-en]').forEach(el => {
+      el.innerHTML = el.dataset[currentLang];
+    });
+    $$('.langs button').forEach(b => {
+      const on = b.dataset.lang === currentLang;
+      b.setAttribute('aria-pressed', String(on));
+    });
+    try { localStorage.setItem('tissium-my-lang', currentLang); } catch {}
+  }
+  $$('.langs button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  setLang(currentLang);
+
+  // ---- Scroll progress ----
+  const progress = $('#progress');
+  const topbar = $('#topbar');
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    requestAnimationFrame(() => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progress.style.setProperty('--p', p + '%');
+      topbar.classList.toggle('shrunk', window.scrollY > 24);
+      ticking = false;
+    });
+    ticking = true;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---- Active nav ----
+  const sections = $$('main .section[id]');
+  const navLinks = $$('.nav a');
+  const navMap = new Map();
+  navLinks.forEach(a => navMap.set(a.getAttribute('href').slice(1), a));
+  if ('IntersectionObserver' in window) {
+    const navObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const link = navMap.get(e.target.id);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    sections.forEach(s => navObs.observe(s));
+  }
+
+  // ---- Reveal on scroll ----
+  if ('IntersectionObserver' in window) {
+    const revObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          revObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    $$('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = (Math.min(i % 4, 3) * 60) + 'ms';
+      revObs.observe(el);
+    });
+  } else {
+    $$('.reveal').forEach(el => el.classList.add('in'));
+  }
+
+  // ---- Animated number counters ----
+  function animateCount(el) {
+    const target = parseFloat(el.dataset.count);
+    if (!target) return;
+    const dur = 1100;
+    const start = performance.now();
+    const small = el.querySelector('small');
+    const smallHTML = small ? small.outerHTML : '';
+    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isReduced) { el.innerHTML = target + smallHTML; return; }
+    function tick(now) {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const v = Math.round(target * eased);
+      el.innerHTML = v + smallHTML;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  if ('IntersectionObserver' in window) {
+    const countObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCount(e.target);
+          countObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    $$('[data-count]').forEach(el => countObs.observe(el));
+  } else {
+    $$('[data-count]').forEach(el => animateCount(el));
+  }
+
+  // ---- Copy-to-clipboard on contact lines ----
+  const toast = $('#toast');
+  const toastMsg = $('#toast-msg');
+  let toastTimer = 0;
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+  $$('.contact-line[data-copy]').forEach(line => {
+    const btn = line.querySelector('.copy-btn');
+    if (!btn) return;
+    const copy = async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const value = line.dataset.copy;
+      try {
+        await navigator.clipboard.writeText(value);
+        btn.classList.add('copied');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<svg><use href="#i-check"/></svg>' + (currentLang === 'fr' ? 'Copié' : 'Copied');
+        showToast(I18N[currentLang].toastCopy);
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = orig;
+        }, 1800);
+      } catch {
+        showToast(value);
+      }
+    };
+    btn.addEventListener('click', copy);
+  });
+
+  // ---- Smooth-scroll offset for anchor links ----
+  $$('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      history.replaceState(null, '', '#' + id);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
