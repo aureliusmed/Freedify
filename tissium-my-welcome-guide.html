@@ -370,6 +370,11 @@ main{max-width:1240px;margin:0 auto;padding:96px 40px 120px}
 .copy-btn svg{width:11px;height:11px;margin-right:4px;vertical-align:-1px}
 
 /* Rules grid */
+.rule-groups{display:flex;flex-direction:column;gap:36px}
+.rule-group-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.rule-group-num{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue-deep);font-variant-numeric:tabular-nums}
+.rule-group-title{font-weight:500;font-size:21px;letter-spacing:-.01em;color:var(--ink)}
+.rule-group-desc{font-size:12.5px;color:var(--stone);margin-left:auto;font-style:italic}
 .rule-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .rule{
   padding:24px;background:#fff;border:1px solid var(--line);border-radius:16px;position:relative;overflow:hidden;
@@ -833,67 +838,98 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
       <p class="section-desc" data-fr="Le plateau est partagé. Trois principes : silence par défaut au poste, respect des espaces communs, propreté immédiate après usage." data-en="The floor is shared. Three principles: silence at the desk by default, respect for shared spaces, immediate cleanup after use.">Le plateau est partagé. Trois principes : silence par défaut au poste, respect des espaces communs, propreté immédiate après usage.</p>
     </div>
 
-    <div class="rule-grid">
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-mute"/></svg>
-        <strong data-fr="Silence au poste" data-en="Silence at the desk">Silence au poste</strong>
-        <span data-fr="Le bureau est un espace de concentration partagé. Volume bas par défaut, échanges courts et chuchotés, téléphone sur silencieux. Pour le reste, on s'éloigne du poste." data-en="The desk is a shared focus space. Low volume by default, short and quiet exchanges, phone on silent. For anything else, step away from your desk.">Le bureau est un espace de concentration partagé. Volume bas par défaut, échanges courts et chuchotés, téléphone sur silencieux. Pour le reste, on s'éloigne du poste.</span>
-      </article>
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-headphones"/></svg>
-        <strong data-fr="Casque = focus" data-en="Headphones = focus">Casque = focus</strong>
-        <span data-fr="Casque ou écouteurs = session de concentration. Avant d'interrompre, passe par Slack — la personne te répondra quand elle sera dispo." data-en="Headphones or earbuds mean focus mode. Reach out on Slack rather than interrupting — they'll reply when they're free.">Casque ou écouteurs = session de concentration. Avant d'interrompre, passe par Slack — la personne te répondra quand elle sera dispo.</span>
-      </article>
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-chat"/></svg>
-        <strong data-fr="Une vraie conversation ?" data-en="A real conversation?">Une vraie conversation ?</strong>
-        <span data-fr="Discussion qui dure ou plus de deux personnes : direction l'Agora, une salle ou un espace adapté. Pas au poste." data-en="A long discussion, or more than two people: head to the Agora, a meeting room or a suitable space. Not at the desk.">Discussion qui dure ou plus de deux personnes : direction l'Agora, une salle ou un espace adapté. Pas au poste.</span>
-      </article>
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-volume"/></svg>
-        <strong data-fr="Appels & visios" data-en="Calls & video">Appels & visios</strong>
-        <span data-fr="En salle ou dans un espace adapté. Au poste, c'est l'exception : casque obligatoire, volume bas, format court." data-en="In a meeting room or a suitable space. At the desk it's the exception: headset required, low volume, keep it short.">En salle ou dans un espace adapté. Au poste, c'est l'exception : casque obligatoire, volume bas, format court.</span>
-      </article>
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-shield"/></svg>
-        <strong data-fr="Sujets sensibles" data-en="Sensitive topics">Sujets sensibles</strong>
-        <span data-fr="Pas à voix haute en open space. Si le sujet est sensible, prends une salle ou le Business Center." data-en="Never out loud in the open space. For sensitive topics, take a meeting room or the Business Center.">Pas à voix haute en open space. Si le sujet est sensible, prends une salle ou le Business Center.</span>
-      </article>
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-lock"/></svg>
-        <strong data-fr="Verrouille ton écran" data-en="Lock your screen">Verrouille ton écran</strong>
-        <span data-fr="Dès que tu quittes ton poste, même deux minutes. Win + L (Windows) ou Ctrl + Cmd + Q (Mac). Réflexe, pas effort." data-en="Every time you leave your desk, even for two minutes. Win + L (Windows) or Ctrl + Cmd + Q (Mac). Reflex, not effort.">Dès que tu quittes ton poste, même deux minutes. Win + L (Windows) ou Ctrl + Cmd + Q (Mac). Réflexe, pas effort.</span>
-      </article>
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-broom"/></svg>
-        <strong data-fr="Clean desk" data-en="Clean desk">Clean desk</strong>
-        <span data-fr="En fin de journée : poste rangé, effets personnels au casier (à l'entrée du R+7), rien de confidentiel à la vue. Sans poste dégagé, le ménage n'est pas effectué." data-en="At the end of the day: desk cleared, personal items in your locker (at the R+7 entrance), nothing confidential in sight. Cleaning isn't done on cluttered desks.">En fin de journée : poste rangé, effets personnels au casier (à l'entrée du R+7), rien de confidentiel à la vue. Sans poste dégagé, le ménage n'est pas effectué.</span>
-      </article>
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-door"/></svg>
-        <strong data-fr="Salles & espaces" data-en="Rooms & spaces">Salles & espaces</strong>
-        <span data-fr="Libère à l'heure, annule la réservation si tu n'en as plus besoin, remets chaises, écrans et équipements en place, laisse l'espace propre." data-en="Leave on time, cancel the booking if you no longer need it, put chairs, screens and equipment back in place, leave the space clean.">Libère à l'heure, annule la réservation si tu n'en as plus besoin, remets chaises, écrans et équipements en place, laisse l'espace propre.</span>
-      </article>
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-coffee"/></svg>
-        <strong data-fr="Agora · Espace de vie" data-en="Agora · Lounge">Agora · Espace de vie</strong>
-        <span data-fr="À l'entrée du R+7, c'est là que le plateau respire : cafés, échanges informels, mini-réunions. Tout ce qui déborde du poste y trouve sa place." data-en="At the R+7 entrance — where the floor breathes: coffees, informal catch-ups, short meetings. Anything that doesn't fit at the desk lives here.">À l'entrée du R+7, c'est là que le plateau respire : cafés, échanges informels, mini-réunions. Tout ce qui déborde du poste y trouve sa place.</span>
-      </article>
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-fork"/></svg>
-        <strong data-fr="Repas" data-en="Meals">Repas</strong>
-        <span data-fr="Le RIE reste le lieu principal pour déjeuner. L'Agora ponctuellement. Manger au poste reste l'exception — et toujours sans odeurs fortes." data-en="The company restaurant is the main lunch area. The Agora occasionally. Eating at the desk remains the exception — and always without strong smells.">Le RIE reste le lieu principal pour déjeuner. L'Agora ponctuellement. Manger au poste reste l'exception — et toujours sans odeurs fortes.</span>
-      </article>
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-fridge"/></svg>
-        <strong data-fr="Frigo · Vidé chaque vendredi" data-en="Fridge · Cleared every Friday">Frigo · Vidé chaque vendredi</strong>
-        <span data-fr="Étiquette tes denrées (nom + date). Tout ce qui reste le vendredi est jeté pour repartir propre." data-en="Label your food (name + date). Anything left on Friday is thrown out so we start fresh.">Étiquette tes denrées (nom + date). Tout ce qui reste le vendredi est jeté pour repartir propre.</span>
-      </article>
-      <article class="rule reveal">
-        <svg class="ico"><use href="#i-sparkles"/></svg>
-        <strong data-fr="Cuisine propre" data-en="Clean kitchen">Cuisine propre</strong>
-        <span data-fr="Vaisselle au lave-vaisselle ou lavée tout de suite — jamais laissée dans les lavabos. Plan de travail, micro-ondes et machine à café essuyés après usage. Rien à faire au suivant." data-en="Dishes in the dishwasher or washed right away — never left in the sinks. Counter, microwave and coffee machine wiped after use. Nothing left for the next person.">Vaisselle au lave-vaisselle ou lavée tout de suite — jamais laissée dans les lavabos. Plan de travail, micro-ondes et machine à café essuyés après usage. Rien à faire au suivant.</span>
-      </article>
+    <div class="rule-groups">
+
+      <div class="rule-group">
+        <div class="rule-group-head">
+          <span class="rule-group-num">01</span>
+          <span class="rule-group-title" data-fr="Silence & concentration" data-en="Silence & focus">Silence & concentration</span>
+          <span class="rule-group-desc" data-fr="Volume bas par défaut, focus respecté." data-en="Low volume by default, focus respected.">Volume bas par défaut, focus respecté.</span>
+        </div>
+        <div class="rule-grid">
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-mute"/></svg>
+            <strong data-fr="Silence au poste" data-en="Silence at the desk">Silence au poste</strong>
+            <span data-fr="Le bureau est un espace de concentration partagé. Volume bas par défaut, échanges courts et chuchotés, téléphone sur silencieux. Pour le reste, on s'éloigne du poste." data-en="The desk is a shared focus space. Low volume by default, short and quiet exchanges, phone on silent. For anything else, step away from your desk.">Le bureau est un espace de concentration partagé. Volume bas par défaut, échanges courts et chuchotés, téléphone sur silencieux. Pour le reste, on s'éloigne du poste.</span>
+          </article>
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-headphones"/></svg>
+            <strong data-fr="Casque = focus" data-en="Headphones = focus">Casque = focus</strong>
+            <span data-fr="Casque ou écouteurs = session de concentration. Avant d'interrompre, passe par Slack — la personne te répondra quand elle sera dispo." data-en="Headphones or earbuds mean focus mode. Reach out on Slack rather than interrupting — they'll reply when they're free.">Casque ou écouteurs = session de concentration. Avant d'interrompre, passe par Slack — la personne te répondra quand elle sera dispo.</span>
+          </article>
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-chat"/></svg>
+            <strong data-fr="Une vraie conversation ?" data-en="A real conversation?">Une vraie conversation ?</strong>
+            <span data-fr="Discussion qui dure ou plus de deux personnes : direction l'Agora, une salle ou un espace adapté. Pas au poste." data-en="A long discussion, or more than two people: head to the Agora, a meeting room or a suitable space. Not at the desk.">Discussion qui dure ou plus de deux personnes : direction l'Agora, une salle ou un espace adapté. Pas au poste.</span>
+          </article>
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-volume"/></svg>
+            <strong data-fr="Appels & visios" data-en="Calls & video">Appels & visios</strong>
+            <span data-fr="En salle ou dans un espace adapté. Au poste, c'est l'exception : casque obligatoire, volume bas, format court." data-en="In a meeting room or a suitable space. At the desk it's the exception: headset required, low volume, keep it short.">En salle ou dans un espace adapté. Au poste, c'est l'exception : casque obligatoire, volume bas, format court.</span>
+          </article>
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-shield"/></svg>
+            <strong data-fr="Sujets sensibles" data-en="Sensitive topics">Sujets sensibles</strong>
+            <span data-fr="Pas à voix haute en open space. Si le sujet est sensible, prends une salle ou le Business Center." data-en="Never out loud in the open space. For sensitive topics, take a meeting room or the Business Center.">Pas à voix haute en open space. Si le sujet est sensible, prends une salle ou le Business Center.</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="rule-group">
+        <div class="rule-group-head">
+          <span class="rule-group-num">02</span>
+          <span class="rule-group-title" data-fr="Espaces partagés" data-en="Shared spaces">Espaces partagés</span>
+          <span class="rule-group-desc" data-fr="Tu laisses la place comme tu voudrais la trouver." data-en="Leave the space as you'd want to find it.">Tu laisses la place comme tu voudrais la trouver.</span>
+        </div>
+        <div class="rule-grid">
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-lock"/></svg>
+            <strong data-fr="Verrouille ton écran" data-en="Lock your screen">Verrouille ton écran</strong>
+            <span data-fr="Dès que tu quittes ton poste, même deux minutes. Win + L (Windows) ou Ctrl + Cmd + Q (Mac). Réflexe, pas effort." data-en="Every time you leave your desk, even for two minutes. Win + L (Windows) or Ctrl + Cmd + Q (Mac). Reflex, not effort.">Dès que tu quittes ton poste, même deux minutes. Win + L (Windows) ou Ctrl + Cmd + Q (Mac). Réflexe, pas effort.</span>
+          </article>
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-broom"/></svg>
+            <strong data-fr="Clean desk" data-en="Clean desk">Clean desk</strong>
+            <span data-fr="En fin de journée : poste rangé, effets personnels au casier (à l'entrée du R+7), rien de confidentiel à la vue. Sans poste dégagé, le ménage n'est pas effectué." data-en="At the end of the day: desk cleared, personal items in your locker (at the R+7 entrance), nothing confidential in sight. Cleaning isn't done on cluttered desks.">En fin de journée : poste rangé, effets personnels au casier (à l'entrée du R+7), rien de confidentiel à la vue. Sans poste dégagé, le ménage n'est pas effectué.</span>
+          </article>
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-door"/></svg>
+            <strong data-fr="Salles & espaces" data-en="Rooms & spaces">Salles & espaces</strong>
+            <span data-fr="Libère à l'heure, annule la réservation si tu n'en as plus besoin, remets chaises, écrans et équipements en place, laisse l'espace propre." data-en="Leave on time, cancel the booking if you no longer need it, put chairs, screens and equipment back in place, leave the space clean.">Libère à l'heure, annule la réservation si tu n'en as plus besoin, remets chaises, écrans et équipements en place, laisse l'espace propre.</span>
+          </article>
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-coffee"/></svg>
+            <strong data-fr="Agora · Espace de vie" data-en="Agora · Lounge">Agora · Espace de vie</strong>
+            <span data-fr="À l'entrée du R+7, c'est là que le plateau respire : cafés, échanges informels, mini-réunions. Tout ce qui déborde du poste y trouve sa place." data-en="At the R+7 entrance — where the floor breathes: coffees, informal catch-ups, short meetings. Anything that doesn't fit at the desk lives here.">À l'entrée du R+7, c'est là que le plateau respire : cafés, échanges informels, mini-réunions. Tout ce qui déborde du poste y trouve sa place.</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="rule-group">
+        <div class="rule-group-head">
+          <span class="rule-group-num">03</span>
+          <span class="rule-group-title" data-fr="Repas & cuisine" data-en="Meals & kitchen">Repas & cuisine</span>
+          <span class="rule-group-desc" data-fr="Le RIE d'abord. L'exception, mais propre." data-en="The restaurant first. The exception, but spotless.">Le RIE d'abord. L'exception, mais propre.</span>
+        </div>
+        <div class="rule-grid">
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-fork"/></svg>
+            <strong data-fr="Repas" data-en="Meals">Repas</strong>
+            <span data-fr="Le RIE reste le lieu principal pour déjeuner. L'Agora ponctuellement. Manger au poste reste l'exception — et toujours sans odeurs fortes." data-en="The company restaurant is the main lunch area. The Agora occasionally. Eating at the desk remains the exception — and always without strong smells.">Le RIE reste le lieu principal pour déjeuner. L'Agora ponctuellement. Manger au poste reste l'exception — et toujours sans odeurs fortes.</span>
+          </article>
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-fridge"/></svg>
+            <strong data-fr="Frigo · Vidé chaque vendredi" data-en="Fridge · Cleared every Friday">Frigo · Vidé chaque vendredi</strong>
+            <span data-fr="Étiquette tes denrées (nom + date). Tout ce qui reste le vendredi est jeté pour repartir propre." data-en="Label your food (name + date). Anything left on Friday is thrown out so we start fresh.">Étiquette tes denrées (nom + date). Tout ce qui reste le vendredi est jeté pour repartir propre.</span>
+          </article>
+          <article class="rule reveal">
+            <svg class="ico"><use href="#i-sparkles"/></svg>
+            <strong data-fr="Cuisine propre" data-en="Clean kitchen">Cuisine propre</strong>
+            <span data-fr="Vaisselle au lave-vaisselle ou lavée tout de suite — jamais laissée dans les lavabos. Plan de travail, micro-ondes et machine à café essuyés après usage. Rien à faire au suivant." data-en="Dishes in the dishwasher or washed right away — never left in the sinks. Counter, microwave and coffee machine wiped after use. Nothing left for the next person.">Vaisselle au lave-vaisselle ou lavée tout de suite — jamais laissée dans les lavabos. Plan de travail, micro-ondes et machine à café essuyés après usage. Rien à faire au suivant.</span>
+          </article>
+        </div>
+      </div>
+
     </div>
   </section>
 
