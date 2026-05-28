@@ -402,6 +402,49 @@ main{max-width:1240px;margin:0 auto;padding:96px 40px 120px}
 .lunch tbody tr{transition:background 200ms var(--ease)}
 .lunch tbody tr:hover{background:var(--cream)}
 
+/* Floor plan R+7 */
+.floor-wrap{
+  margin:8px 0;
+  padding:16px 18px 12px;
+  background:linear-gradient(180deg, #FCFAF6, #F3EFE7);
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+.floor-plan{width:100%;height:auto;display:block}
+.floor-plan .fp-floor{fill:#FFFEFA;stroke:rgba(10,46,92,.22);stroke-width:1.4}
+.floor-plan .fp-lab{fill:var(--clay-wash);stroke:rgba(217,119,87,.32);stroke-width:1}
+.floor-plan .fp-work{fill:var(--blue-wash);stroke:rgba(31,78,140,.22);stroke-width:1}
+.floor-plan .fp-social{fill:#FAF1E6;stroke:rgba(217,119,87,.22);stroke-width:1}
+.floor-plan .fp-service{fill:#fff;stroke:rgba(10,46,92,.22);stroke-width:1}
+.floor-plan .fp-eyebrow{font:700 8.5px var(--font);fill:var(--stone);letter-spacing:.18em;text-transform:uppercase}
+.floor-plan .fp-label{font:500 12px var(--font);fill:var(--ink)}
+.floor-plan .fp-mini{font:700 8px var(--font);fill:var(--ink);letter-spacing:.1em;text-transform:uppercase;text-anchor:middle}
+.floor-plan .fp-palier-a{fill:var(--clay)}
+.floor-plan .fp-palier-b{fill:rgba(10,46,92,.65)}
+.floor-plan .fp-palier-num{font:700 12px var(--font);fill:#fff;text-anchor:middle}
+.floor-plan .fp-palier-label{font:700 9px var(--font);fill:var(--ink);letter-spacing:.18em;text-transform:uppercase;text-anchor:middle}
+.floor-plan .fp-palier-sub{font:600 8px var(--font);fill:var(--stone);letter-spacing:.12em;text-transform:uppercase;text-anchor:middle}
+.floor-plan .fp-pin{fill:#fff;stroke:var(--blue-deep);stroke-width:1.4}
+.floor-plan .fp-pin-icon{stroke:var(--blue-deep);stroke-width:1.4;fill:none}
+.floor-plan .fp-title{font:300 22px var(--font);fill:var(--ink);letter-spacing:-.02em}
+.floor-plan .fp-eyebrow-big{font:700 10.5px var(--font);fill:var(--blue-deep);letter-spacing:.22em;text-transform:uppercase}
+
+.fp-legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;padding:0 4px;
+  font-size:11.5px;color:var(--stone)}
+.fp-legend > span{display:inline-flex;align-items:center;gap:8px}
+.fp-legend .sw{width:14px;height:14px;border-radius:4px;border:1px solid transparent;display:inline-block}
+
+/* Mini services grid */
+.mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+.mini-card{
+  padding:22px 22px 24px;background:#fff;border:1px solid var(--line);border-radius:16px;
+  transition:transform 320ms var(--ease),box-shadow 320ms var(--ease),border-color 320ms var(--ease);
+}
+.mini-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:rgba(31,78,140,.28)}
+.mini-card .ico{width:22px;height:22px;color:var(--blue-deep);margin-bottom:14px;display:block}
+.mini-card strong{display:block;font-weight:600;font-size:14.5px;color:var(--ink);margin-bottom:8px}
+.mini-card span{display:block;font-size:13px;color:var(--slate);line-height:1.55}
+
 /* Parking plan */
 .parking-wrap{
   margin:16px 0 8px;
@@ -449,6 +492,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
   .hero-address,.hero-floor,.hero-metro{grid-column:span 12}
   .hero-floor .big{font-size:48px}
   .rule-grid{grid-template-columns:repeat(2,1fr)}
+  .mini-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:800px){
   .topbar{padding:16px 20px}
@@ -469,6 +513,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
 }
 @media (max-width:560px){
   .rule-grid{grid-template-columns:1fr}
+  .mini-grid{grid-template-columns:1fr}
   .kv{grid-template-columns:90px 1fr;gap:10px}
   .hero h1{font-size:48px}
   .section-title{font-size:32px}
@@ -534,6 +579,13 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
 <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v4M3 5h4M6 17v4M4 19h4M14 4l2.5 5.5L22 12l-5.5 2.5L14 20l-2.5-5.5L6 12l5.5-2.5z"/></symbol>
 <symbol id="i-headphones" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol>
 <symbol id="i-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6"/></symbol>
+<symbol id="i-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol>
+<symbol id="i-recycle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19l-3-3 3-3M17 5l3 3-3 3M4 16l4-7 4 7M16 8l-4 7-4-7"/></symbol>
+<symbol id="i-qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3M21 14v3M14 17v4M17 17h4M17 21h4"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v6M15 4v6M5 10h14v3a7 7 0 0 1-14 0v-3zM12 17v4"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L1 21h22L12 2zM12 9v5"/><circle cx="12" cy="18" r=".8" fill="currentColor"/></symbol>
+<symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 7v13l6-3 6 3 6-3V4l-6 3-6-3zM9 4v13M15 7v13"/></symbol>
 </defs></svg>
 
 <header class="topbar" id="topbar">
@@ -588,6 +640,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
     <a href="#visiteurs" data-fr="Visiteurs" data-en="Visitors">Visiteurs</a>
     <a href="#services" data-fr="Services" data-en="Services">Services</a>
     <a href="#courrier" data-fr="Courrier" data-en="Mail">Courrier</a>
+    <a href="#plateau" data-fr="Plateau" data-en="Floor">Plateau</a>
     <a href="#vivre" data-fr="Bien vivre" data-en="Living together">Bien vivre</a>
     <a href="#securite" data-fr="Sécurité" data-en="Security">Sécurité</a>
     <a href="#contacts" data-fr="Contacts" data-en="Contacts">Contacts</a>
@@ -759,6 +812,7 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
         <div class="cell-eyebrow"><span data-fr="Collaborateurs TISSIUM" data-en="TISSIUM employees">Collaborateurs TISSIUM</span> <span class="tag ok" style="margin-left:auto"><span class="dot"></span><span data-fr="Confirmé" data-en="Confirmed">Confirmé</span></span></div>
         <h3 class="cell-title" data-fr="Ton badge t'attend." data-en="Your badge is ready.">Ton badge t'attend.</h3>
         <p data-fr="Ton badge d'accès te sera remis <strong>avant ton arrivée</strong>." data-en="Your access badge is given to you <strong>before you arrive</strong>.">Ton badge d'accès te sera remis <strong>avant ton arrivée</strong>.</p>
+        <p data-fr="Badge actif de <strong>8h à 20h</strong>. Hors de ces horaires, contacte le <strong>PC Sécurité</strong>. Le bâtiment reste ouvert : <strong>tu peux sortir à tout moment</strong>." data-en="Badge active from <strong>8AM to 8PM</strong>. Outside these hours, contact the <strong>Security desk</strong>. The building stays open: <strong>you can leave at any time</strong>.">Badge actif de <strong>8h à 20h</strong>. Hors de ces horaires, contacte le <strong>PC Sécurité</strong>. Le bâtiment reste ouvert : <strong>tu peux sortir à tout moment</strong>.</p>
         <p data-fr="Badge <strong>perdu, oublié ou en panne</strong> ? Contacte l'Office Manager :" data-en="Badge <strong>lost, forgotten or broken</strong>? Reach out to the Office Manager:">Badge <strong>perdu, oublié ou en panne</strong> ? Contacte l'Office Manager :</p>
         <p style="margin-top:14px"><strong>Kumuthiya Thiyagalingam</strong> · <a href="tel:+33761615867">+33 7 61 61 58 67</a> · <a href="mailto:kthiyagalingam@tissium.com">kthiyagalingam@tissium.com</a></p>
       </article>
@@ -786,10 +840,10 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
         <svg class="ico-lg"><use href="#i-coffee"/></svg>
         <div class="cell-eyebrow" data-fr="Business Center · 8h–20h" data-en="Business Center · 8AM–8PM">Business Center · 8h–20h</div>
         <h3 class="cell-title lg" data-fr="<strong>Great Work</strong> by Praemia REIM" data-en="<strong>Great Work</strong> by Praemia REIM"><strong>Great Work</strong> by Praemia REIM</h3>
-        <p data-fr="Le Business Center de l'immeuble MY est accessible de <strong>8h à 20h</strong>." data-en="The MY Business Center is open from <strong>8:00 AM to 8:00 PM</strong>.">Le Business Center de l'immeuble MY est accessible de <strong>8h à 20h</strong>.</p>
+        <p data-fr="Le Business Center de l'immeuble MY est accessible de <strong>8h à 20h</strong>. Les <strong>lumières s'éteignent à 18h</strong>." data-en="The MY Business Center is open from <strong>8AM to 8PM</strong>. <strong>Lights go off at 6PM</strong>.">Le Business Center de l'immeuble MY est accessible de <strong>8h à 20h</strong>. Les <strong>lumières s'éteignent à 18h</strong>.</p>
         <p data-fr="Réserve directement <strong>via l'application</strong> ou via l'<strong>accueil de l'immeuble</strong>. Capacités des salles sur le site web ; autres infos pratiques dans l'application." data-en="Book directly <strong>via the app</strong> or through the <strong>building reception</strong>. Room capacities are on the website; other practical info is in the app.">Réserve directement <strong>via l'application</strong> ou via l'<strong>accueil de l'immeuble</strong>. Capacités des salles sur le site web ; autres infos pratiques dans l'application.</p>
         <p data-fr="L'application permet aussi de réserver les créneaux <strong>yoga</strong>. <strong>Vestiaires et douches</strong> à l'entrée du Business Center." data-en="The app also lets you book <strong>yoga</strong> slots. <strong>Changing rooms and showers</strong> at the entrance of the Business Center.">L'application permet aussi de réserver les créneaux <strong>yoga</strong>. <strong>Vestiaires et douches</strong> à l'entrée du Business Center.</p>
-        <p style="margin-top:16px"><a href="https://apps.apple.com/fr/app/great-work-by-praemia-reim/id1670201153?l=en-GB" style="color:var(--blue-soft);text-decoration:underline;text-underline-offset:4px"><span data-fr="Télécharger l'application · iOS" data-en="Download the app · iOS">Télécharger l'application · iOS</span> →</a></p>
+        <p data-fr="Télécharger l'app : <strong>QR codes dans le bâtiment</strong>, ou via les stores." data-en="Get the app: <strong>QR codes around the building</strong>, or via the stores.">Télécharger l'app : <strong>QR codes dans le bâtiment</strong>, ou via les stores.</p>
         <p data-fr="Pour les réunions avec des externes, privilégie ces espaces au plateau TISSIUM." data-en="For meetings with external guests, prefer these spaces over the TISSIUM floor.">Pour les réunions avec des externes, privilégie ces espaces au plateau TISSIUM.</p>
       </article>
 
@@ -826,6 +880,122 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
         <h3 class="cell-title" data-fr="Tu viens avec ton matériel habituel" data-en="Bring your usual gear">Tu viens avec ton matériel habituel</h3>
         <p data-fr="Aucun changement lié au déménagement : tu viens avec ton <strong>équipement TISSIUM habituel</strong>." data-en="Nothing changes with the move — bring your <strong>usual TISSIUM gear</strong>.">Aucun changement lié au déménagement : tu viens avec ton <strong>équipement TISSIUM habituel</strong>.</p>
         <p data-fr="Les <strong>règles IT et cybersécurité</strong> TISSIUM continuent de s'appliquer." data-en="TISSIUM <strong>IT and cybersecurity rules</strong> continue to apply.">Les <strong>règles IT et cybersécurité</strong> TISSIUM continuent de s'appliquer.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- PLATEAU R+7 -->
+  <section class="section reveal" id="plateau">
+    <div class="section-head">
+      <div class="section-eyebrow" data-fr="Sur le plateau · R+7" data-en="On the floor · R+7">Sur le plateau · R+7</div>
+      <h2 class="section-title" data-fr="Tu arrives par <em>Palier A</em>, casiers, et c'est parti." data-en="You come in via <em>Palier A</em>, lockers, and you're set.">Tu arrives par <em>Palier A</em>, casiers, et c'est parti.</h2>
+      <p class="section-desc" data-fr="Le plateau s'organise autour de deux paliers, de deux open spaces, d'une Tisanerie centrale, d'une zone Labs côté ouest et des casiers à l'entrée." data-en="The floor is built around two landings, two open spaces, a central Tisanerie, a lab zone on the west side and lockers at the entrance.">Le plateau s'organise autour de deux paliers, de deux open spaces, d'une Tisanerie centrale, d'une zone Labs côté ouest et des casiers à l'entrée.</p>
+    </div>
+
+    <div class="bento-grid">
+      <article class="cell span-12 reveal">
+        <svg class="ico-lg"><use href="#i-map"/></svg>
+        <div class="cell-eyebrow" data-fr="Plan du R+7" data-en="R+7 floor plan">Plan du R+7</div>
+        <h3 class="cell-title" data-fr="Repère tes zones d'un coup d'œil" data-en="Get your bearings at a glance">Repère tes zones d'un coup d'œil</h3>
+
+        <div class="floor-wrap">
+          <svg class="floor-plan" viewBox="0 0 1000 380" role="img" aria-label="Plan stylisé du plateau R+7 TISSIUM">
+            <!-- Header -->
+            <text class="fp-eyebrow-big" x="20" y="28" data-fr="Plateau TISSIUM · R+7" data-en="TISSIUM floor · R+7">Plateau TISSIUM · R+7</text>
+            <text class="fp-title" x="20" y="56" data-fr="Deux paliers, un plateau" data-en="Two landings, one floor">Deux paliers, un plateau</text>
+
+            <!-- Floor outline: angled wing left + main rectangle -->
+            <path class="fp-floor" d="M 40 290 L 260 95 L 960 95 L 960 320 L 40 320 Z"/>
+
+            <!-- LABS zone (left, in the angled wing) -->
+            <path class="fp-lab" d="M 60 286 L 272 110 L 372 110 L 372 305 L 60 305 Z"/>
+            <text class="fp-eyebrow" x="220" y="200" text-anchor="middle">LABS</text>
+            <text class="fp-label" x="220" y="220" text-anchor="middle" data-fr="Performance · Chemistry · 3D" data-en="Performance · Chemistry · 3D">Performance · Chemistry · 3D</text>
+            <text class="fp-mini" x="220" y="246" data-fr="Stock & Frigo · Laverie" data-en="Stock & Fridge · Lab wash">Stock &amp; Frigo · Laverie</text>
+
+            <!-- OPEN SPACE 36P -->
+            <rect class="fp-work" x="388" y="110" width="200" height="195" rx="6"/>
+            <text class="fp-eyebrow" x="488" y="200" text-anchor="middle" data-fr="OPEN SPACE" data-en="OPEN SPACE">OPEN SPACE</text>
+            <text class="fp-label" x="488" y="220" text-anchor="middle" data-fr="36 postes" data-en="36 desks">36 postes</text>
+
+            <!-- TISANERIE (social center) -->
+            <rect class="fp-social" x="600" y="110" width="120" height="195" rx="6"/>
+            <text class="fp-eyebrow" x="660" y="200" text-anchor="middle">TISANERIE</text>
+            <text class="fp-label" x="660" y="220" text-anchor="middle" data-fr="36 places" data-en="36 seats">36 places</text>
+
+            <!-- OPEN SPACE 24P -->
+            <rect class="fp-work" x="732" y="110" width="150" height="195" rx="6"/>
+            <text class="fp-eyebrow" x="807" y="200" text-anchor="middle" data-fr="OPEN SPACE" data-en="OPEN SPACE">OPEN SPACE</text>
+            <text class="fp-label" x="807" y="220" text-anchor="middle" data-fr="24 postes" data-en="24 desks">24 postes</text>
+
+            <!-- Casiers + WC + Wall of Values (right column) -->
+            <g transform="translate(895 110)">
+              <rect class="fp-service" x="0" y="0" width="60" height="58" rx="4"/>
+              <text class="fp-mini" x="30" y="34" data-fr="CASIERS" data-en="LOCKERS">CASIERS</text>
+              <rect class="fp-service" x="0" y="64" width="60" height="58" rx="4"/>
+              <text class="fp-mini" x="30" y="98">WC</text>
+              <rect class="fp-lab" x="0" y="128" width="60" height="67" rx="4"/>
+              <text class="fp-mini" x="30" y="158" data-fr="WALL OF" data-en="WALL OF">WALL OF</text>
+              <text class="fp-mini" x="30" y="172" data-fr="VALUES" data-en="VALUES">VALUES</text>
+            </g>
+
+            <!-- Palier A marker (right, primary entry) -->
+            <circle class="fp-palier-a" cx="975" cy="208" r="14"/>
+            <text class="fp-palier-num" x="975" y="212">A</text>
+            <text class="fp-palier-label" x="975" y="236" data-fr="PALIER A" data-en="LANDING A">PALIER A</text>
+            <text class="fp-palier-sub" x="975" y="250" data-fr="Entrée" data-en="Entry">Entrée</text>
+
+            <!-- Palier B marker (left, secondary entry) -->
+            <circle class="fp-palier-b" cx="58" cy="304" r="14"/>
+            <text class="fp-palier-num" x="58" y="308" font-size="11">B</text>
+            <text class="fp-palier-label" x="58" y="338" data-fr="PALIER B" data-en="LANDING B">PALIER B</text>
+            <text class="fp-palier-sub" x="58" y="352" data-fr="Sortie secondaire" data-en="Secondary exit">Sortie secondaire</text>
+
+            <!-- 2 printer markers -->
+            <g transform="translate(420 285)">
+              <circle class="fp-pin" r="11"/>
+              <use href="#i-printer" x="-7" y="-7" width="14" height="14" class="fp-pin-icon"/>
+            </g>
+            <g transform="translate(860 285)">
+              <circle class="fp-pin" r="11"/>
+              <use href="#i-printer" x="-7" y="-7" width="14" height="14" class="fp-pin-icon"/>
+            </g>
+          </svg>
+
+          <div class="fp-legend">
+            <span><span class="sw" style="background:var(--clay-wash);border-color:rgba(217,119,87,.32)"></span><span data-fr="Labs · Wall of values" data-en="Labs · Wall of values">Labs · Wall of values</span></span>
+            <span><span class="sw" style="background:var(--blue-wash);border-color:rgba(31,78,140,.22)"></span><span data-fr="Open space" data-en="Open space">Open space</span></span>
+            <span><span class="sw" style="background:#FAF1E6;border-color:rgba(217,119,87,.22)"></span><span data-fr="Tisanerie" data-en="Tisanerie">Tisanerie</span></span>
+            <span><span class="sw" style="background:#fff;border-color:rgba(10,46,92,.22)"></span><span data-fr="Casiers · WC" data-en="Lockers · WC">Casiers · WC</span></span>
+            <span><span class="sw" style="background:var(--clay)"></span><span data-fr="Palier A · Entrée" data-en="Landing A · Entry">Palier A · Entrée</span></span>
+            <span style="margin-left:auto"><svg style="width:13px;height:13px;color:var(--blue-deep)"><use href="#i-printer"/></svg><span data-fr="2 imprimantes" data-en="2 printers">2 imprimantes</span></span>
+          </div>
+        </div>
+
+        <p style="margin-top:18px" data-fr="Tu entres par <strong>Palier A</strong> : tu trouves directement les <strong>casiers</strong> et le <strong>Wall of Values</strong>. La <strong>Tisanerie</strong> est au centre, entre les deux open spaces. Les <strong>Labs</strong> occupent l'aile ouest, à côté du <strong>Palier B</strong> (sortie secondaire)." data-en="You enter through <strong>Palier A</strong>: <strong>lockers</strong> and the <strong>Wall of Values</strong> are right there. The <strong>Tisanerie</strong> sits in the middle, between the two open spaces. The <strong>Labs</strong> are in the west wing, next to <strong>Palier B</strong> (secondary exit).">Tu entres par <strong>Palier A</strong> : tu trouves directement les <strong>casiers</strong> et le <strong>Wall of Values</strong>. La <strong>Tisanerie</strong> est au centre, entre les deux open spaces. Les <strong>Labs</strong> occupent l'aile ouest, à côté du <strong>Palier B</strong> (sortie secondaire).</p>
+      </article>
+    </div>
+
+    <div class="mini-grid">
+      <article class="mini-card reveal">
+        <svg class="ico"><use href="#i-locker"/></svg>
+        <strong data-fr="Casier attitré" data-en="Assigned locker">Casier attitré</strong>
+        <span data-fr="Comme aujourd'hui : tu gardes ton casier nominatif à l'entrée du R+7. Chargeurs de batterie vélo dispo à côté." data-en="Same as today: you keep a named locker at the R+7 entrance. Bike battery chargers available nearby.">Comme aujourd'hui : tu gardes ton casier nominatif à l'entrée du R+7. Chargeurs de batterie vélo dispo à côté.</span>
+      </article>
+      <article class="mini-card reveal">
+        <svg class="ico"><use href="#i-calendar"/></svg>
+        <strong data-fr="Salles par Outlook" data-en="Rooms via Outlook">Salles par Outlook</strong>
+        <span data-fr="Les salles du plateau se réservent <strong>via Outlook</strong>, comme aujourd'hui. Rien à apprendre." data-en="Floor meeting rooms are booked <strong>via Outlook</strong>, like today. Nothing new to learn.">Les salles du plateau se réservent <strong>via Outlook</strong>, comme aujourd'hui. Rien à apprendre.</span>
+      </article>
+      <article class="mini-card reveal">
+        <svg class="ico"><use href="#i-printer"/></svg>
+        <strong data-fr="Deux imprimantes" data-en="Two printers">Deux imprimantes</strong>
+        <span data-fr="Deux imprimantes sont disposées sur le plateau. Repérables sur le plan ci-dessus." data-en="Two printers are set up on the floor. Marked on the map above.">Deux imprimantes sont disposées sur le plateau. Repérables sur le plan ci-dessus.</span>
+      </article>
+      <article class="mini-card reveal">
+        <svg class="ico"><use href="#i-recycle"/></svg>
+        <strong data-fr="Tri des déchets" data-en="Waste sorting">Tri des déchets</strong>
+        <span data-fr="Les flux de tri sont identifiés directement sur les poubelles. Tu jettes au bon endroit, sans hésiter." data-en="Sorting streams are labeled directly on the bins. Drop the right thing in the right place, no guesswork.">Les flux de tri sont identifiés directement sur les poubelles. Tu jettes au bon endroit, sans hésiter.</span>
       </article>
     </div>
   </section>
@@ -956,6 +1126,14 @@ footer .brand-foot .reg{font-size:7px;letter-spacing:0;vertical-align:super}
         <div class="contact-line"><svg><use href="#i-phone"/></svg><a href="tel:0185783938">01 85 78 39 38</a></div>
         <div class="contact-line"><svg><use href="#i-phone"/></svg><a href="tel:0764006513">07 64 00 65 13</a></div>
         <div class="contact-line"><svg><use href="#i-at"/></svg><a href="mailto:my.hotessesaccueil@gmail.com">my.hotessesaccueil@gmail.com</a></div>
+      </article>
+
+      <article class="cell warm span-12 reveal">
+        <svg class="ico-lg" style="color:var(--clay-deep)"><use href="#i-alert"/></svg>
+        <div class="cell-eyebrow" data-fr="Évacuation · En cas d'incendie" data-en="Evacuation · In case of fire">Évacuation · En cas d'incendie</div>
+        <h3 class="cell-title" data-fr="Procédure classique, point de rassemblement Rue de Lagny" data-en="Standard procedure, assembly point on Rue de Lagny">Procédure classique, point de rassemblement Rue de Lagny</h3>
+        <p data-fr="<strong>Procédure incendie classique</strong> : à l'alarme, tu sors par l'issue la plus proche en suivant le balisage. Pas d'ascenseur." data-en="<strong>Standard fire procedure</strong>: when the alarm goes off, leave via the closest exit, following the signage. No elevators.">  <strong>Procédure incendie classique</strong> : à l'alarme, tu sors par l'issue la plus proche en suivant le balisage. Pas d'ascenseur.</p>
+        <p data-fr="<strong>Point de rassemblement : Rue de Lagny.</strong> On se compte, on attend les consignes du PC Sécurité." data-en="<strong>Assembly point: Rue de Lagny.</strong> We do a headcount and wait for instructions from the Security desk."><strong>Point de rassemblement : Rue de Lagny.</strong> On se compte, on attend les consignes du PC Sécurité.</p>
       </article>
     </div>
   </section>
