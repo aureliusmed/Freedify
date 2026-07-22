@@ -3,6 +3,7 @@ import type { BilanDeVie, EtatDeVie, Impact, Tournant } from "@life/shared";
 import { infoPhase } from "@life/shared";
 import {
   ApiError,
+  adopterVie,
   chargerVie,
   genererBilan,
   genererTournant,
@@ -11,6 +12,13 @@ import {
   playerIdLocal,
   resoudreTournant,
 } from "./api";
+import {
+  authDisponible,
+  connexionGoogle,
+  deconnexion,
+  surChangementAuth,
+  utilisateurCourant,
+} from "./auth";
 import { CardScreen } from "./components/CardScreen";
 import { StatsBar } from "./components/StatsBar";
 import { TimelineRecap } from "./components/TimelineRecap";
@@ -33,6 +41,7 @@ export default function App() {
   const [ecran, setEcran] = useState<Ecran>("chargement");
   const [timelineOuverte, setTimelineOuverte] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
+  const [connecte, setConnecte] = useState(false);
 
   const chargerCarte = useCallback(async (playerId: string) => {
     try {
@@ -54,40 +63,62 @@ export default function App() {
     }
   }, []);
 
-  const demarrer = useCallback(async () => {
-    setEcran("chargement");
-    try {
-      const idLocal = playerIdLocal();
-      let vie: EtatDeVie;
-      if (idLocal) {
-        try {
-          vie = (await chargerVie(idLocal)).etat;
-        } catch {
+  // idForce : impose l'id du compte authentifié (sinon reprend l'id local anonyme).
+  const demarrer = useCallback(
+    async (idForce?: string) => {
+      setEcran("chargement");
+      try {
+        const idCible = idForce ?? playerIdLocal();
+        let vie: EtatDeVie;
+        if (idCible) {
+          try {
+            vie = (await chargerVie(idCible)).etat;
+          } catch {
+            vie = (await nouvelleVie(idForce)).etat;
+          }
+        } else {
           vie = (await nouvelleVie()).etat;
         }
-      } else {
-        vie = (await nouvelleVie()).etat;
+        memoriserPlayerId(vie.player_id);
+        setEtat(vie);
+        if (!vie.vivant) {
+          const { bilan } = await genererBilan(vie.player_id);
+          setBilan(bilan);
+          setEcran("bilan");
+          return;
+        }
+        await chargerCarte(vie.player_id);
+      } catch (e) {
+        setErreur(e instanceof Error ? e.message : "serveur injoignable");
+        setEcran("erreur");
       }
-      memoriserPlayerId(vie.player_id);
-      setEtat(vie);
-      if (!vie.vivant) {
-        const { bilan } = await genererBilan(vie.player_id);
-        setBilan(bilan);
-        setEcran("bilan");
-        return;
-      }
-      await chargerCarte(vie.player_id);
-    } catch (e) {
-      setErreur(e instanceof Error ? e.message : "serveur injoignable");
-      setEcran("erreur");
-    }
-  }, [chargerCarte]);
+    },
+    [chargerCarte],
+  );
 
   useEffect(() => {
     void demarrer();
     if ("serviceWorker" in navigator) {
       void navigator.serviceWorker.register("/sw.js").catch(() => {});
     }
+  }, [demarrer]);
+
+  // Auth optionnelle (brief §6) : à la connexion, on adopte la vie anonyme
+  // vers le compte (une seule fois) puis on redémarre sur l'id du compte.
+  useEffect(() => {
+    if (!authDisponible()) return;
+    void utilisateurCourant().then((u) => setConnecte(!!u));
+    const off = surChangementAuth(async (u) => {
+      setConnecte(!!u);
+      if (!u) return;
+      const ancienLocal = playerIdLocal();
+      if (ancienLocal && ancienLocal !== u.id) {
+        await adopterVie(ancienLocal).catch(() => {});
+      }
+      memoriserPlayerId(u.id);
+      void demarrer(u.id);
+    });
+    return off;
   }, [demarrer]);
 
   const faireChoix = useCallback(
@@ -141,6 +172,22 @@ export default function App() {
               </button>
             </>
           )}
+          {authDisponible() &&
+            (connecte ? (
+              <button
+                onClick={() => void deconnexion()}
+                className="rounded-lg bg-zinc-800 px-2 py-1"
+              >
+                Déconnexion
+              </button>
+            ) : (
+              <button
+                onClick={() => void connexionGoogle()}
+                className="rounded-lg bg-zinc-100 px-2 py-1 text-zinc-900"
+              >
+                Se connecter
+              </button>
+            ))}
         </div>
       </header>
 

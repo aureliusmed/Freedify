@@ -41,9 +41,22 @@ en prod).
 | `LIFE_MODEL` | `claude-opus-4-8` | Modèle de génération des cartes et bilans |
 | `LIFE_MODEL_RESOLUTION` | = `LIFE_MODEL` | Modèle du second appel (narration du résultat) |
 | `LIFE_DATA_DIR` | `server/data` | Dossier de persistance JSON (store fichier) |
-| `SUPABASE_URL` | — | Active le store Supabase (avec la clé ci-dessous) |
+| `SUPABASE_URL` | — | Active le store Supabase (avec la clé ci-dessous) et l'auth (avec l'anon key) |
 | `SUPABASE_SERVICE_ROLE_KEY` | — | Service role key Supabase — **serveur uniquement**, jamais exposée au front |
+| `SUPABASE_ANON_KEY` | — | Anon key — active la vérification des JWT côté serveur (auth Google) |
 | `PORT` | `3001` | Port de l'API |
+
+Côté **front** (build Vite), l'auth s'active via un fichier `.env.local` (jamais
+commité) :
+
+```
+VITE_SUPABASE_URL=https://<projet>.supabase.co
+VITE_SUPABASE_ANON_KEY=<anon key>
+```
+
+Sans ces variables, le bouton « Se connecter » n'apparaît pas et le jeu reste
+100 % anonyme (id localStorage). Provider Google à activer dans la console
+Supabase (action manuelle, hors code).
 
 ### Stockage
 
@@ -97,7 +110,8 @@ Trois couches, conformes au brief §2 :
 - [x] 6. Filtrage d'âge strict par phase
 - [x] Banque de secours : ~20 cartes par phase (19-20 cartes, ≥ 6 seeds chacune)
 - [x] Stockage Postgres/Supabase (via `SUPABASE_URL` + service role key ; fichier par défaut)
-- [ ] 7. Auth Google/Apple, notifications push (id anonyme localStorage pour l'instant)
+- [x] 7a. Auth Google (Supabase Auth, optionnelle, par-dessus l'anonyme ; Apple reporté)
+- [ ] 7b. Notifications push du reset quotidien
 - [ ] Monétisation (tournants bonus, cosmétiques)
 
 Décisions d'implémentation notables : [`docs/DECISIONS.md`](docs/DECISIONS.md).

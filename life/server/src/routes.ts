@@ -137,4 +137,28 @@ export function enregistrerRoutes(app: FastifyInstance, store: Store): void {
     const bilan = await genererBilan(etat);
     return { bilan };
   });
+
+  // Adoption d'une vie anonyme par un compte authentifié (brief §6). Le hook
+  // d'auth a déjà remplacé le player_id du corps par l'id du compte ; l'id
+  // anonyme à migrer est fourni séparément dans `player_id_anonyme`.
+  app.post("/api/vie/adopter", async (req, reply) => {
+    if (!req.authUserId) return reply.code(401).send({ erreur: "authentification requise" });
+    const corps = z
+      .object({ player_id_anonyme: z.string().min(1).max(64) })
+      .safeParse(req.body);
+    if (!corps.success || !validerPlayerId(corps.data.player_id_anonyme)) {
+      return reply.code(400).send({ erreur: "player_id_anonyme invalide" });
+    }
+
+    // Ne rien écraser : si le compte a déjà une vie, on la renvoie telle quelle.
+    const existante = await store.get(req.authUserId);
+    if (existante) return { etat: existante, adopte: false };
+
+    const anonyme = await store.get(corps.data.player_id_anonyme);
+    if (!anonyme) return reply.code(404).send({ erreur: "vie anonyme introuvable" });
+
+    const adoptee = { ...anonyme, player_id: req.authUserId };
+    await store.put(adoptee);
+    return { etat: adoptee, adopte: true };
+  });
 }

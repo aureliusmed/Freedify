@@ -55,6 +55,21 @@ la bascule Postgres/Supabase (prévue au brief §6) ne touche que `store.ts`.
 l'id. **Conséquences.** Pas de double génération en cas de refresh, pas de
 résolution d'une carte forgée côté client.
 
+## ADR-011 — Auth optionnelle par-dessus l'anonyme, Apple reporté
+
+**Contexte.** Brief §6 : auth Google/Apple, session persistante. **Décision.**
+Auth Google via Supabase Auth, **optionnelle** : sans config (`SUPABASE_URL`/
+`SUPABASE_ANON_KEY` côté serveur, `VITE_SUPABASE_*` côté web), le jeu reste
+100 % anonyme (id localStorage). Un hook Fastify `preValidation` vérifie le
+Bearer token via `auth.getUser` et force le `player_id` du corps à l'id du
+compte ; un token invalide donne un 401 (jamais de repli silencieux). Une route
+`POST /api/vie/adopter` migre la vie anonyme vers le compte, une seule fois (ne
+écrase jamais une vie de compte existante). **Apple reporté** (exige un compte
+développeur Apple). **Conséquences.** Un compte joue toujours sur sa propre vie
+(anti-usurpation) ; le code auth est inerte sans config et n'a pu être validé
+que sur le chemin « sans config » — les chemins authentifiés sont à vérifier
+avec un vrai projet Supabase.
+
 ## ADR-010 — Pool mutualisé de cartes de petite enfance
 
 **Contexte.** Brief §6 : les cartes de petite enfance sont peu différenciées

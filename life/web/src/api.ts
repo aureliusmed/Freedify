@@ -1,4 +1,5 @@
 import type { BilanDeVie, EtatDeVie, Impact, Tournant } from "@life/shared";
+import { tokenAcces } from "./auth";
 
 export class ApiError extends Error {
   constructor(
@@ -11,9 +12,12 @@ export class ApiError extends Error {
 }
 
 async function requete<T>(chemin: string, options?: RequestInit): Promise<T> {
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  const token = await tokenAcces();
+  if (token) headers.Authorization = `Bearer ${token}`;
   const res = await fetch(chemin, {
-    headers: { "Content-Type": "application/json" },
     ...options,
+    headers: { ...headers, ...(options?.headers as Record<string, string> | undefined) },
   });
   const corps = (await res.json().catch(() => ({}))) as Record<string, unknown>;
   if (!res.ok) {
@@ -63,6 +67,14 @@ export function genererBilan(playerId: string): Promise<{ bilan: BilanDeVie }> {
   return requete("/api/vie/bilan", {
     method: "POST",
     body: JSON.stringify({ player_id: playerId }),
+  });
+}
+
+/** Migre une vie anonyme vers le compte authentifié (idempotent côté serveur). */
+export function adopterVie(playerIdAnonyme: string): Promise<{ etat: EtatDeVie; adopte: boolean }> {
+  return requete("/api/vie/adopter", {
+    method: "POST",
+    body: JSON.stringify({ player_id_anonyme: playerIdAnonyme }),
   });
 }
 
