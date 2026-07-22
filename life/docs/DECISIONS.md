@@ -55,6 +55,20 @@ la bascule Postgres/Supabase (prévue au brief §6) ne touche que `store.ts`.
 l'id. **Conséquences.** Pas de double génération en cas de refresh, pas de
 résolution d'une carte forgée côté client.
 
+## ADR-010 — Pool mutualisé de cartes de petite enfance
+
+**Contexte.** Brief §6 : les cartes de petite enfance sont peu différenciées
+entre joueurs ; les mutualiser réduit les appels IA. **Décision.** Un
+`PoolPhase` en mémoire, partagé entre joueurs, sert des cartes de petite
+enfance quand aucune seed n'est prête ; chaque carte servie reçoit un
+`tournant_id` neuf et est retirée du pool (unicité par joueur). Le pool se
+réapprovisionne en tâche de fond (une génération IA par service, non
+bloquante) tant qu'il contient moins de 10 cartes. **Conséquences.** Zéro appel
+IA quand le pool répond ; comportement strictement inchangé sans clé API (pool
+vide → fallback). Une seed prête ne passe jamais par le pool (elle exige une
+carte contextualisée). Le pool étant en mémoire, il est perdu au redémarrage et
+se reconstitue — acceptable pour le MVP mono-instance.
+
 ## ADR-009 — Flags narratifs dérivés par seuils, permanents
 
 **Contexte.** `flags_narratifs` (brief §4) existait dans le modèle mais n'était

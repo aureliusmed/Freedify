@@ -1,4 +1,5 @@
 import type { FastifyInstance } from "fastify";
+import type { EtatDeVie } from "@life/shared";
 import { z } from "zod";
 import { appliquerResetQuotidien, nouvelleVie } from "./engine/etat.js";
 import {
@@ -8,7 +9,28 @@ import {
   seedPrete,
 } from "./engine/resolution.js";
 import { genererBilan, genererTournant, narrerResolution } from "./ia/generateur.js";
+import { iaDisponible } from "./ia/client.js";
+import { PoolPhase } from "./engine/pool.js";
 import { validerPlayerId, type Store } from "./store.js";
+
+// Pool partagé entre joueurs pour la petite enfance (brief §6). En mémoire :
+// perdu au redémarrage, ce qui est acceptable — il se reconstitue en tâche de fond.
+const POOL_SEUIL_REMPLISSAGE = 10;
+const poolPetiteEnfance = new PoolPhase();
+
+/** Réapprovisionne le pool en tâche de fond (jamais bloquant pour la réponse
+ *  HTTP). Génère UNE carte IA de petite enfance, modérée comme toute carte. */
+function reapprovisionnerPool(etat: EtatDeVie): void {
+  if (!iaDisponible() || poolPetiteEnfance.taille() >= POOL_SEUIL_REMPLISSAGE) return;
+  void (async () => {
+    try {
+      const carte = await genererTournant(etat, null);
+      if (carte.source === "ia") poolPetiteEnfance.remplir(carte);
+    } catch {
+      /* échec silencieux : le pool reste tel quel, le fallback prend le relais */
+    }
+  })();
+}
 
 const CorpsJoueur = z.object({ player_id: z.string().min(1).max(64) });
 const CorpsResolution = CorpsJoueur.extend({
@@ -57,8 +79,19 @@ export function enregistrerRoutes(app: FastifyInstance, store: Store): void {
     }
 
     const seed = seedPrete(etat);
-    const tournant = await genererTournant(etat, seed);
-    if (seed && tournant.source === "ia") consommerSeed(etat, seed.id);
+    let tournant;
+
+    // Petite enfance sans seed prête : tenter le pool mutualisé d'abord. Une
+    // seed prête exige une carte contextualisée et ne passe JAMAIS par le pool.
+    if (etat.phase === "petite_enfance" && !seed) {
+      const dejaVues = etat.historique_tournants.map((h) => h.resume);
+      const duPool = poolPetiteEnfance.prendre(dejaVues);
+      tournant = duPool ?? (await genererTournant(etat, null));
+      reapprovisionnerPool(etat); // tâche de fond, non bloquante
+    } else {
+      tournant = await genererTournant(etat, seed);
+      if (seed && tournant.source === "ia") consommerSeed(etat, seed.id);
+    }
 
     etat.tournant_en_cours = tournant;
     await store.put(etat);
