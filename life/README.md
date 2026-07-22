@@ -40,8 +40,22 @@ en prod).
 | `ANTHROPIC_API_KEY` | — | Active la génération IA |
 | `LIFE_MODEL` | `claude-opus-4-8` | Modèle de génération des cartes et bilans |
 | `LIFE_MODEL_RESOLUTION` | = `LIFE_MODEL` | Modèle du second appel (narration du résultat) |
-| `LIFE_DATA_DIR` | `server/data` | Dossier de persistance JSON (MVP) |
+| `LIFE_DATA_DIR` | `server/data` | Dossier de persistance JSON (store fichier) |
+| `SUPABASE_URL` | — | Active le store Supabase (avec la clé ci-dessous) |
+| `SUPABASE_SERVICE_ROLE_KEY` | — | Service role key Supabase — **serveur uniquement**, jamais exposée au front |
 | `PORT` | `3001` | Port de l'API |
+
+### Stockage
+
+Par défaut, l'état est persisté en fichiers JSON (`LIFE_DATA_DIR`). Si
+`SUPABASE_URL` **et** `SUPABASE_SERVICE_ROLE_KEY` sont définis, le serveur
+bascule sur Postgres via Supabase (même interface `Store`, ADR-006). Exécuter
+d'abord le schéma :
+
+```bash
+psql "$DATABASE_URL" -f server/sql/schema.sql
+# ou coller le contenu dans l'éditeur SQL de la console Supabase
+```
 
 ## Commandes
 
@@ -82,8 +96,8 @@ Trois couches, conformes au brief §2 :
 - [x] 5. Écran de bilan + partage (canvas 9:16, Web Share API)
 - [x] 6. Filtrage d'âge strict par phase
 - [x] Banque de secours : ~20 cartes par phase (19-20 cartes, ≥ 6 seeds chacune)
+- [x] Stockage Postgres/Supabase (via `SUPABASE_URL` + service role key ; fichier par défaut)
 - [ ] 7. Auth Google/Apple, notifications push (id anonyme localStorage pour l'instant)
 - [ ] Monétisation (tournants bonus, cosmétiques)
-- [ ] Stockage Postgres/Supabase (interface `Store` prête, implémentation fichier en MVP)
 
 Décisions d'implémentation notables : [`docs/DECISIONS.md`](docs/DECISIONS.md).

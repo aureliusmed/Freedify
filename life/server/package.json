@@ -13,6 +13,7 @@
     "@anthropic-ai/sdk": "^0.113.0",
     "@fastify/cors": "^10.0.1",
     "@life/shared": "*",
+    "@supabase/supabase-js": "^2.47.10",
     "fastify": "^5.2.0",
     "zod": "^4.0.0"
   },
