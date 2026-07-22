@@ -81,9 +81,9 @@ Trois couches, conformes au brief §2 :
 - [x] 4. Seeds narratives (plantage, vieillissement, résurgence prioritaire)
 - [x] 5. Écran de bilan + partage (canvas 9:16, Web Share API)
 - [x] 6. Filtrage d'âge strict par phase
+- [x] Banque de secours : ~20 cartes par phase (19-20 cartes, ≥ 6 seeds chacune)
 - [ ] 7. Auth Google/Apple, notifications push (id anonyme localStorage pour l'instant)
 - [ ] Monétisation (tournants bonus, cosmétiques)
-- [ ] Banque de secours : passer de 3 à ~20 cartes par phase
 - [ ] Stockage Postgres/Supabase (interface `Store` prête, implémentation fichier en MVP)
 
 Décisions d'implémentation notables : [`docs/DECISIONS.md`](docs/DECISIONS.md).

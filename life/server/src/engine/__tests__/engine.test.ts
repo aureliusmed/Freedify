@@ -193,13 +193,22 @@ describe("banque de secours", () => {
   it("contient des cartes pour chaque phase, toutes conformes à la modération", () => {
     for (const phase of PHASES) {
       const cartes = banquePourPhase(phase);
-      expect(cartes.length).toBeGreaterThanOrEqual(2);
+      expect(cartes.length).toBeGreaterThanOrEqual(18);
       // les cartes des phases mineures doivent passer la modération mineur
       const ageTest = phase === "petite_enfance" ? 3 : phase === "enfance" ? 9 : phase === "adolescence" ? 15 : 30;
       for (const carte of cartes) {
         const t: Tournant = { tournant_id: "t", ...carte };
         expect(moderer(t, ageTest).ok, `${phase}: ${carte.situation}`).toBe(true);
       }
+    }
+  });
+
+  it("plante au moins 5 seeds par phase (variété narrative)", () => {
+    for (const phase of PHASES) {
+      const avecSeed = banquePourPhase(phase).filter((c) =>
+        c.choix.some((ch) => ch.plante_seed !== null),
+      );
+      expect(avecSeed.length, phase).toBeGreaterThanOrEqual(5);
     }
   });
 
