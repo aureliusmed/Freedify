@@ -23,6 +23,7 @@ export function nouvelleVie(playerId?: string): EtatDeVie {
     historique_tournants: [],
     flags_narratifs: [],
     tournants_restants_aujourdhui: TOURNANTS_PAR_JOUR,
+    tournants_bonus: 0,
     derniere_reset: minuitUtc(),
     vivant: true,
     cause_deces: null,

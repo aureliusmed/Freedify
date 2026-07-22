@@ -149,6 +149,24 @@ describe("reset quotidien", () => {
     resoudreChoix(etat, t, t.choix[0]!, () => 0.5);
     expect(etat.tournants_restants_aujourdhui).toBe(TOURNANTS_PAR_JOUR - 1);
   });
+
+  it("consomme les tournants bonus seulement après épuisement du quota (§7)", () => {
+    const etat = nouvelleVie("p6");
+    etat.tournants_restants_aujourdhui = 1;
+    etat.tournants_bonus = 2;
+
+    // 1er tournant : consomme le quota, pas le bonus
+    let t = tournantTest();
+    resoudreChoix(etat, t, t.choix[0]!, () => 0.5);
+    expect(etat.tournants_restants_aujourdhui).toBe(0);
+    expect(etat.tournants_bonus).toBe(2);
+
+    // quota épuisé : les suivants consomment le bonus
+    t = tournantTest();
+    etat.tournant_en_cours = t;
+    resoudreChoix(etat, t, t.choix[0]!, () => 0.5);
+    expect(etat.tournants_bonus).toBe(1);
+  });
 });
 
 describe("mort", () => {

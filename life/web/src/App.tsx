@@ -43,6 +43,7 @@ export default function App() {
   const [erreur, setErreur] = useState<string | null>(null);
   const [connecte, setConnecte] = useState(false);
   const [pushActif, setPushActif] = useState(false);
+  const [boutiqueActif, setBoutiqueActif] = useState(false);
 
   const chargerCarte = useCallback(async (playerId: string) => {
     try {
@@ -105,7 +106,10 @@ export default function App() {
     // Disponibilité du push côté serveur (masque le bouton si non configuré).
     void fetch("/api/sante")
       .then((r) => r.json())
-      .then((d: { push?: boolean }) => setPushActif(!!d.push))
+      .then((d: { push?: boolean; boutique?: boolean }) => {
+        setPushActif(!!d.push);
+        setBoutiqueActif(!!d.boutique);
+      })
       .catch(() => {});
   }, [demarrer]);
 
@@ -169,7 +173,10 @@ export default function App() {
         <div className="flex items-center gap-3 text-xs text-zinc-400">
           {etat && ecran !== "bilan" && (
             <>
-              <span>{etat.tournants_restants_aujourdhui} / 5 aujourd'hui</span>
+              <span>
+                {etat.tournants_restants_aujourdhui} / 5 aujourd'hui
+                {etat.tournants_bonus > 0 ? ` (+${etat.tournants_bonus} bonus)` : ""}
+              </span>
               <button
                 onClick={() => setTimelineOuverte(true)}
                 className="rounded-lg bg-zinc-800 px-2 py-1"
@@ -222,6 +229,8 @@ export default function App() {
             onRafraichir={() => void demarrer()}
             playerId={etat?.player_id}
             pushActif={pushActif}
+            boutiqueActif={boutiqueActif}
+            onAchat={() => void demarrer(etat?.player_id)}
           />
         )}
 

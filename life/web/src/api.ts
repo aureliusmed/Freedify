@@ -70,6 +70,14 @@ export function genererBilan(playerId: string): Promise<{ bilan: BilanDeVie }> {
   });
 }
 
+/** Débloque des Tournants supplémentaires le jour même (monétisation §7). */
+export function acheterTournants(playerId: string): Promise<{ etat: EtatDeVie; credites: number }> {
+  return requete("/api/boutique/tournants", {
+    method: "POST",
+    body: JSON.stringify({ player_id: playerId }),
+  });
+}
+
 /** Migre une vie anonyme vers le compte authentifié (idempotent côté serveur). */
 export function adopterVie(playerIdAnonyme: string): Promise<{ etat: EtatDeVie; adopte: boolean }> {
   return requete("/api/vie/adopter", {

@@ -1,6 +1,12 @@
 import type { FastifyInstance } from "fastify";
-import type { EtatDeVie } from "@life/shared";
+import { type EtatDeVie, TOURNANTS_BONUS_PAR_ACHAT, tournantsJouables } from "@life/shared";
 import { z } from "zod";
+
+/** Feature flag de la boutique (monétisation §7). Sans ce flag, l'endpoint
+ *  d'achat répond 503 et le bouton front est masqué. Le vrai paiement Stripe
+ *  n'est PAS câblé (voir ADR-013) : quand le flag est actif, l'achat est simulé
+ *  comme abouti — à remplacer par un flux Stripe + webhook avant la prod. */
+export const boutiqueActive = process.env.LIFE_BOUTIQUE_ACTIVE === "1";
 import { appliquerResetQuotidien, nouvelleVie } from "./engine/etat.js";
 import {
   consommerSeed,
@@ -69,7 +75,7 @@ export function enregistrerRoutes(app: FastifyInstance, store: Store): void {
 
     appliquerResetQuotidien(etat);
     if (!etat.vivant) return reply.code(409).send({ erreur: "personnage décédé", code: "MORT" });
-    if (etat.tournants_restants_aujourdhui <= 0) {
+    if (tournantsJouables(etat) <= 0) {
       return reply.code(429).send({ erreur: "plus de tournants aujourd'hui", code: "QUOTA" });
     }
 
@@ -160,5 +166,24 @@ export function enregistrerRoutes(app: FastifyInstance, store: Store): void {
     const adoptee = { ...anonyme, player_id: req.authUserId };
     await store.put(adoptee);
     return { etat: adoptee, adopte: true };
+  });
+
+  // Boutique : débloque des Tournants supplémentaires le jour même (§7 — joue
+  // sur la vitesse, jamais sur les stats). Gated par LIFE_BOUTIQUE_ACTIVE.
+  // STUB : achat simulé comme abouti — le flux de paiement Stripe (+ webhook de
+  // confirmation) reste à câbler avant toute mise en production (ADR-013).
+  app.post("/api/boutique/tournants", async (req, reply) => {
+    if (!boutiqueActive) {
+      return reply.code(503).send({ erreur: "boutique non configurée" });
+    }
+    const corps = CorpsJoueur.safeParse(req.body);
+    if (!corps.success) return reply.code(400).send({ erreur: "corps invalide" });
+    const etat = await store.get(corps.data.player_id);
+    if (!etat) return reply.code(404).send({ erreur: "joueur inconnu" });
+    if (!etat.vivant) return reply.code(409).send({ erreur: "personnage décédé", code: "MORT" });
+
+    etat.tournants_bonus += TOURNANTS_BONUS_PAR_ACHAT;
+    await store.put(etat);
+    return { etat, credites: TOURNANTS_BONUS_PAR_ACHAT };
   });
 }

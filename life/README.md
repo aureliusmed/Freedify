@@ -45,6 +45,7 @@ en prod).
 | `SUPABASE_SERVICE_ROLE_KEY` | — | Service role key Supabase — **serveur uniquement**, jamais exposée au front |
 | `SUPABASE_ANON_KEY` | — | Anon key — active la vérification des JWT côté serveur (auth Google) |
 | `VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` / `VAPID_SUBJECT` | — | Activent les notifications push du reset (générer via `npx web-push generate-vapid-keys` ; `VAPID_SUBJECT=mailto:...`) |
+| `LIFE_BOUTIQUE_ACTIVE` | — | `1` active la boutique de Tournants bonus. **STUB : achat simulé, paiement Stripe non câblé** — ne pas activer en prod tant que le flux de paiement n'est pas branché |
 | `PORT` | `3001` | Port de l'API |
 
 Côté **front** (build Vite), l'auth s'active via un fichier `.env.local` (jamais
@@ -113,6 +114,6 @@ Trois couches, conformes au brief §2 :
 - [x] Stockage Postgres/Supabase (via `SUPABASE_URL` + service role key ; fichier par défaut)
 - [x] 7a. Auth Google (Supabase Auth, optionnelle, par-dessus l'anonyme ; Apple reporté)
 - [x] 7b. Notifications push du reset quotidien (Web Push / VAPID, optionnelles)
-- [ ] Monétisation (tournants bonus, cosmétiques)
+- [~] Monétisation : mécanique de Tournants bonus + boutique gated en place ; **paiement Stripe à câbler** (stub d'achat), cosmétiques non commencés
 
 Décisions d'implémentation notables : [`docs/DECISIONS.md`](docs/DECISIONS.md).

@@ -2,7 +2,7 @@ import Fastify from "fastify";
 import cors from "@fastify/cors";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { enregistrerRoutes } from "./routes.js";
+import { boutiqueActive, enregistrerRoutes } from "./routes.js";
 import { FichierStore } from "./store.js";
 import { SupabaseStore } from "./store-supabase.js";
 import type { Store } from "./store.js";
@@ -104,6 +104,7 @@ app.get("/api/sante", async () => ({
   ok: true,
   ia: iaDisponible(),
   push: gestionnairePush !== null,
+  boutique: boutiqueActive,
 }));
 
 app.addHook("onClose", async () => {

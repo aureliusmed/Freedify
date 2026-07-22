@@ -155,7 +155,12 @@ export function resoudreChoix(
   }
 
   avancerAge(etat, rng);
-  etat.tournants_restants_aujourdhui = Math.max(0, etat.tournants_restants_aujourdhui - 1);
+  // Consomme le quota du jour en priorité, puis les tournants bonus (§7).
+  if (etat.tournants_restants_aujourdhui > 0) {
+    etat.tournants_restants_aujourdhui -= 1;
+  } else if (etat.tournants_bonus > 0) {
+    etat.tournants_bonus -= 1;
+  }
   etat.tournant_en_cours = null;
 
   // Flags narratifs permanents dérivés de l'évolution des stats et de l'âge.

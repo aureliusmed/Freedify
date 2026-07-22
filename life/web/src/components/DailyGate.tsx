@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { activerNotifications, pushSupporte } from "../push";
+import { acheterTournants } from "../api";
 
 function prochainMinuitUtc(): Date {
   const d = new Date();
@@ -19,12 +20,27 @@ interface Props {
   onRafraichir: () => void;
   playerId?: string;
   pushActif?: boolean;
+  boutiqueActif?: boolean;
+  /** Appelé après un achat réussi pour recharger l'état et relancer le jeu. */
+  onAchat?: () => void;
 }
 
 /** Écran de fin de journée : compte à rebours jusqu'au reset (brief §6). */
-export function DailyGate({ onRafraichir, playerId, pushActif }: Props) {
+export function DailyGate({ onRafraichir, playerId, pushActif, boutiqueActif, onAchat }: Props) {
   const [restant, setRestant] = useState(() => prochainMinuitUtc().getTime() - Date.now());
   const [etatPush, setEtatPush] = useState<"idle" | "en_cours" | "ok" | "echec">("idle");
+  const [achatEnCours, setAchatEnCours] = useState(false);
+
+  const acheter = async () => {
+    if (!playerId || achatEnCours) return;
+    setAchatEnCours(true);
+    try {
+      await acheterTournants(playerId);
+      onAchat?.();
+    } catch {
+      setAchatEnCours(false);
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -55,6 +71,16 @@ export function DailyGate({ onRafraichir, playerId, pushActif }: Props) {
       <p className="max-w-xs text-xs text-zinc-600">
         Pas de grind possible : une vie se déguste par petites gorgées quotidiennes.
       </p>
+
+      {boutiqueActif && playerId && (
+        <button
+          onClick={() => void acheter()}
+          disabled={achatEnCours}
+          className="mt-2 rounded-xl bg-amber-500 px-5 py-3 font-semibold text-zinc-900 transition active:scale-95 disabled:opacity-50"
+        >
+          {achatEnCours ? "…" : "Débloquer 5 Tournants de plus"}
+        </button>
+      )}
 
       {montrerBouton && etatPush !== "ok" && (
         <button

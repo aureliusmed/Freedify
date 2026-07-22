@@ -199,6 +199,10 @@ export interface EtatDeVie {
   historique_tournants: HistoriqueTournant[];
   flags_narratifs: string[];
   tournants_restants_aujourdhui: number;
+  /** Tournants supplémentaires débloqués (monétisation §7) : consommés APRÈS
+   *  le quota quotidien, non réinitialisés au reset. Jouent sur la vitesse
+   *  uniquement, jamais sur les stats (pas de pay-to-win). */
+  tournants_bonus: number;
   derniere_reset: string; // ISO, minuit UTC du jour courant
   vivant: boolean;
   cause_deces: string | null;
@@ -208,6 +212,16 @@ export interface EtatDeVie {
 
 export const TOURNANTS_PAR_JOUR = 5;
 export const MAX_SEEDS_ACTIVES = 5;
+/** Tournants bonus accordés par achat (monétisation §7). */
+export const TOURNANTS_BONUS_PAR_ACHAT = 5;
+
+/** Tournants jouables maintenant : quota du jour + bonus débloqués. */
+export function tournantsJouables(etat: {
+  tournants_restants_aujourdhui: number;
+  tournants_bonus: number;
+}): number {
+  return etat.tournants_restants_aujourdhui + etat.tournants_bonus;
+}
 /** nb d'entrées d'historique envoyées en contexte complet à l'IA */
 export const HISTORIQUE_CONTEXTE = 12;
 

@@ -55,6 +55,24 @@ la bascule Postgres/Supabase (prévue au brief §6) ne touche que `store.ts`.
 l'id. **Conséquences.** Pas de double génération en cas de refresh, pas de
 résolution d'une carte forgée côté client.
 
+## ADR-013 — Monétisation : mécanique de bonus prête, paiement non câblé
+
+**Contexte.** Brief §7 : débloquer des Tournants supplémentaires le jour même
+(vitesse, pas de pay-to-win sur les stats). Le plan (LOT 9) limite ce lot à la
+*préparation*, la validation humaine et le paiement réel étant requis avant
+d'aller plus loin. **Décision.** Champ `tournants_bonus` dans l'état, consommé
+UNIQUEMENT après le quota quotidien et non réinitialisé au reset ; il ne touche
+jamais les stats. Endpoint `POST /api/boutique/tournants` derrière le flag
+`LIFE_BOUTIQUE_ACTIVE` : inerte (503) sans le flag, `/api/sante` expose
+`boutique:false` et le bouton front est masqué. **Le flux de paiement Stripe
+(session de paiement + webhook de confirmation) n'est délibérément PAS câblé** :
+il exige des clés Stripe, un secret webhook et une décision de pricing, et
+manipule de l'argent réel. Quand le flag est actif, l'achat est **simulé comme
+abouti** (crédite 5 bonus) — utilisable en dev, à remplacer par le flux Stripe
+avant toute prod. Cosmétiques (§7) non commencés. **Conséquences.** La mécanique
+de jeu (bonus, quota, UI) est complète et testée ; il ne reste qu'à brancher le
+paiement à la place du stub, sans retoucher le moteur.
+
 ## ADR-012 — Push du reset : scheduler in-process, abonnements en fichier
 
 **Contexte.** Brief §6 : notifications push web pour signaler le reset
