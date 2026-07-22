@@ -42,6 +42,7 @@ export default function App() {
   const [timelineOuverte, setTimelineOuverte] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
   const [connecte, setConnecte] = useState(false);
+  const [pushActif, setPushActif] = useState(false);
 
   const chargerCarte = useCallback(async (playerId: string) => {
     try {
@@ -101,6 +102,11 @@ export default function App() {
     if ("serviceWorker" in navigator) {
       void navigator.serviceWorker.register("/sw.js").catch(() => {});
     }
+    // Disponibilité du push côté serveur (masque le bouton si non configuré).
+    void fetch("/api/sante")
+      .then((r) => r.json())
+      .then((d: { push?: boolean }) => setPushActif(!!d.push))
+      .catch(() => {});
   }, [demarrer]);
 
   // Auth optionnelle (brief §6) : à la connexion, on adopte la vie anonyme
@@ -211,7 +217,13 @@ export default function App() {
           />
         )}
 
-        {ecran === "quota" && <DailyGate onRafraichir={() => void demarrer()} />}
+        {ecran === "quota" && (
+          <DailyGate
+            onRafraichir={() => void demarrer()}
+            playerId={etat?.player_id}
+            pushActif={pushActif}
+          />
+        )}
 
         {ecran === "bilan" && bilan && <EndOfLifeScreen bilan={bilan} onRejouer={() => void rejouer()} />}
 

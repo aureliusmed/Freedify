@@ -19,3 +19,24 @@ self.addEventListener("fetch", (event) => {
     fetch(event.request).catch(() => caches.match(event.request).then((r) => r ?? caches.match("/")))
   );
 });
+
+// Notification push du reset quotidien (brief §6).
+self.addEventListener("push", (event) => {
+  let data = { title: "LIFE", body: "Tes 5 Tournants du jour t'attendent." };
+  try {
+    if (event.data) data = { ...data, ...event.data.json() };
+  } catch {
+    /* payload non-JSON : on garde le texte par défaut */
+  }
+  event.waitUntil(self.registration.showNotification(data.title, { body: data.body }));
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: "window" }).then((clients) => {
+      const ouvert = clients.find((c) => "focus" in c);
+      return ouvert ? ouvert.focus() : self.clients.openWindow("/");
+    })
+  );
+});

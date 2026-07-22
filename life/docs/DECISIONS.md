@@ -55,6 +55,20 @@ la bascule Postgres/Supabase (prévue au brief §6) ne touche que `store.ts`.
 l'id. **Conséquences.** Pas de double génération en cas de refresh, pas de
 résolution d'une carte forgée côté client.
 
+## ADR-012 — Push du reset : scheduler in-process, abonnements en fichier
+
+**Contexte.** Brief §6 : notifications push web pour signaler le reset
+quotidien. **Décision.** Web Push (VAPID), **optionnel** : sans les trois
+variables VAPID, `/api/sante` renvoie `push:false`, la route d'abonnement
+répond 503 et le bouton front est masqué. Le serveur expose sa clé publique sur
+`/api/push/cle` ; les abonnements sont persistés dans un fichier JSON
+(`server/data/push-subscriptions.json`, git-ignoré) ; un `setInterval` d'une
+minute déclenche l'envoi au passage de minuit UTC et purge les abonnements
+morts (404/410). **Conséquences.** Suffisant pour un MVP mono-instance ; un
+ordonnanceur dédié et un stockage partagé des abonnements seront nécessaires en
+multi-instance (à faire avec l'infra). Validé sur les deux chemins (avec/sans
+clés VAPID) ; l'envoi réel n'a pas été testé faute d'un endpoint push réel.
+
 ## ADR-011 — Auth optionnelle par-dessus l'anonyme, Apple reporté
 
 **Contexte.** Brief §6 : auth Google/Apple, session persistante. **Décision.**

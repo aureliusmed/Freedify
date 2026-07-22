@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { activerNotifications, pushSupporte } from "../push";
 
 function prochainMinuitUtc(): Date {
   const d = new Date();
@@ -14,9 +15,16 @@ function formatCompteARebours(ms: number): string {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
 }
 
+interface Props {
+  onRafraichir: () => void;
+  playerId?: string;
+  pushActif?: boolean;
+}
+
 /** Écran de fin de journée : compte à rebours jusqu'au reset (brief §6). */
-export function DailyGate({ onRafraichir }: { onRafraichir: () => void }) {
+export function DailyGate({ onRafraichir, playerId, pushActif }: Props) {
   const [restant, setRestant] = useState(() => prochainMinuitUtc().getTime() - Date.now());
+  const [etatPush, setEtatPush] = useState<"idle" | "en_cours" | "ok" | "echec">("idle");
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -26,6 +34,15 @@ export function DailyGate({ onRafraichir }: { onRafraichir: () => void }) {
     }, 1000);
     return () => clearInterval(timer);
   }, [onRafraichir]);
+
+  const activer = async () => {
+    if (!playerId) return;
+    setEtatPush("en_cours");
+    const ok = await activerNotifications(playerId);
+    setEtatPush(ok ? "ok" : "echec");
+  };
+
+  const montrerBouton = pushActif && pushSupporte() && playerId;
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
@@ -38,6 +55,20 @@ export function DailyGate({ onRafraichir }: { onRafraichir: () => void }) {
       <p className="max-w-xs text-xs text-zinc-600">
         Pas de grind possible : une vie se déguste par petites gorgées quotidiennes.
       </p>
+
+      {montrerBouton && etatPush !== "ok" && (
+        <button
+          onClick={() => void activer()}
+          disabled={etatPush === "en_cours"}
+          className="mt-2 rounded-xl border border-zinc-600 px-4 py-2 text-sm transition active:scale-95 disabled:opacity-50"
+        >
+          {etatPush === "en_cours" ? "Activation…" : "Me prévenir au reset 🌅"}
+        </button>
+      )}
+      {etatPush === "ok" && <p className="text-xs text-emerald-400">Notifications activées ✓</p>}
+      {etatPush === "echec" && (
+        <p className="text-xs text-zinc-500">Notifications indisponibles sur cet appareil.</p>
+      )}
     </div>
   );
 }

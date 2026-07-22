@@ -8,6 +8,9 @@ import { SupabaseStore } from "./store-supabase.js";
 import type { Store } from "./store.js";
 import { iaDisponible } from "./ia/client.js";
 import { authConfigDepuisEnv, creerVerificateur } from "./auth.js";
+import { GestionnairePush, planifierResetQuotidien, pushConfigDepuisEnv } from "./push.js";
+import type { PushSubscription } from "web-push";
+import { z } from "zod";
 
 declare module "fastify" {
   interface FastifyRequest {
@@ -62,7 +65,50 @@ if (supabaseUrl && supabaseKey) {
 }
 enregistrerRoutes(app, store);
 
-app.get("/api/sante", async () => ({ ok: true, ia: iaDisponible() }));
+// Push optionnel (brief §6) : actif seulement si les clés VAPID sont fournies.
+const pushConfig = pushConfigDepuisEnv();
+let gestionnairePush: GestionnairePush | null = null;
+let arreterScheduler: (() => void) | null = null;
+if (pushConfig) {
+  gestionnairePush = new GestionnairePush(
+    pushConfig,
+    path.join(dossierDonnees, "push-subscriptions.json"),
+  );
+  arreterScheduler = planifierResetQuotidien(gestionnairePush);
+  app.log.info("Push : actif (VAPID configuré)");
+
+  app.get("/api/push/cle", async () => ({ publicKey: gestionnairePush!.clePublique }));
+
+  app.post("/api/push/abonner", async (req, reply) => {
+    const corps = z
+      .object({
+        player_id: z.string().min(1).max(64),
+        subscription: z.object({ endpoint: z.string().url() }).passthrough(),
+      })
+      .safeParse(req.body);
+    if (!corps.success) return reply.code(400).send({ erreur: "corps invalide" });
+    await gestionnairePush!.abonner(
+      corps.data.player_id,
+      corps.data.subscription as unknown as PushSubscription,
+    );
+    return { ok: true };
+  });
+} else {
+  app.log.info("Push : inactif (aucune clé VAPID)");
+  app.post("/api/push/abonner", async (_req, reply) =>
+    reply.code(503).send({ erreur: "notifications push non configurées" }),
+  );
+}
+
+app.get("/api/sante", async () => ({
+  ok: true,
+  ia: iaDisponible(),
+  push: gestionnairePush !== null,
+}));
+
+app.addHook("onClose", async () => {
+  if (arreterScheduler) arreterScheduler();
+});
 
 const port = Number(process.env.PORT ?? 3001);
 await app.listen({ port, host: "0.0.0.0" });

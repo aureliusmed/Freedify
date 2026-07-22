@@ -44,6 +44,7 @@ en prod).
 | `SUPABASE_URL` | — | Active le store Supabase (avec la clé ci-dessous) et l'auth (avec l'anon key) |
 | `SUPABASE_SERVICE_ROLE_KEY` | — | Service role key Supabase — **serveur uniquement**, jamais exposée au front |
 | `SUPABASE_ANON_KEY` | — | Anon key — active la vérification des JWT côté serveur (auth Google) |
+| `VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` / `VAPID_SUBJECT` | — | Activent les notifications push du reset (générer via `npx web-push generate-vapid-keys` ; `VAPID_SUBJECT=mailto:...`) |
 | `PORT` | `3001` | Port de l'API |
 
 Côté **front** (build Vite), l'auth s'active via un fichier `.env.local` (jamais
@@ -111,7 +112,7 @@ Trois couches, conformes au brief §2 :
 - [x] Banque de secours : ~20 cartes par phase (19-20 cartes, ≥ 6 seeds chacune)
 - [x] Stockage Postgres/Supabase (via `SUPABASE_URL` + service role key ; fichier par défaut)
 - [x] 7a. Auth Google (Supabase Auth, optionnelle, par-dessus l'anonyme ; Apple reporté)
-- [ ] 7b. Notifications push du reset quotidien
+- [x] 7b. Notifications push du reset quotidien (Web Push / VAPID, optionnelles)
 - [ ] Monétisation (tournants bonus, cosmétiques)
 
 Décisions d'implémentation notables : [`docs/DECISIONS.md`](docs/DECISIONS.md).
