@@ -1,0 +1,11 @@
+{
+  "name": "LIFE",
+  "short_name": "LIFE",
+  "description": "Simulateur de vie par choix textuels — 5 Tournants par jour",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f14",
+  "theme_color": "#0f0f14",
+  "lang": "fr",
+  "icons": []
+}
