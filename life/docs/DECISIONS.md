@@ -55,6 +55,20 @@ la bascule Postgres/Supabase (prévue au brief §6) ne touche que `store.ts`.
 l'id. **Conséquences.** Pas de double génération en cas de refresh, pas de
 résolution d'une carte forgée côté client.
 
+## ADR-009 — Flags narratifs dérivés par seuils, permanents
+
+**Contexte.** `flags_narratifs` (brief §4) existait dans le modèle mais n'était
+jamais alimenté. **Décision.** Une fonction pure `deriverFlags(avant, apres,
+age, flagsExistants)` pose des flags permanents à partir de seuils de stats
+(`ruine`, `fortune`, `moralite_noire`, `saint`, `solitaire`, `pilier_social`)
+et de l'âge (`survivant` à 86 ans). `miracule` passe par un flag intermédiaire
+`a_frole_la_mort` (santé < 10) et n'est posé qu'au tournant suivant si la santé
+remonte au-dessus de 30. Les flags sont injectés dans le contexte IA
+(`prompts.ts`) pour colorer la génération. **Conséquences.** Un flag acquis ne
+se retire jamais (pas de doublon) ; la fonction est testable indépendamment de
+`resoudreChoix`. Les flags dépendent de stats calculées par le moteur — pas de
+LLM dans la boucle (cohérent avec ADR-001).
+
 ## ADR-008 — Consommation de seed seulement si la carte IA l'exploite
 
 **Décision.** Une seed prête à ressurgir n'est retirée de l'état que si la

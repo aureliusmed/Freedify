@@ -3,6 +3,7 @@ import {
   type EtatDeVie,
   type Impact,
   type SeedActive,
+  type Stats,
   type Tournant,
   HISTORIQUE_CONTEXTE,
   MAX_SEEDS_ACTIVES,
@@ -88,6 +89,41 @@ export interface Resolution {
 }
 
 /**
+ * Dérive les nouveaux flags narratifs à ajouter (brief §4), à partir des
+ * stats avant/après application des impacts et de l'âge courant. Fonction
+ * pure : ne retourne que les flags absents de `flagsExistants`, jamais de
+ * doublon. Un flag acquis ne se retire jamais.
+ */
+export function deriverFlags(
+  avant: Stats,
+  apres: Stats,
+  age: number,
+  flagsExistants: string[],
+): string[] {
+  const nouveaux: string[] = [];
+  const ajouter = (flag: string, condition: boolean) => {
+    if (condition && !flagsExistants.includes(flag) && !nouveaux.includes(flag)) {
+      nouveaux.push(flag);
+    }
+  };
+
+  ajouter("ruine", apres.richesse <= 0);
+  ajouter("fortune", apres.richesse >= 100);
+  ajouter("moralite_noire", apres.moralite < 10);
+  ajouter("saint", apres.moralite > 90);
+  ajouter("solitaire", apres.capital_social < 10);
+  ajouter("pilier_social", apres.capital_social > 90);
+  ajouter("a_frole_la_mort", apres.sante < 10);
+  // `miracule` exige d'avoir DÉJÀ frôlé la mort lors d'un tournant précédent,
+  // puis d'être remonté au-dessus de 30 — jamais dans le même tournant.
+  ajouter("miracule", flagsExistants.includes("a_frole_la_mort") && apres.sante > 30);
+  ajouter("survivant", age >= 86);
+
+  void avant; // conservé dans la signature pour d'éventuels flags par transition
+  return nouveaux;
+}
+
+/**
  * Résout le choix du joueur sur le tournant en cours : impacts, seeds,
  * vieillissement, quota quotidien, mort. Mute l'état ; le texte narratif du
  * résultat est produit séparément (IA ou fallback) et ajouté à l'historique
@@ -101,6 +137,7 @@ export function resoudreChoix(
 ): Resolution {
   const issue = tirerIssue(etat.stats.chance, rng);
   const impacts = impactsFinaux(choix.impact_prevu, issue);
+  const avant = { ...etat.stats };
   etat.stats = appliquerImpact(etat.stats, impacts);
 
   // Seeds : celles en attente vieillissent d'un tournant.
@@ -120,6 +157,10 @@ export function resoudreChoix(
   avancerAge(etat, rng);
   etat.tournants_restants_aujourdhui = Math.max(0, etat.tournants_restants_aujourdhui - 1);
   etat.tournant_en_cours = null;
+
+  // Flags narratifs permanents dérivés de l'évolution des stats et de l'âge.
+  const nouveauxFlags = deriverFlags(avant, etat.stats, etat.age, etat.flags_narratifs);
+  if (nouveauxFlags.length > 0) etat.flags_narratifs.push(...nouveauxFlags);
 
   const causeMort = verifierMort(etat, rng);
   if (causeMort) {

@@ -56,6 +56,30 @@ export function estMineur(age: number): boolean {
 }
 
 // ---------------------------------------------------------------------------
+// Flags narratifs
+// ---------------------------------------------------------------------------
+
+/**
+ * Flags permanents dérivés d'événements de vie (brief §4 : « booléens
+ * permanents qui débloquent/bloquent certains pools de cartes »). Une fois
+ * acquis, un flag ne se retire jamais. `a_frole_la_mort` est un flag
+ * intermédiaire technique (permet de dériver `miracule`).
+ */
+export const FLAGS_DERIVES = [
+  "ruine", // richesse tombée à 0
+  "fortune", // richesse montée à 100
+  "moralite_noire", // moralité tombée sous 10
+  "saint", // moralité montée au-dessus de 90
+  "solitaire", // capital social tombé sous 10
+  "pilier_social", // capital social monté au-dessus de 90
+  "a_frole_la_mort", // santé passée sous 10 (intermédiaire)
+  "miracule", // santé remontée au-dessus de 30 après avoir frôlé la mort
+  "survivant", // a dépassé 85 ans
+] as const;
+
+export type FlagDerive = (typeof FLAGS_DERIVES)[number];
+
+// ---------------------------------------------------------------------------
 // Stats
 // ---------------------------------------------------------------------------
 
